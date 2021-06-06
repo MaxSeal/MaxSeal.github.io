@@ -1,0 +1,520 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/favicon.png">
+  <link rel="icon" href="/img/favicon.png">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-06 15:46" pubdate>
+        2021年6月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h4 id="关键类"><a href="#关键类" class="headerlink" title="关键类"></a><strong>关键类</strong></h4><ul>
+<li>Instant：瞬时实例。</li>
+<li>LocalDate：本地日期，不包含具体时间。例如：2014-01-14 可以用来记录生日、纪念日、加盟日等。</li>
+<li>LocalTime：本地时间，不包含日期。</li>
+<li>LocalDateTime：组合了日期和时间，但不包含时差和时区信息。</li>
+<li>ZonedDateTime：最完整的日期时间，包含时区和相对UTC或格林威治的时差。</li>
+</ul>
+<p>新API还引入了 ZoneOffSet 和 ZoneId 类，使得解决时区问题更为简便。解析、格式化时间的 DateTimeFormatter 类也全部重新设计。</p>
+<h4 id="LocalDate"><a href="#LocalDate" class="headerlink" title="LocalDate"></a>LocalDate</h4><h5 id="1-获取当前日期"><a href="#1-获取当前日期" class="headerlink" title="1. 获取当前日期"></a>1. 获取当前日期</h5><p>LocalDate 用于表示当天日期。只有日期，不包含时间。当你仅需要表示日期时就用这个类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getCurrentDate</span><span class="hljs-params">()</span></span>&#123;<br>  LocalDate today = LocalDate.now();  <span class="hljs-comment">// 获取当前时间</span><br>  System.out.println(date);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-获取年月日信息"><a href="#2-获取年月日信息" class="headerlink" title="2. 获取年月日信息"></a>2. 获取年月日信息</h5><p>LocalDate 提供了获取年、月、日的快捷方法，其实例还包含很多其它的日期属性。通过调用这些方法就可以很方便的得到需要的日期信息。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getDetailDate</span><span class="hljs-params">()</span></span>&#123;<br>  LocalDate today = LocalDate.now();   <span class="hljs-comment">// 获取当前日期</span><br>  <span class="hljs-keyword">int</span> year = today.getYear();					<span class="hljs-comment">// 获取年份</span><br>  <span class="hljs-keyword">int</span> month = today.getMonthValue();  <span class="hljs-comment">// 获取月份</span><br>  <span class="hljs-keyword">int</span> day = today.getDayOfMonth();   <span class="hljs-comment">// 获取日</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="3-获得特定日期"><a href="#3-获得特定日期" class="headerlink" title="3. 获得特定日期"></a>3. 获得特定日期</h5><p>通过 LocalDate.of() 创建任意日期，该方法需要传入年、月、日做参数，返回对应的 LocalDate实例。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function">Public <span class="hljs-keyword">void</span> <span class="hljs-title">handleSpecialDate</span><span class="hljs-params">()</span></span>&#123;<br>  LocalDate dateOfBirth = LocalDate.of(<span class="hljs-number">2021</span>, <span class="hljs-number">6</span>, <span class="hljs-number">1</span>); <span class="hljs-comment">// 创建特定日期</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-计算某时间段前-后的日期"><a href="#4-计算某时间段前-后的日期" class="headerlink" title="4. 计算某时间段前/后的日期"></a>4. 计算某时间段前/后的日期</h5><p>LocalDate日期不包含时间信息，它的 plus() 方法用来增加天、周、月、十年、世纪，ChronoUnit类声明了这些时间单位。minus() 方法同上。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plusDate</span><span class="hljs-params">()</span></span>&#123;<br>    LocalDate currentDate = LocalDate.now();<br>    System.out.println(<span class="hljs-string">&quot;今天的日期是:&quot;</span> + currentDate);<br><br>    LocalDate afterDayDate = currentDate.plus(<span class="hljs-number">1</span>, ChronoUnit.DAYS);<br>    System.out.println(<span class="hljs-string">&quot;一天以后的日期是:&quot;</span> + afterDayDate);<br><br>    LocalDate afterWeekDate = currentDate.plus(<span class="hljs-number">1</span>, ChronoUnit.WEEKS);<br>    System.out.println(<span class="hljs-string">&quot;一个星期后的日期是:&quot;</span> + afterWeekDate);<br><br>    LocalDate afterMonthDate = currentDate.plus(<span class="hljs-number">1</span>, ChronoUnit.MONTHS);<br>    System.out.println(<span class="hljs-string">&quot;一个月以后的日期是：&quot;</span> + afterMonthDate);<br><br>    LocalDate afterDecadeDate = currentDate.plus(<span class="hljs-number">1</span>, ChronoUnit.DECADES);<br>    System.out.println(<span class="hljs-string">&quot;十年以后的日期是：&quot;</span> + afterDecadeDate);<br><br>    LocalDate afterCenturyDate = currentDate.plus(<span class="hljs-number">1</span>, ChronoUnit.CENTURIES);<br>    System.out.println(<span class="hljs-string">&quot;一个世纪以后的日期是：&quot;</span> + afterCenturyDate);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-判断日期是早于还是晚于另一个日期"><a href="#5-判断日期是早于还是晚于另一个日期" class="headerlink" title="5. 判断日期是早于还是晚于另一个日期"></a>5. 判断日期是早于还是晚于另一个日期</h5><p>LocalDate 类有两类方法 isBefore() 和 isAfter() 用于比较日期。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">compareDate</span><span class="hljs-params">()</span></span>&#123;<br>       LocalDate currentDate = LocalDate.now();<br>       LocalDate anotherDate = LocalDate.of(<span class="hljs-number">2021</span>, <span class="hljs-number">6</span> ,<span class="hljs-number">1</span>);<br><br>       <span class="hljs-comment">// isBefore()</span><br>       <span class="hljs-keyword">if</span>(currentDate.isBefore(anotherDate))&#123;<br>           System.out.println(currentDate + <span class="hljs-string">&quot;更早&quot;</span>);<br>       &#125;<br><br>       <span class="hljs-comment">// isAfter()</span><br>       <span class="hljs-keyword">if</span>(currentDate.isAfter(anotherDate))&#123;<br>           System.out.println(currentDate + <span class="hljs-string">&quot;更晚&quot;</span>);<br>       &#125;<br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="6-判断两个日期是否相等"><a href="#6-判断两个日期是否相等" class="headerlink" title="6. 判断两个日期是否相等"></a>6. 判断两个日期是否相等</h5><p>LocalDate 重载了 equal 方法。如果比较的是日期是字符型，需要先解析成日期对象再做判断。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">equalDate</span><span class="hljs-params">()</span></span>&#123;<br>    LocalDate currentDate = LocalDate.now();<br>    LocalDate anotherDate = LocalDate.of(<span class="hljs-number">2021</span>, <span class="hljs-number">6</span>, <span class="hljs-number">2</span>);<br>    <span class="hljs-keyword">if</span>(currentDate.equals(anotherDate))&#123;<br>        System.out.println(<span class="hljs-string">&quot;两个日期是相等的&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="7-判断闰年"><a href="#7-判断闰年" class="headerlink" title="7. 判断闰年"></a>7. 判断闰年</h5><p>LocalDate类有一个很实用的方法 isLeapYear() 判断该实例是否是一个闰年。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">judgeLeapYear</span><span class="hljs-params">()</span></span>&#123;<br>    LocalDate today = LocalDate.now();<br>    <span class="hljs-keyword">if</span>(today.isLeapYear())&#123;<br>        System.out.println(<span class="hljs-string">&quot;是闰年&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span> &#123;<br>        System.out.println(<span class="hljs-string">&quot;不是闰年&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="Period"><a href="#Period" class="headerlink" title="Period"></a>Period</h4><h5 id="1-计算两个日期之间的天数和月数"><a href="#1-计算两个日期之间的天数和月数" class="headerlink" title="1. 计算两个日期之间的天数和月数"></a>1. 计算两个日期之间的天数和月数</h5><p>有一个常见日期操作是计算两个日期之间的天数、周数或月数。在Java 8中可以用java.time.Period类来做计算。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">calculateDate</span><span class="hljs-params">()</span></span>&#123;<br>        LocalDate date1 = LocalDate.of(<span class="hljs-number">2021</span>,<span class="hljs-number">6</span>,<span class="hljs-number">1</span>);<br>        LocalDate date2 = LocalDate.of(<span class="hljs-number">2020</span>, <span class="hljs-number">2</span>, <span class="hljs-number">21</span>);<br>        LocalDate java8Release = LocalDate.of(<span class="hljs-number">2018</span>, Month.MAY, <span class="hljs-number">14</span>);<br><br>        Period periodBetweenD1AndD2 = Period.between(date1,date2);   <span class="hljs-comment">// 格式是 xxxY-xxxM-xxxD</span><br>        System.out.println(periodBetweenD1AndD2);<br><br>        <span class="hljs-keyword">int</span> periodYear = periodBetweenD1AndD2.getYears();<br>        System.out.println(<span class="hljs-string">&quot;相差&quot;</span> + periodYear + <span class="hljs-string">&quot;年&quot;</span>);<br><br>        <span class="hljs-keyword">int</span> periodMonth = periodBetweenD1AndD2.getMonths();<br>        System.out.println(<span class="hljs-string">&quot;相差&quot;</span> + periodMonth + <span class="hljs-string">&quot;个月&quot;</span>);<br><br>        <span class="hljs-keyword">int</span> periodDay = periodBetweenD1AndD2.getDays();<br>        System.out.println(<span class="hljs-string">&quot;相差&quot;</span> + periodDay + <span class="hljs-string">&quot;天&quot;</span>);<br>    &#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="LocalTime"><a href="#LocalTime" class="headerlink" title="LocalTime"></a>LocalTime</h4><h5 id="1-在现有的时间上增加小时"><a href="#1-在现有的时间上增加小时" class="headerlink" title="1. 在现有的时间上增加小时"></a>1. 在现有的时间上增加小时</h5><p>Java 8 提供了更好的 plusHours() 方法替换 add() ，并且是兼容的。注意，这些方法返回一个全新的LocalTime实例，由于其不可变性，返回后一定要用变量赋值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plusHours</span><span class="hljs-params">()</span></span>&#123;<br>    LocalTime time = LocalTime.now();<br>    LocalTime newTime = time.plusHours(<span class="hljs-number">2</span>); <span class="hljs-comment">// 增加两小时</span><br>    System.out.println(<span class="hljs-string">&quot;两个小时后的时间是 : &quot;</span> +  newTime);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="处理时区-amp-时差"><a href="#处理时区-amp-时差" class="headerlink" title="处理时区&amp;时差"></a>处理时区&amp;时差</h4><h5 id="1-ZoneId-amp-ZoneDateTime"><a href="#1-ZoneId-amp-ZoneDateTime" class="headerlink" title="1. ZoneId &amp; ZoneDateTime"></a>1. ZoneId &amp; ZoneDateTime</h5><ul>
+<li>Zoneld 来处理特定时区</li>
+<li>ZoneDateTime 类来表示某时区下的时间。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getZoneTime</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">//设置时区</span><br>    ZoneId america = ZoneId.of(<span class="hljs-string">&quot;America/New_York&quot;</span>);<br><br>    LocalDateTime localtDateAndTime = LocalDateTime.now();<br>		<br>  <br>    ZonedDateTime dateAndTimeInNewYork  = ZonedDateTime.of(localtDateAndTime, america );<br>  <br>    System.out.println(<span class="hljs-string">&quot;现在的日期和时间在特定的时区 : &quot;</span> + dateAndTimeInNewYork);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-ZoneOffset"><a href="#2-ZoneOffset" class="headerlink" title="2. ZoneOffset"></a>2. ZoneOffset</h5><p>ZoneOffset 类用来表示时区，举例来说印度与 GMT 或 UTC 标准时区相差 +05:30，可以通过 ZoneOffset.of() 静态方法来 获取对应的时区。一旦得到了时差就可以通过传入 LocalDateTime 和 ZoneOffset 来创建一个 OffSetDateTime 对象。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">ZoneOffset</span><span class="hljs-params">()</span></span>&#123;<br>    LocalDateTime datetime = LocalDateTime.of(<span class="hljs-number">2018</span>, Month.FEBRUARY, <span class="hljs-number">14</span>, <span class="hljs-number">19</span>, <span class="hljs-number">30</span>);<br>    ZoneOffset offset = ZoneOffset.of(<span class="hljs-string">&quot;+05:30&quot;</span>);<br>    OffsetDateTime date = OffsetDateTime.of(datetime, offset);<br>    System.out.println(<span class="hljs-string">&quot;Date and Time with timezone offset in Java : &quot;</span> + date);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="时间戳"><a href="#时间戳" class="headerlink" title="时间戳"></a>时间戳</h4><h5 id="1-Clock"><a href="#1-Clock" class="headerlink" title="1. Clock"></a>1. Clock</h5><p>Clock 时钟类用于获取当时的时间戳，或当前时区下的日期时间信息。以前用到System.currentTimeInMillis() 和 TimeZone.getDefault() 的地方都可用Clock替换。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">clock</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-comment">// 根据系统时间返回当前时间并设置为UTC。</span><br>    Clock clock = Clock.systemUTC();<br>    System.out.println(<span class="hljs-string">&quot;Clock : &quot;</span> + clock);<br><br>    <span class="hljs-comment">// 根据系统时钟区域返回时间</span><br>    Clock defaultClock = Clock.systemDefaultZone();<br>    System.out.println(<span class="hljs-string">&quot;Clock : &quot;</span> + clock);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-Instant"><a href="#2-Instant" class="headerlink" title="2. Instant"></a>2. Instant</h5><p>Instant类有一个静态工厂方法now()会返回当前的时间戳，如下所示：</p>
+ <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getTimestamp</span><span class="hljs-params">()</span></span>&#123;<br>    Instant timestamp = Instant.now();<br>    System.out.println(timestamp);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="格式转换"><a href="#格式转换" class="headerlink" title="格式转换"></a>格式转换</h4><h5 id="1-DateTimeFormatter"><a href="#1-DateTimeFormatter" class="headerlink" title="1. DateTimeFormatter"></a>1. DateTimeFormatter</h5><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java">LocalDateTime rightNow=LocalDateTime.now();<br>String date=DateTimeFormatter.ISO_LOCAL_DATE_TIME.format(rightNow);<br>System.out.println(date);<br><br>DateTimeFormatter formatter=DateTimeFormatter.ofPattern(<span class="hljs-string">&quot;YYYY-MM-dd HH:mm:ss&quot;</span>);<br>System.out.println(formatter.format(rightNow));<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="YearMonth"><a href="#YearMonth" class="headerlink" title="YearMonth"></a>YearMonth</h4><p>YearMonth 用于表示信用卡到期日、FD到期日、期货期权到期日等。还可以用这个类得到当月共有多少天，YearMonth 实例的 lengthOfMonth() 方法可以返回当月的天数，在判断2月有28天还是29天时非常有用。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">checkCardExpiry</span><span class="hljs-params">()</span></span>&#123;<br>      YearMonth currentYearMonth = YearMonth.now();<br>      System.out.printf(<span class="hljs-string">&quot;%s: 当月有 %d 天%n&quot;</span>, currentYearMonth, currentYearMonth.lengthOfMonth());<br><br>      YearMonth creditCardExpiry = YearMonth.of(<span class="hljs-number">2028</span>, Month.FEBRUARY);<br>      System.out.printf(<span class="hljs-string">&quot;你的信用卡将在 %s 过期&quot;</span>, creditCardExpiry);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="MonthDay"><a href="#MonthDay" class="headerlink" title="MonthDay"></a>MonthDay</h4><p>MonthDay 这个类组合了月份和日，去掉了年，这意味着你可以用它判断每年都会发生事件。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">cycleDate</span><span class="hljs-params">()</span></span>&#123;<br>    LocalDate today = LocalDate.now();<br>    LocalDate dateOfBirth = LocalDate.of(<span class="hljs-number">2018</span>, <span class="hljs-number">01</span>, <span class="hljs-number">21</span>);<br><br>    MonthDay birthday = MonthDay.of(dateOfBirth.getMonth(), dateOfBirth.getDayOfMonth());<br>    MonthDay currentMonthDay = MonthDay.from(today);<br><br>    <span class="hljs-keyword">if</span>(currentMonthDay.equals(birthday))&#123;<br>       System.out.println(<span class="hljs-string">&quot;Many Many happy returns of the day !!&quot;</span>);<br>    &#125;<span class="hljs-keyword">else</span>&#123;<br>       System.out.println(<span class="hljs-string">&quot;Sorry, today is not your birthday&quot;</span>);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/06/%E9%9D%A2%E5%90%91%E5%AF%B9%E8%B1%A1/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
