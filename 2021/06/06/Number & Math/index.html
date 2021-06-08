@@ -264,7 +264,7 @@ Java 的 Math 包含了用于执行基本数学运算的属性和方法。">
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x =Integer.valueOf(<span class="hljs-number">9</span>);<br>Double c = Double.valueOf(<span class="hljs-number">5.0</span>);<br>Float a = Float.valueOf(<span class="hljs-string">&quot;80&quot;</span>);              <br>Integer b = Integer.valueOf(<span class="hljs-string">&quot;444&quot;</span>,<span class="hljs-number">16</span>);   <span class="hljs-comment">// 使用 16 进制</span><br><br>System.out.println(x);<br>System.out.println(c);<br>System.out.println(a);<br>System.out.println(b);<br></code></pre></td></tr></table></figure></li>
 <li><p>compareTo()</p>
 <p>用于将 Number 对象与方法的参数进行比较。参数可以是 Byte, Double, Integer, Float, Long 或 Short 类型。</p>
-<p>该方法==<strong>用于两个相同数据类型的比较</strong>==，两个不同类型的数据不能用此方法来比较。</p>
+<p>该方法<strong>用于两个相同数据类型的比较</strong>，两个不同类型的数据不能用此方法来比较。</p>
 <ul>
 <li>如果指定的数与参数相等返回 0。</li>
 <li>如果指定的数小于参数返回 -1。</li>
@@ -273,7 +273,7 @@ Java 的 Math 包含了用于执行基本数学运算的属性和方法。">
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x = <span class="hljs-number">5</span>;<br>System.out.println(x.compareTo(<span class="hljs-number">3</span>));    <span class="hljs-comment">// 结果为 1</span><br>System.out.println(x.compareTo(<span class="hljs-number">5</span>));    <span class="hljs-comment">// 结果为 0</span><br>System.out.println(x.compareTo(<span class="hljs-number">8</span>));    <span class="hljs-comment">// 结果为 -1</span><br></code></pre></td></tr></table></figure></li>
 <li><p>equals()</p>
 <p>判断 Number 对象是否与参数相等。</p>
-<p>如 Number 对象不为 Null，且与方法的==<strong>参数类型与数值都相等</strong>==返回 True，否则返回 False。</p>
+<p>如 Number 对象不为 Null，且与方法的<strong>参数类型与数值都相等</strong>返回 True，否则返回 False。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x = <span class="hljs-number">5</span>;<br>Double y = <span class="hljs-number">5.0</span>;<br>Long z = <span class="hljs-number">5</span>;<br>Short a = <span class="hljs-number">5</span>;<br>Float b = <span class="hljs-number">5.0</span>;<br>Byte c = <span class="hljs-number">5</span>; <br><br>System.out.println(x.equals(y));  <span class="hljs-comment">// false</span><br>System.out.println(x.equals(z));  <span class="hljs-comment">// false</span><br>System.out.println(x.equals(a));  <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure></li>
 <li><p>toString(）</p>
 <p>返回以一个字符串表示的 Number 对象值。</p>
@@ -414,6 +414,12 @@ Java 的 Math 包含了用于执行基本数学运算的属性和方法。">
                 <div class="post-prevnext">
                   <article class="post-prev col-6">
                     
+                    
+                      <a href="/2021/06/07/java%20%E4%B8%AD%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java 中的命名规范</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
                     
                   </article>
                   <article class="post-next col-6">

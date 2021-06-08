@@ -246,16 +246,16 @@
 <h4 id="1-访问控制修饰符"><a href="#1-访问控制修饰符" class="headerlink" title="1. 访问控制修饰符"></a>1. 访问控制修饰符</h4><p>Java中，可以使用访问控制符来<strong>保护对类、变量、方法和构造方法的访问</strong>。</p>
 <ul>
 <li><p><strong>default（默认访问修饰符）：</strong></p>
-<p>使用 default 的变量和方法，==<strong>对同一个包内的类是可见的</strong>==。</p>
+<p>使用 default 的变量和方法，<strong>对同一个包内的类是可见的</strong>。</p>
 <p>接口里的变量都隐式声明为 <strong>public static final</strong>，而接口里的方法默认情况下访问权限为 <strong>public</strong>。</p>
 <p>使用对象：类、接口、变量、方法。</p>
 </li>
 <li><p><strong>public（公有访问修饰符）：</strong></p>
-<p>被声明为 public 的类、方法、构造方法和接口==<strong>能够被任何其他类访问</strong>==。</p>
+<p>被声明为 public 的类、方法、构造方法和接口<strong>能够被任何其他类访问</strong>。</p>
 <p>使用对象：类、接口、变量、方法。</p>
 </li>
 <li><p><strong>private（私有访问修饰符）：</strong></p>
-<p>被声明为 private 的方法、变量和构造方法==<strong>只能被所属类访问</strong>==。</p>
+<p>被声明为 private 的方法、变量和构造方法<strong>只能被所属类访问</strong>。</p>
 <p>使用对象：变量、方法，不能修饰类（外部类）。</p>
 </li>
 <li><p><strong>protected（受保护的访问修饰符）：</strong></p>
@@ -315,37 +315,37 @@
 <li><p><strong>static：</strong></p>
 <ul>
 <li><p>static 变量：</p>
-<p>static 关键字用来声明独立于对象的静态变量，==<strong>无论一个类实例化多少对象，它的静态变量只有一份拷贝</strong>==。 静态变量也被称为类变量。局部变量不能被声明为 static 变量。</p>
+<p>static 关键字用来声明独立于对象的静态变量，<strong>无论一个类实例化多少对象，它的静态变量只有一份拷贝</strong>。 静态变量也被称为类变量。局部变量不能被声明为 static 变量。</p>
 </li>
 <li><p>static 方法：</p>
-<p>static 关键字用来声明独立于对象的静态方法，即可以使用 类名.方法名 的方式进行调用。==<strong>静态方法不能使用类的非静态变量</strong>==。静态方法从参数列表得到数据，然后计算这些数据。</p>
+<p>static 关键字用来声明独立于对象的静态方法，即可以使用 类名.方法名 的方式进行调用。<strong>静态方法不能使用类的非静态变量</strong>。静态方法从参数列表得到数据，然后计算这些数据。</p>
 </li>
 </ul>
 </li>
 <li><p><strong>final：</strong></p>
 <ul>
 <li><p>final 变量：</p>
-<p>final 表示“最后的、最终的含义”，变量==<strong>一旦赋值后，不能被重新赋值</strong>==。被 final 修饰的实例变量==<strong>必须显式指定初始值</strong>==。final 修饰符通常和 static 修饰符一起使用来创建类常量。</p>
+<p>final 表示“最后的、最终的含义”，变量<strong>一旦赋值后，不能被重新赋值</strong>。被 final 修饰的实例变量<strong>必须显式指定初始值</strong>。final 修饰符通常和 static 修饰符一起使用来创建类常量。</p>
 </li>
 <li><p>final 方法：</p>
-<p>父类中的 final 方法可以被子类继承，但是不能被子类重写。声明 final 方法的主要目的是==<strong>防止该方法的内容被修改</strong>==。</p>
+<p>父类中的 final 方法可以被子类继承，但是不能被子类重写。声明 final 方法的主要目的是<strong>防止该方法的内容被修改</strong>。</p>
 </li>
 </ul>
 </li>
 <li><p><strong>abstract：</strong></p>
 <ul>
 <li><p>abstract 类：</p>
-<p>抽象类不能用来实例化对象，声明抽象类的唯一目的是为了==<strong>将来对该类进行扩充</strong>==。</p>
+<p>抽象类不能用来实例化对象，声明抽象类的唯一目的是为了<strong>将来对该类进行扩充</strong>。</p>
 <p>一个类不能同时被 abstract 和 final 修饰。</p>
-<p>==<strong>如果一个类包含抽象方法，那么该类一定要声明为抽象类</strong>==，否则将出现编译错误。</p>
-<p>==<strong>抽象类可以包含抽象方法和非抽象方法</strong>==。</p>
+<p><strong>如果一个类包含抽象方法，那么该类一定要声明为抽象类</strong>，否则将出现编译错误。</p>
+<p><strong>抽象类可以包含抽象方法和非抽象方法</strong>。</p>
 </li>
 <li><p>abstract 方法：</p>
 <p>抽象方法是一种没有任何实现的方法，该方法的的具体实现由子类提供。</p>
 <p>抽象方法不能被声明成 final 和 static。</p>
-<p>==<strong>任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类。</strong>==</p>
+<p><strong>任何继承抽象类的子类必须实现父类的所有抽象方法，除非该子类也是抽象类。</strong></p>
 <p>如果一个类包含若干个抽象方法，那么该类必须声明为抽象类。抽象类可以不包含抽象方法。</p>
-<p>==<strong>抽象方法的声明以分号结尾。</strong>==</p>
+<p><strong>抽象方法的声明以分号结尾。</strong></p>
 </li>
 </ul>
 </li>
@@ -413,8 +413,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/06/06/%E7%B1%BB/">
-                        <span class="hidden-mobile">类</span>
+                      <a href="/2021/06/06/%E6%97%A5%E6%9C%9F%E5%A4%84%E7%90%86/">
+                        <span class="hidden-mobile">日期处理</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
