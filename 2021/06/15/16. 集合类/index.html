@@ -1,0 +1,675 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-15 19:39" pubdate>
+        2021年6月15日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      5.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      73
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h3 id="集合"><a href="#集合" class="headerlink" title="集合"></a>集合</h3><h4 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h4><p>集合是 JavaAPI 中提供的一种容器工具，可以用来存储多个数据。 </p>
+<h5 id="1-1-集合和数组之间的区别"><a href="#1-1-集合和数组之间的区别" class="headerlink" title="1.1 集合和数组之间的区别"></a>1.1 集合和数组之间的区别</h5><ul>
+<li><p>数组的长度是固定的，集合的长度是可变的。</p>
+</li>
+<li><p>数组中存储的是同一类型的元素，集合中存储的数据可以是不同类型的。</p>
+</li>
+<li><p>数组中可以存放基本类型数据或者对象，集合中只能存放对象。 </p>
+</li>
+<li><p>数组是由 JVM 中现有的 类型+[] 组合而成的，除了一个 length 属性，还有从 Object 中继承过来的方法之外，数组对象就调用不到其他属性和方法。 </p>
+</li>
+<li><p>集合是由 JavaAPI 中的 java.util 包里面所提供的接口和实现类组成的，这里面定义并实现了很多方法，可以使用集合对象直接调用这些方法，从而操作集合存放的数据。</p>
+</li>
+</ul>
+<h5 id="1-2-集合框架中主要有三个要素组成"><a href="#1-2-集合框架中主要有三个要素组成" class="headerlink" title="1.2 集合框架中主要有三个要素组成"></a>1.2 集合框架中主要有三个要素组成</h5><ol>
+<li><p>接口：整个集合框架的上层结构，都是用接口进行组织的。 接口中定义了集合中必须要有的基本方法。 通过接口还把集合划分成了几种不同的类型，每一种集合都有自己对应的接口。 </p>
+</li>
+<li><p>实现类：对于上层使用接口划分好的集合种类，每种集合的接口都会有对应的实现类。 每一种接口的实现类很可能有多个，每个的实现方式也会各有不同。 </p>
+</li>
+<li><p>数据结构：每个实现类都实现了接口中所定义的最基本的方法，例如对数据的存储、检索、操作等方法。 但是不同的实现类，它们存储数据的方式不同，也就是使用的数据结构不同。</p>
+</li>
+</ol>
+<h5 id="1-3-集合的分类"><a href="#1-3-集合的分类" class="headerlink" title="1.3 集合的分类"></a>1.3 集合的分类</h5><p>按照其存储结构可以分为两大类： <code>java.util.Collection</code> 和 <code>java.util.Map</code>。其他的集合接口，都是由这俩个接口派生出来的。</p>
+<h4 id="2-Collection-接口"><a href="#2-Collection-接口" class="headerlink" title="2. Collection 接口"></a>2. Collection 接口</h4><h5 id="2-1-Collection-框架的结构图"><a href="#2-1-Collection-框架的结构图" class="headerlink" title="2.1 Collection 框架的结构图"></a>2.1 Collection 框架的结构图</h5><p>Collection 接口是单列集合类的父接口，这种集合可以将数据一个一个的存放到集合中。它有两个重要的子接口，分别是 java.util.List 和 java.util.Set。</p>
+<img src="https://i.loli.net/2021/06/15/pbLlatR7QhSjdIB.png" srcset="/img/loading.gif" lazyload alt="Collecton结构.png" style="background-color: #fff;"  />
+
+<h5 id="2-2-Collection-集合的方法"><a href="#2-2-Collection-集合的方法" class="headerlink" title="2.2 Collection 集合的方法"></a>2.2 Collection 集合的方法</h5><ul>
+<li>向集合中添加元素： <code>boolean add(E e)</code></li>
+<li>把一个指定集合中的所有数据，添加到当前集合中： <code>boolean addAll(Collection c)</code></li>
+<li>清空集合中所有的元素： void clear() </li>
+<li>判断当前集合中是否包含给定的对象：boolean contains(Object o) </li>
+<li>判断当前集合中是否包含给定的集合的所有元素：<code>boolean containsAll(Collection c)</code> </li>
+<li>判断当前集合是否为空：<code>boolean isEmpty() </code></li>
+<li>返回遍历这个集合的迭代器对象：<code>Iterator iterator() </code></li>
+<li>把给定的对象，在当前集合中删除：<code>boolean remove(Object o)</code> </li>
+<li>把给定的集合中的所有元素，在当前集合中删除：<code>boolean removeAll(Collection c)</code> </li>
+<li>判断俩个集合中是否有相同的元素, 如果有当前集合只保留相同元素，如果没有当前集合元素清空``boolean retainAll(Collection c)`</li>
+<li>返回集合中元素的个数：<code>int size() </code></li>
+<li>把集合中的元素，存储到数组中：<code>Object[] toArray()</code> </li>
+<li>把集合中的元素，存储到数组中，并指定数组的类型： <code>T[] toArray(T[] a)</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// ArrayList 类是 Collection 集合的一个实现类。</span><br>    Collection c1 = <span class="hljs-keyword">new</span> ArrayList();<br>    c1.add(<span class="hljs-string">&quot;hello1&quot;</span>);<br>    c1.add(<span class="hljs-string">&quot;hello2&quot;</span>);<br>    c1.add(<span class="hljs-string">&quot;hello3&quot;</span>);<br>  <br>    <span class="hljs-comment">//默认调用集合的toString方法，输出集合中内容</span><br>    System.out.println(<span class="hljs-string">&quot;操作之前集合中元素:&quot;</span>+c1);<br>    System.out.println(<span class="hljs-string">&quot;集合中的元素个数：&quot;</span>+c1.size());<br>    System.out.println(<span class="hljs-string">&quot;集合中是否包含hello1：&quot;</span>+c1.contains(<span class="hljs-string">&quot;hello1&quot;</span>));<br>    System.out.println(<span class="hljs-string">&quot;删除hello1：&quot;</span>+c1.remove(<span class="hljs-string">&quot;hello1&quot;</span>));<br>    System.out.println(<span class="hljs-string">&quot;操作之后集合中元素:&quot;</span>+c1);<br>  <br>    Object[] objects = c1.toArray();<br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; objects.length; i++) &#123;<br>    		System.out.println(objects[i]);<br>    &#125;<br>    c1.clear();<br>    System.out.println(<span class="hljs-string">&quot;集合中内容为：&quot;</span>+c1);<br>    System.out.println(c1.isEmpty());<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-Iterator-迭代器"><a href="#3-Iterator-迭代器" class="headerlink" title="3. Iterator 迭代器"></a>3. Iterator 迭代器</h4><p>为了能够方便的遍历集合中的每一个元素，API中提供了一个迭代器接口： <code>java.util.Iterator</code> 该接口可以很方便的迭代出集合中的元素。</p>
+<p><code>java.lang.Iterable</code> 接口中，定义了获取迭代器的方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Iterable</span> </span>&#123;<br>		<span class="hljs-function">Iterator <span class="hljs-title">iterator</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>java.util.Collection</code> 接口继承了 <code>java.lang.Iterable</code> 接口，所以 Collection 接口及其子接口中，都有一个获取迭代器对象的方法： <code>Iterator iterator()</code>。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Collection</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Iterable</span> </span>&#123;<br>		<span class="hljs-comment">//...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p><code>java.util.Iterator</code> 接口中，主要定义俩个方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Iterator</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">hasNext</span><span class="hljs-params">()</span></span>; <span class="hljs-comment">//返回当前迭代器中是否还有下一个对象</span><br>    <span class="hljs-function">Object <span class="hljs-title">next</span><span class="hljs-params">()</span></span>;     <span class="hljs-comment">//获取迭代器中的下一个对象</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>迭代器方式获取集合中的每一个元素，是 Collection 集合及其子类型集合通用的方式。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Collection c1 = <span class="hljs-keyword">new</span> ArrayList();<br>    c1.add(<span class="hljs-string">&quot;hello1&quot;</span>);<br>    c1.add(<span class="hljs-string">&quot;hello2&quot;</span>);<br>    c1.add(<span class="hljs-string">&quot;hello3&quot;</span>);<br>  <br>		<span class="hljs-comment">//获取c1集合的迭代器对象</span><br>		Iterator iterator = c1.iterator();<br>  <br>		<span class="hljs-comment">//判断迭代器中，是否还有下一个元素</span><br>    <span class="hljs-keyword">while</span>(iterator.hasNext())&#123;<br>        <span class="hljs-comment">//如果有的话，就取出来</span><br>        Object obj = iterator.next();<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="4-List-集合"><a href="#4-List-集合" class="headerlink" title="4. List 集合"></a>4. List 集合</h4><p><code>java.util.List</code> 接口继承了 Collection 接口，是常用的一种集合类型。 </p>
+<h5 id="4-1-List-集合的特点"><a href="#4-1-List-集合的特点" class="headerlink" title="4.1 List 集合的特点"></a>4.1 List 集合的特点</h5><ul>
+<li>List是一种有序的集合。 例如，向集合中存储的元素顺序是 8、2、5。那么集合中就是按照这个顺序进行存储的。</li>
+<li>List是一种带索引的集合，可以通过元素的下标索引，精确查找对应的元素数据。</li>
+<li>List是一种可以存放重复数据的集合可以把相同的数据，在List集合中多次保存。</li>
+</ul>
+<h5 id="4-2-List-集合的方法"><a href="#4-2-List-集合的方法" class="headerlink" title="4.2 List 集合的方法"></a>4.2 List 集合的方法</h5><ul>
+<li>返回集合中指定位置的元素：<code>E get(int index)</code></li>
+<li>用指定元素替换集合中指定位置的元素,并返回被替代的旧元素：<code>E set(int index, E element)</code></li>
+<li>将指定的元素，添加到该集合中的指定位置上：<code>void add(int index, E element)</code></li>
+<li>从指定位置开始，把另一个集合的所有元素添加进来：<code>boolean addAll(int index, Collection c)</code></li>
+<li>移除列表中指定位置的元素, 并返回被移除的元素：<code>E remove(int index)</code></li>
+<li>查收指定元素在集合中的所有，从前往后查到的第一个元素（List集合可以重复存放数据）：<code> int indexOf(Object o)</code></li>
+<li>查收指定元素在集合中的所有，从后往前查到的第一个元素（List集合可以重复存放数据）： <code>int lastIndexOf(Object o)</code></li>
+<li>根据指定开始和结束位置，截取出集合中的一部分数据：<code>List subList(int fromIndex, int toIndex)</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">// 创建List集合对象</span><br>    List list = <span class="hljs-keyword">new</span> ArrayList();<br>  <br>    <span class="hljs-comment">// 往尾部添加 指定元素</span><br>    list.add(<span class="hljs-string">&quot;hello1&quot;</span>);<br>    list.add(<span class="hljs-string">&quot;hello2&quot;</span>);<br>    list.add(<span class="hljs-string">&quot;hello3&quot;</span>);<br>    System.out.println(list);<br>  <br>    <span class="hljs-comment">// add(int index,String s) 往指定位置添加</span><br>    list.add(<span class="hljs-number">1</span>, <span class="hljs-string">&quot;world&quot;</span>);<br>    System.out.println(list);<br>  <br>    <span class="hljs-comment">// 删除索引位置为2的元素</span><br>    System.out.println(<span class="hljs-string">&quot;删除索引位置为2的元素&quot;</span>);<br>    System.out.println(list.remove(<span class="hljs-number">2</span>));<br>    System.out.println(list);<br>  <br>    <span class="hljs-comment">// 修改指定位置元素</span><br>    list.set(<span class="hljs-number">0</span>, <span class="hljs-string">&quot;briup&quot;</span>);<br>    System.out.println(list);<br>  <br>    <span class="hljs-comment">// 遍历集合</span><br>    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; list.size(); i++) &#123;<br>   		 System.out.println(list.get(i));<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;-----------------&quot;</span>);<br>  <br>    <span class="hljs-comment">// 使用foreach遍历</span><br>    <span class="hljs-keyword">for</span>(Object obj : list)&#123;<br>    		System.out.println(obj);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;-----------------&quot;</span>);<br>  <br>    <span class="hljs-comment">// 使用迭代器进行遍历集合</span><br>    Iterator it = list.iterator();<br>    <span class="hljs-keyword">while</span>(it.hasNext())&#123;<br>        Object obj = it.next();<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="4-3-ArarryList"><a href="#4-3-ArarryList" class="headerlink" title="4.3 ArarryList"></a>4.3 ArarryList</h5><p><code>java.util.ArrayList</code> 是最常用的一种 List 类型集合。 </p>
+<ul>
+<li><p>ArrayList 类中使用数组来实现数据的存储， 所以它的特点是就是：<strong>增删慢，查找快。</strong> </p>
+</li>
+<li><p>在日常的开发中，查询数据也是用的最多的功能，所以 ArrayList 是最常用的集合。 但是，如果项目中对性能要求较高，并且在集合中大量的数据做增删操作，那么 ArrayList 就不太适合了。</p>
+</li>
+</ul>
+<h5 id="4-4-LinkedList"><a href="#4-4-LinkedList" class="headerlink" title="4.4 LinkedList"></a>4.4 LinkedList</h5><h6 id="4-4-1-特点"><a href="#4-4-1-特点" class="headerlink" title="4.4.1 特点"></a>4.4.1 特点</h6><ul>
+<li><p><code>java.util.LinkedList</code> 存储数据采用的数据结构是链表，所以它的特点是：<strong>增删快，查找慢</strong>。这里描述的快和慢，需要在大量的数据操作下，才可以体现，<strong>如果数据量不大的话，集合每一种集合的操作几乎没有任何区别</strong>。</p>
+</li>
+<li><p><strong>线程不安全，但是效率高</strong>。</p>
+</li>
+</ul>
+<h6 id="4-4-2-结构"><a href="#4-4-2-结构" class="headerlink" title="4.4.2 结构"></a>4.4.2 结构</h6><img src="https://i.loli.net/2021/06/15/U9xHFIu7nojDOba.png" srcset="/img/loading.gif" lazyload style= "background-color : #fff;">
+
+
+
+<p>LinkedList 是一个双向链表。除了头节点（head）和尾节点（tail）之外，其他节点都含有俩个引用，一 个引用指向它的上一个节点，另一个引用指向它的的下一个节点。</p>
+<h6 id="4-4-3-特有方法"><a href="#4-4-3-特有方法" class="headerlink" title="4.4.3 特有方法"></a>4.4.3 特有方法</h6><ul>
+<li><p>将指定元素插入此列表的开头：<code>void addFirst(E e) </code></p>
+</li>
+<li><p>将指定元素添加到此列表的结尾：<code>void addLast(E e) </code></p>
+</li>
+<li><p>返回此列表的第一个元素：<code>E getFirst()</code> </p>
+</li>
+<li><p>返回此列表的最后一个元素：<code>E getLast() </code></p>
+</li>
+<li><p>从此列表所表示的堆栈处弹出一个元素：<code>E pop() </code></p>
+</li>
+<li><p>将元素推入此列表所表示的堆栈：<code>void push(E e) </code></p>
+</li>
+<li><p>移除并返回此列表的第一个元素：<code>E removeFirst() </code></p>
+</li>
+<li><p>移除并返回此列表的最后一个元素：<code>E removeLast()</code></p>
+</li>
+</ul>
+<h6 id="4-4-4-队列"><a href="#4-4-4-队列" class="headerlink" title="4.4.4 队列"></a>4.4.4 队列</h6><p>LinkedList 类不仅实现了 List 接口，还实现了 Queue 接口以及子接口 Deque。</p>
+<img src="https://i.loli.net/2021/06/15/3JUAS9pxuLWeHdf.png" srcset="/img/loading.gif" lazyload >
+
+<p>Queue 是队列接口， Deque 是双端队列。 JavaAPI 中提供了 <code>java.util.Stack</code> 来实现栈结构，但官方目前已不推荐使用，而是推荐使用 <code>java.util.Deque</code> 双端队列来实现队列与栈的各种需求。所以 LinkedList 同时具有队列和栈的操作方法，pop 和 push 都是栈结构的操作方法。所以， <strong>LinkedList 集合也可以作为栈和队列的数据结构来使用</strong>。</p>
+<h5 id="4-5-Vector"><a href="#4-5-Vector" class="headerlink" title="4.5 Vector"></a>4.5 Vector</h5><p>Vector 内部也是采用了数组来存储数据，但是 Vector 中的方法大多数都是<strong>线程安全</strong>的方法，所以在多线并发访问的环境中，可以使用 Vector 来保证集合中元据操作的安全。</p>
+<h4 id="5-Set-集合"><a href="#5-Set-集合" class="headerlink" title="5. Set 集合"></a>5. Set 集合</h4><p><code>java.util.Set</code> 接口继承了 Collection 接口，是常用的一种集合类型。 </p>
+<h5 id="5-1-Set-集合的特点"><a href="#5-1-Set-集合的特点" class="headerlink" title="5.1 Set 集合的特点"></a>5.1 Set 集合的特点</h5><ul>
+<li>Set 是一种无序的集合。</li>
+<li>Set 是一种不带下标索引的集合。</li>
+<li>Set 是一种不能存放重复数据的集合。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> HashSet();<br>    set.add(<span class="hljs-string">&quot;hello1&quot;</span>);<br>    set.add(<span class="hljs-string">&quot;hello2&quot;</span>);<br>    set.add(<span class="hljs-string">&quot;hello3&quot;</span>);<br>    set.add(<span class="hljs-string">&quot;hello4&quot;</span>);<br>    set.add(<span class="hljs-string">&quot;hello5&quot;</span>);<br>    set.add(<span class="hljs-string">&quot;hello5&quot;</span>);<br>  <br>    <span class="hljs-keyword">for</span>(Object obj:set)&#123;<br>    		System.out.println(obj);<br>    &#125;<br>    System.out.println(<span class="hljs-string">&quot;-----------------&quot;</span>);<br>  <br>    Iterator it = set.iterator();<br>    <span class="hljs-keyword">while</span>(it.hasNext())&#123;<br>        Object obj = it.next();<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-2-HashSet"><a href="#5-2-HashSet" class="headerlink" title="5.2 HashSet"></a>5.2 HashSet</h5><p><code>java.util.HashSet</code> 类的实现，主要依靠的是 HashMap，而 HashMap 的实现主要是利用哈希表。</p>
+<ul>
+<li>HashSet 中存储元素是无序的，主要因为它是靠对象的哈希值来确定元素在集合中的存储位置。 </li>
+<li>HashSet 中元素不可重复，主要是靠对象的hashCode和equals方法来判断对象是否重复。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span></span>&#123;<br>  String name;<br>  <span class="hljs-keyword">int</span> age;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>      <span class="hljs-keyword">this</span>.name = name;<br>      <span class="hljs-keyword">this</span>.age = age;<br>	&#125;<br>  <br>	<span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>      <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>      <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>      <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>  &#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> HashSet();<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>      	System.out.println(obj);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//运行结果为：</span><br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看出，HashSet 并没有把 name 和 age 都相同的对象，当做相同的对象进行去重。原因是，<strong>HashSet 中判断对象是否重复是根据对象的 hashCode 值和 equals 的比较结果</strong>，而不是根据对象的 name 和 age 值是否相等！ 如果俩个对象的 hashCode 值相等，那么再使用 equals 判断是否俩对象是否相同， 如果俩个对象的 hashCode 值不同等，那么就不再使用 equals 进行判断了，因为 hashCode 不同的俩个对象一定是不同的俩个对象！</p>
+<p>所以，想要将 Student 对象根据我们的要求进行去重，就要重写 Student 中的 hashCode 方法和 equals 方法。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span></span>&#123;<br>    String name;<br>    <span class="hljs-keyword">int</span> age;<br>	  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span></span>&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.name = name;<br>        <span class="hljs-keyword">this</span>.age = age;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>        <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>        <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>        <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> Objects.hash(name, age);<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object o)</span> </span>&#123;<br>        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">this</span> == o) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;<br>        <span class="hljs-keyword">if</span> (o == <span class="hljs-keyword">null</span> || getClass() != o.getClass()) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;<br>        Student student = (Student) o;<br>        <span class="hljs-keyword">return</span> age == student.age &amp;&amp; Objects.equals(name, student.name);<br>     &#125;<br> &#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> HashSet();<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>  <br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br><span class="hljs-comment">//输出结果：</span><br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="5-3-TreeSet"><a href="#5-3-TreeSet" class="headerlink" title="5.3 TreeSet"></a>5.3 TreeSet</h5><p>TreeSet 是 Set 接口的子接口 SortedSet 的实现类。</p>
+<p>TreeSet可以将我们存进去的数据进行排序，排序的方式有俩种：</p>
+<ul>
+<li><p>自然排序 </p>
+</li>
+<li><p>比较器排序（也称客户化排序）</p>
+</li>
+</ul>
+<h6 id="5-3-1-自然排序"><a href="#5-3-1-自然排序" class="headerlink" title="5.3.1 自然排序"></a>5.3.1 自然排序</h6><p>如果一个类，实现了 <code>java.lang.Comparable</code> 接口，那么这个类的俩个对象就是可以比较大小的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Comparable</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(T o)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>compareTo 方法使用说明： <code>int result = o1.compareTo(o2);</code> </p>
+<ul>
+<li>result 的值大于0，说明 o1 比 o2 大。 </li>
+<li>result 的值小于0，说明 o1 比 o2 小。 </li>
+<li>result 的值等于0，说明 o1 与 o2 相等。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> TreeSet();<br>    set.add(<span class="hljs-number">3</span>);<br>    set.add(<span class="hljs-number">5</span>);<br>    set.add(<span class="hljs-number">1</span>);<br>    set.add(<span class="hljs-number">7</span>);<br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>    		System.out.println(obj);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//输出结果：</span><br><span class="hljs-number">1</span><br><span class="hljs-number">3</span><br><span class="hljs-number">5</span><br><span class="hljs-number">7</span><br></code></pre></td></tr></table></figure>
+
+<p><code>set.add(3);</code> 代码执行的时候，会自动进行装箱，把基本类型数据 3 变为 Integer 对象，然后再存放到集合中。</p>
+<p>Integer 类是实现了 Comparable 接口的，那么 Integer 类的俩个对象之间就可以调用 compareTo 方法比较大小了，当前对象比较出来大小，那么对象就可以按照从小到大的顺序进行排序。 所以，<strong>数据排序的前提，一定是可以比较出数据的大小</strong>。</p>
+<p>给自定义类型进行排序：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span></span>&#123;<br>    String name;<br>    <span class="hljs-keyword">int</span> age;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span></span>&#123;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.name = name;<br>        <span class="hljs-keyword">this</span>.age = age;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>        <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>        <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>        <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> TreeSet();<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;mary&quot;</span>,<span class="hljs-number">23</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;jack&quot;</span>,<span class="hljs-number">21</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;lucy&quot;</span>,<span class="hljs-number">22</span>));<br>  <br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//运行结果报错：</span><br>Exception in thread <span class="hljs-string">&quot;main&quot;</span> java.lang.ClassCastException: com.briup.demo.Student<br>cannot be cast to java.lang.Comparable<br></code></pre></td></tr></table></figure>
+
+<p>报错原因，TreeSet 中会把对象强制为 Comparable 类型，因为转成 Comparable 类型就可以调用 compareTo 方法进行俩个对象的比较大小了。但是这里的 Student 没有实现该接口，所以报错了。</p>
+<p>Student 类实现 Comparable 接口，并在 compareTo 方法中，编写比较大小的规则：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparable</span></span>&#123;<br>    String name;<br>    <span class="hljs-keyword">int</span> age;<br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.name = name;<br>        <span class="hljs-keyword">this</span>.age = age;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>        <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>        <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>        <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compareTo</span><span class="hljs-params">(Object o)</span> </span>&#123;<br>        <span class="hljs-comment">//注意，这里this代表我，other代表你，也就是当前要和我比较大小的对象</span><br>        Student other = (Student)o;<br>      <br>        <span class="hljs-comment">//如果我的年龄比你大，就返回正数，说明我比你大</span><br>        <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.age &gt; other.age)&#123;<br>        		<span class="hljs-keyword">return</span> <span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-comment">//如果我的年龄比你小，就返回负数，说明我比你小</span><br>        <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(<span class="hljs-keyword">this</span>.age &lt; other.age)&#123;<br>        		<span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;<br>        &#125;<br>        <span class="hljs-comment">//其他情况返回0，说明俩个对象（我和你）一样大</span><br>        <span class="hljs-keyword">else</span> &#123;<br>          	<span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;<br>    		&#125;<br>		&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Set set = <span class="hljs-keyword">new</span> TreeSet();<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;mary&quot;</span>,<span class="hljs-number">23</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;jack&quot;</span>,<span class="hljs-number">21</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;lucy&quot;</span>,<span class="hljs-number">22</span>));<br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//运行结果：</span><br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;jack&#x27;</span>, age=<span class="hljs-number">21</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;lucy&#x27;</span>, age=<span class="hljs-number">22</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;mary&#x27;</span>, age=<span class="hljs-number">23</span>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>可以看出，现在学生对象在 TreeSet 中，就可以按照我们定义的规则进行从小到大排序了。</p>
+<h6 id="5-3-1-比较器排序"><a href="#5-3-1-比较器排序" class="headerlink" title="5.3.1 比较器排序"></a>5.3.1 比较器排序</h6><p>比较器排序比自然排序优先级更高。</p>
+<p>假设现在 Student 类已经写好了，但是没有实现 Comparable 接口，同时我们又不愿意直接修改 Student 类的代码，那么在这种情况下，Student 对象在 TreeSet 中是否还能排序呢？<code> java.util.Comparator</code> 接口，是一个比较器接口，它的实现类可以对俩个对象作出大小的比较，即使对象没有实现 Comparable 接口，也可以进行比较。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Comparator</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(T o1, T o2)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>比较器的使用规则： <code>int result = compare(o1, o2); </code></p>
+<ul>
+<li>result 的值大于0，说明o1比o2大。</li>
+<li>result 的值小于0，说明o1比o2小 。</li>
+<li>result 的值等于0，说明o1与o2相等 。</li>
+</ul>
+<p>注意，这里和自然排序的规则是一样的，<strong>只关心正数、负数、零，不关心具体的值是多少。</strong></p>
+<p>在TreeSet类重载的构造器中，有一个构造器可以接收比较器对象：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">TreeSet</span><span class="hljs-params">(Comparator&lt;? <span class="hljs-keyword">super</span> E&gt; comparator)</span> </span>&#123;<br>		<span class="hljs-keyword">this</span>(<span class="hljs-keyword">new</span> TreeMap&lt;&gt;(comparator));<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>给学生对象排序</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Comparable</span></span>&#123;<br>    String name;<br>    <span class="hljs-keyword">int</span> age;<br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Student</span><span class="hljs-params">(String name, <span class="hljs-keyword">int</span> age)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>.name = name;<br>        <span class="hljs-keyword">this</span>.age = age;<br>    &#125;<br>  <br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Student&#123;&quot;</span> +<br>        <span class="hljs-string">&quot;name=&#x27;&quot;</span> + name + <span class="hljs-string">&#x27;\&#x27;&#x27;</span> +<br>        <span class="hljs-string">&quot;, age=&quot;</span> + age +<br>        <span class="hljs-string">&#x27;&#125;&#x27;</span>;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>		<span class="hljs-comment">//使用 Comparator 接口，创建出匿名内部类对象，这个对象就是要用的比较器对象</span><br>		Comparator c = <span class="hljs-keyword">new</span> Comparator() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Object o1, Object o2)</span> </span>&#123;<br>            Student s1 = (Student) o1;<br>            Student s2 = (Student) o2;<br>            <span class="hljs-keyword">return</span> s1.age &gt; s2.age? <span class="hljs-number">1</span> : (s1.age==s2.age? <span class="hljs-number">0</span> : -<span class="hljs-number">1</span>);<br>        &#125;<br>		&#125;;<br>  <br>    <span class="hljs-comment">//创建TreeSet对象的时候，把比较器对象传入</span><br>    Set set = <span class="hljs-keyword">new</span> TreeSet(c);<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;mary&quot;</span>,<span class="hljs-number">23</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;jack&quot;</span>,<span class="hljs-number">21</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>));<br>    set.add(<span class="hljs-keyword">new</span> Student(<span class="hljs-string">&quot;lucy&quot;</span>,<span class="hljs-number">22</span>));<br>  <br>    <span class="hljs-keyword">for</span>(Object obj : set)&#123;<br>        System.out.println(obj);<br>    &#125;<br>&#125;<br><br><span class="hljs-comment">//运行结果：</span><br>Student&#123;name=<span class="hljs-string">&#x27;tom&#x27;</span>, age=<span class="hljs-number">20</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;jack&#x27;</span>, age=<span class="hljs-number">21</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;lucy&#x27;</span>, age=<span class="hljs-number">22</span>&#125;<br>Student&#123;name=<span class="hljs-string">&#x27;mary&#x27;</span>, age=<span class="hljs-number">23</span>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="6-Map"><a href="#6-Map" class="headerlink" title="6. Map"></a>6. Map</h4><h5 id="6-1-Map-集合的特点"><a href="#6-1-Map-集合的特点" class="headerlink" title="6.1 Map 集合的特点"></a>6.1 Map 集合的特点</h5><p>Map 类型集合中，每次需要存一对数据，key-value（键值对）</p>
+<ul>
+<li><p> key 值必须是唯一的，value 值允许重复。</p>
+</li>
+<li><p>键（key）和值（value）一一映射，一个key对应一个 value 。</p>
+</li>
+<li><p>在 Map 中，通过 key 值（唯一的），可以快速的找到对应的 value 值。</p>
+</li>
+<li><p>如果键值相同，后面加入的会覆盖前面的。</p>
+</li>
+</ul>
+<h5 id="6-2-Map-集合的常用方法"><a href="#6-2-Map-集合的常用方法" class="headerlink" title="6.2 Map 集合的常用方法"></a>6.2 Map 集合的常用方法</h5><ul>
+<li>把 key-value 存到当前 Map 集合中： <code>V put(K key, V value) </code></li>
+<li>把指定 map 中的所有 key-value，存到当前 Map 集合中： <code>void putAll(Map m) </code></li>
+<li>当前 Map 集合中是否包含指定的 key 值： <code>boolean containsKey(Object key) </code></li>
+<li>当前 Map 集合中是否包含指定的 value 值： <code>boolean containsValue(Object value)</code> </li>
+<li>清空当前 Map 集合中的所有数据： <code>void clear() </code></li>
+<li>在当前 Map 集合中，通过指定的 key 值，获取对应的value值： <code>V get(Object key)</code> </li>
+<li>在当前 Map 集合中，移除指定 key 及其对应的 value： <code>V remove(Object key) </code></li>
+<li>返回当前 Map 集合中的元素个数（一对 key-value，算一个元素数据）： <code>int size() </code></li>
+<li>判断当前 Map 集合是否为空：<code>boolean isEmpty()</code></li>
+<li>返回 Map 集合中所有的 key 值 ：<code>Set keySet() </code></li>
+<li>返回 Map 集合中所有的 value 值：<code>Collection values()</code></li>
+<li>把 Map 集合中的的 key-value 封装成 Entry 类型对象，再存放到 set 集合中，并返回：<code>Set&lt;Map.Entry&lt;k,V&gt;&gt; entrySet()</code></li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Map map = <span class="hljs-keyword">new</span> HashMap();<br>    map.put(<span class="hljs-number">1</span>,<span class="hljs-string">&quot;tom&quot;</span>);<br>    map.put(<span class="hljs-number">2</span>,<span class="hljs-string">&quot;jack&quot;</span>);<br>    map.put(<span class="hljs-number">3</span>,<span class="hljs-string">&quot;lucy&quot;</span>);<br>    map.put(<span class="hljs-number">4</span>,<span class="hljs-string">&quot;mary&quot;</span>);<br>    System.out.println(<span class="hljs-string">&quot;map是否为空：&quot;</span>+map.isEmpty());<br>    System.out.println(<span class="hljs-string">&quot;map中元素的个数：&quot;</span>+map.size());<br>    System.out.println(<span class="hljs-string">&quot;map中是否包含指定key值1：&quot;</span>+map.containsKey(<span class="hljs-number">1</span>));<br>    System.out.println(<span class="hljs-string">&quot;map中是否包含指定value值mary：&quot;</span>+map.containsValue(<span class="hljs-string">&quot;mary&quot;</span>));<br>    System.out.println(<span class="hljs-string">&quot;map中获取指定key值1对应的value值：&quot;</span>+map.get(<span class="hljs-number">1</span>));<br>    System.out.println(<span class="hljs-string">&quot;map中获取指定key值5对应的value值：&quot;</span>+map.get(<span class="hljs-number">5</span>));<br>  <br>		<span class="hljs-comment">/* Map集合的这三种遍历方式 */</span><br>    System.out.println(<span class="hljs-string">&quot;--------获取map中所有的kay值--------&quot;</span>);<br>    Set keys = map.keySet();<br>    <span class="hljs-keyword">for</span>(Object key : keys)&#123;<br>        System.out.println(key+<span class="hljs-string">&quot; : &quot;</span>+map.get(key));<br>    &#125;<br>  <br>    System.out.println(<span class="hljs-string">&quot;--------获取map中所有的value值--------&quot;</span>);<br>    Collection values = map.values();<br>    <span class="hljs-keyword">for</span>(Object value : values)&#123;<br>      	System.out.println(value);<br>    &#125;<br>  <br>		System.out.println(<span class="hljs-string">&quot;--------获取map中所有的key-value(键值对),封装成Entry类型对象--------&quot;</span>);<br>    Set entrySet = map.entrySet();<br>    <span class="hljs-keyword">for</span>(Object obj : entrySet)&#123;<br>    Map.Entry entry = (Map.Entry) obj;<br>      System.out.println(entry.getKey()+<span class="hljs-string">&quot; : &quot;</span>+entry.getValue());<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="6-3-HashMap"><a href="#6-3-HashMap" class="headerlink" title="6.3 HashMap"></a>6.3 HashMap</h5><h4 id="7-集合工具类-Collections"><a href="#7-集合工具类-Collections" class="headerlink" title="7. 集合工具类 Collections"></a>7. 集合工具类 Collections</h4><p><code>java.util.Collections</code> 也是一个工具类，专门用来操作集合对象的，里面都是静态方法，可以直接调用。</p>
+<h5 id="7-1-常用方法"><a href="#7-1-常用方法" class="headerlink" title="7.1 常用方法"></a>7.1 常用方法</h5><ul>
+<li><p>使用指定元素替换指定列表中的所有元素：<code>fill()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">List list = <span class="hljs-keyword">new</span> ArrayList();<br>list.add(<span class="hljs-number">1</span>);<br>list.add(<span class="hljs-number">2</span>);<br>list.add(<span class="hljs-number">3</span>);<br>Collections.fill(list, <span class="hljs-number">20</span>);<br><span class="hljs-keyword">for</span>(Object o:list)&#123;<br>	System.out.println(o);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+<li><p>根据元素的自然顺序，返回给定集合的最大元素/最小元素：<code>max() &amp; min()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java">List list = <span class="hljs-keyword">new</span> ArrayList();<br>list.add(<span class="hljs-number">1</span>);<br>list.add(<span class="hljs-number">9</span>);<br>list.add(<span class="hljs-number">3</span>);<br>System.out.println(Collections.max(list));<br></code></pre></td></tr></table></figure></li>
+</ul>
+<ul>
+<li><p>反转集合中的元素：<code>reverse()</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java">List list = <span class="hljs-keyword">new</span> ArrayList();<br>list.add(<span class="hljs-number">1</span>);<br>list.add(<span class="hljs-number">9</span>);<br>list.add(<span class="hljs-number">3</span>);<br>Collections.reverse(list);<br><span class="hljs-keyword">for</span>(Object o:list)&#123;<br>		System.out.println(o);<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/18/17.%20%E6%9E%9A%E4%B8%BE/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/14/13.%20String%20%E7%B1%BB/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
