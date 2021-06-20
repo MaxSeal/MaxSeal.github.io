@@ -245,7 +245,7 @@
 
 
 
-<h4 id="1-枚举的定义"><a href="#1-枚举的定义" class="headerlink" title="1. 枚举的定义"></a>1. 枚举的定义</h4><ul>
+<h2 id="1-枚举的定义"><a href="#1-枚举的定义" class="headerlink" title="1. 枚举的定义"></a>1. 枚举的定义</h2><ul>
 <li>枚举，是 JDK1.5 引入的新特性，可以通过关键字 enum 来定义枚举类。 </li>
 <li>枚举类是一种特殊的类，它和普通类一样可以使用构造器、定义成员变量和方法，也能实现一个或多个接口。 但是<strong>枚举类不能继承其他类。</strong></li>
 </ul>
@@ -282,13 +282,13 @@
 </ul>
 </li>
 </ul>
-<h4 id="2-意义"><a href="#2-意义" class="headerlink" title="2. 意义"></a>2. 意义</h4><p>java中的类，从语法形式上来说，可以创建出一个类的无数个对象。 </p>
+<h2 id="2-意义"><a href="#2-意义" class="headerlink" title="2. 意义"></a>2. 意义</h2><p>java中的类，从语法形式上来说，可以创建出一个类的无数个对象。 </p>
 <p>例如，学生类 Student，我们可以创建出10个、20个等不同数量的学生对象，并且从意义讲确实也没有问题，因为实际情况中确实会存在很多不同的学生。 </p>
 <p>但是这其实还存在另一种情况：一个类的对象，从意义上来说，对象个数是固定的。 </p>
 <p>例如， Gender 这个类，表示人的性别，从语法上来说，可以创建出无数个性别对象，但是从实际意义 上看，我们只需要俩个对象就可以了，一个表示男、一个表示女。 </p>
 <p>那么，在这个时候，我们就需要去对 Gender 类的对象创建作出限制，不让用户创建很Gender类型的对象，因为如果创建了很多对象，那么会占用内存空间，同时这么多对象也没什么实际意义，最终还是只能表示俩种情况，男和女。 </p>
 <p>解决这个问题的方式是，可以将 Gender 定义为一个枚举类型（enum），我们就可以在枚举类型中，提前将这个类型的对象个数和对象名字都固定下来，并且之后的使用中不会改变，也不会再创建其他对象。</p>
-<h4 id="3-获取枚举对象"><a href="#3-获取枚举对象" class="headerlink" title="3. 获取枚举对象"></a>3. 获取枚举对象</h4><p>以 Gender 这个枚举类型为例：</p>
+<h2 id="3-获取枚举对象"><a href="#3-获取枚举对象" class="headerlink" title="3. 获取枚举对象"></a>3. 获取枚举对象</h2><p>以 Gender 这个枚举类型为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>	MALE,FEMALE<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
@@ -308,12 +308,14 @@
 
 
 
-<h4 id="4-枚举中定义属性和方法"><a href="#4-枚举中定义属性和方法" class="headerlink" title="4. 枚举中定义属性和方法"></a>4. 枚举中定义属性和方法</h4><p>在枚举类型中，除了可以指定对象的个数和名称之外，还可以定义属性和方法。</p>
+
+
+<h2 id="4-枚举中定义属性和方法"><a href="#4-枚举中定义属性和方法" class="headerlink" title="4. 枚举中定义属性和方法"></a>4. 枚举中定义属性和方法</h2><p>在枚举类型中，除了可以指定对象的个数和名称之外，还可以定义属性和方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>  MALE,FEMALE;<br>  <span class="hljs-keyword">private</span> String name;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span></span>&#123;<br>    <span class="hljs-keyword">this</span>.name = name;<br>  &#125;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span></span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.name;<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>&#123;<br>  	System.out.println(<span class="hljs-string">&quot;Gender test...&quot;</span>);<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">print</span><span class="hljs-params">(String name)</span></span>&#123;<br>  	System.out.println(<span class="hljs-string">&quot;hello &quot;</span>+name);<br>  &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>  Gender g = Gender.MALE;<br>  g.test();<br>  g.setName(<span class="hljs-string">&quot;我是男生&quot;</span>);<br>  System.out.println(g.getName());<br>  Gender.print(<span class="hljs-string">&quot;jack&quot;</span>);<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>枚举类型中的第一行代码，要求一定是指定枚举对象的个数和名字，同时最后面加分号。</p>
 <p>在这行代码下， 才可以定义枚举类型的属性和方法。</p>
-<h4 id="5-枚举中定义构造器"><a href="#5-枚举中定义构造器" class="headerlink" title="5. 枚举中定义构造器"></a>5. 枚举中定义构造器</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>  MALE,FEMALE;<br>  <span class="hljs-keyword">private</span> String name;<br>  <br>	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Gender</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Gender</span><span class="hljs-params">(String name)</span></span>&#123;<br>    <span class="hljs-keyword">this</span>.name = name;<br>  &#125;<br>	<span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Gender&#123;name=&quot;</span>+name+<span class="hljs-string">&quot;&#125;&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+<h2 id="5-枚举中定义构造器"><a href="#5-枚举中定义构造器" class="headerlink" title="5. 枚举中定义构造器"></a>5. 枚举中定义构造器</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>  MALE,FEMALE;<br>  <span class="hljs-keyword">private</span> String name;<br>  <br>	<span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Gender</span><span class="hljs-params">()</span></span>&#123;&#125;<br>  <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-title">Gender</span><span class="hljs-params">(String name)</span></span>&#123;<br>    <span class="hljs-keyword">this</span>.name = name;<br>  &#125;<br>	<span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Gender&#123;name=&quot;</span>+name+<span class="hljs-string">&quot;&#125;&quot;</span>;<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>枚举中的构造器，只能使用 private 修饰，或者不写修饰符，那么默认也是 private，同时还可以构造器重载。</p>
 <p>调用构造器：</p>
@@ -321,11 +323,13 @@
 
 
 
-<h4 id="6-枚举中定义抽象方法"><a href="#6-枚举中定义抽象方法" class="headerlink" title="6.  枚举中定义抽象方法"></a>6.  枚举中定义抽象方法</h4><p>枚举类中定义抽象方法，必须将抽象方法进行实现。因为枚举类型是 final 修饰的类，不可能有子类型来实现这个抽象方法，所以就必须是自己的对象去实现这个抽象方法。</p>
+
+
+<h2 id="6-枚举中定义抽象方法"><a href="#6-枚举中定义抽象方法" class="headerlink" title="6.  枚举中定义抽象方法"></a>6.  枚举中定义抽象方法</h2><p>枚举类中定义抽象方法，必须将抽象方法进行实现。因为枚举类型是 final 修饰的类，不可能有子类型来实现这个抽象方法，所以就必须是自己的对象去实现这个抽象方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>    MALE()&#123;<br>    		<span class="hljs-meta">@Override</span><br>      	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>        		System.out.println(<span class="hljs-string">&quot;男生测试&quot;</span>);<br>        &#125;<br>     &#125;,FEMALE()&#123;<br>          <span class="hljs-meta">@Override</span><br>          <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>          		System.out.println(<span class="hljs-string">&quot;女生测试&quot;</span>);<br>          &#125;<br>      &#125;;<br>  <br>       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这种写法和匿名内部类的写法很相似， <code>MALE()&#123;...&#125;,</code> <code>FEMALE()&#123;...&#125;;</code></p>
-<h4 id="7-枚举类实现接口"><a href="#7-枚举类实现接口" class="headerlink" title="7. 枚举类实现接口"></a>7. 枚举类实现接口</h4><p>枚举类型已经有默认的父类型<code>java.lang.Enum</code>，我们就不能让它在继承其他父类了，但是我们可 以让枚举类型实现指定的接口。</p>
+<h2 id="7-枚举类实现接口"><a href="#7-枚举类实现接口" class="headerlink" title="7. 枚举类实现接口"></a>7. 枚举类实现接口</h2><p>枚举类型已经有默认的父类型<code>java.lang.Enum</code>，我们就不能让它在继承其他父类了，但是我们可 以让枚举类型实现指定的接口。</p>
 <p>方法1：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Action</span></span>&#123;<br>	MALE,FEMALE;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>  	System.out.println(<span class="hljs-string">&quot;枚举中统一实现接口中的抽象方法&quot;</span>);<br>  &#125;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -336,7 +340,9 @@
 
 
 
-<h4 id="8-枚举使用总结"><a href="#8-枚举使用总结" class="headerlink" title="8. 枚举使用总结"></a>8. 枚举使用总结</h4><p>对于枚举类型的使用，大多数情况下，我们在枚举中列出它的的每一个对象即可，偶尔会添加几个自定 义的属性和方法，并不会写的那么复杂，否则就没什么意义了。 </p>
+
+
+<h2 id="8-枚举使用总结"><a href="#8-枚举使用总结" class="headerlink" title="8. 枚举使用总结"></a>8. 枚举使用总结</h2><p>对于枚举类型的使用，大多数情况下，我们在枚举中列出它的的每一个对象即可，偶尔会添加几个自定 义的属性和方法，并不会写的那么复杂，否则就没什么意义了。 </p>
 <p>在项目中，只要一个类型的对象个数和名称能固定下来的，就可以考虑使用枚举类型来表示。</p>
 
             </div>

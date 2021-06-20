@@ -245,34 +245,34 @@
 
 
 
-<h4 id="Math-类"><a href="#Math-类" class="headerlink" title="Math 类"></a>Math 类</h4><p>Math 包含了用于执行基本数学运算的属性和方法，如初等指数、对数、平方根和三角函数。</p>
+<h3 id="Math-类"><a href="#Math-类" class="headerlink" title="Math 类"></a>Math 类</h3><p>Math 包含了用于执行基本数学运算的属性和方法，如初等指数、对数、平方根和三角函数。</p>
 <p>Math 的方法都被定义为 static 形式，通过 Math 类可以在主函数中直接调用。</p>
-<h4 id="1-abs"><a href="#1-abs" class="headerlink" title="1. abs()"></a>1. abs()</h4><p>返回参数的绝对值。参数可以是 int, float, long, double, short, byte类型。</p>
+<h3 id="1-abs"><a href="#1-abs" class="headerlink" title="1. abs()"></a>1. abs()</h3><p>返回参数的绝对值。参数可以是 int, float, long, double, short, byte类型。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> a = -<span class="hljs-number">80</span>;<br><span class="hljs-keyword">float</span> b = -<span class="hljs-number">90.0f</span>;<br><span class="hljs-keyword">double</span> c = -<span class="hljs-number">100</span>;<br><br>System.out.println(Math.abs(a));  <span class="hljs-comment">// 结果为 80</span><br>System.out.println(Math.abs(b));  <span class="hljs-comment">// 结果为 90.0</span><br>System.out.println(Math.abs(c));  <span class="hljs-comment">// 结果为 100.0</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="2-ceil"><a href="#2-ceil" class="headerlink" title="2. ceil()"></a>2. ceil()</h4><p>返回大于等于( &gt;= )给定参数的的最小整数，类型为 double。参数为 float 或 double。</p>
+<h3 id="2-ceil"><a href="#2-ceil" class="headerlink" title="2. ceil()"></a>2. ceil()</h3><p>返回大于等于( &gt;= )给定参数的的最小整数，类型为 double。参数为 float 或 double。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">double</span> d = <span class="hljs-number">3.1415926</span>;<br><span class="hljs-keyword">float</span> f = -<span class="hljs-number">2.4f</span>;<br><br>System.out.println(Math.ceil(d));  <span class="hljs-comment">// 结果为 4.0</span><br>System.out.println(Math.ceil(f));  <span class="hljs-comment">// 结果为 -2.0</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="3-floor"><a href="#3-floor" class="headerlink" title="3. floor()"></a>3. floor()</h4><p>返回大于等于( &lt;= )给定参数的的最小整数，类型为 double。参数为 float 或 double。</p>
+<h3 id="3-floor"><a href="#3-floor" class="headerlink" title="3. floor()"></a>3. floor()</h3><p>返回大于等于( &lt;= )给定参数的的最小整数，类型为 double。参数为 float 或 double。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">double</span> d = <span class="hljs-number">3.1415926</span>;<br><span class="hljs-keyword">float</span> f = -<span class="hljs-number">2.4f</span>;<br><br>System.out.println(Math.floor(d));  <span class="hljs-comment">// 结果为 3.0</span><br>System.out.println(Math.floor(f));  <span class="hljs-comment">// 结果为 -3.0</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="4-rint"><a href="#4-rint" class="headerlink" title="4. rint()"></a>4. rint()</h4><p>返回最接近参数的整数值，类型为 double。参数为 float 或 double。</p>
+<h3 id="4-rint"><a href="#4-rint" class="headerlink" title="4. rint()"></a>4. rint()</h3><p>返回最接近参数的整数值，类型为 double。参数为 float 或 double。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">double</span> d = <span class="hljs-number">3.1415926</span>;<br><span class="hljs-keyword">float</span> f = -<span class="hljs-number">2.4f</span>;<br><br>System.out.println(Math.rint(d));  <span class="hljs-comment">// 结果为 3.0</span><br>System.out.println(Math.rint(f));  <span class="hljs-comment">// 结果为 -2.0</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="5-round"><a href="#5-round" class="headerlink" title="5. round()"></a>5. round()</h4><p>返回一个最接近的 int、long 型值，四舍五入。参数为 float 或 double。</p>
+<h3 id="5-round"><a href="#5-round" class="headerlink" title="5. round()"></a>5. round()</h3><p>返回一个最接近的 int、long 型值，四舍五入。参数为 float 或 double。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">double</span> a = <span class="hljs-number">3.1415926</span>;<br><span class="hljs-keyword">double</span> b = <span class="hljs-number">3.5</span>;<br><span class="hljs-keyword">float</span> c = <span class="hljs-number">4.1f</span>;<br><span class="hljs-keyword">float</span> d = <span class="hljs-number">4.6f</span>;<br><br>System.out.println(Math.round(a)); <span class="hljs-comment">// 结果为 3</span><br>System.out.println(Math.round(b)); <span class="hljs-comment">// 结果为 4</span><br>System.out.println(Math.round(c)); <span class="hljs-comment">// 结果为 4</span><br>System.out.println(Math.round(d)); <span class="hljs-comment">// 结果为 5</span><br></code></pre></td></tr></table></figure>
 
 
 
-<h4 id="6-max-amp-min"><a href="#6-max-amp-min" class="headerlink" title="6. max() &amp; min()"></a>6. max() &amp; min()</h4><ul>
+<h3 id="6-max-amp-min"><a href="#6-max-amp-min" class="headerlink" title="6. max() &amp; min()"></a>6. max() &amp; min()</h3><ul>
 <li><p>max() 方法用于返回两个参数中的最大值。</p>
 </li>
 <li><p>min() 方法用于返回两个参数中的最小值。</p>
@@ -282,7 +282,7 @@
 
 
 
-<h4 id="7-次方运算"><a href="#7-次方运算" class="headerlink" title="7. 次方运算"></a>7. 次方运算</h4><table>
+<h3 id="7-次方运算"><a href="#7-次方运算" class="headerlink" title="7. 次方运算"></a>7. 次方运算</h3><table>
 <thead>
 <tr>
 <th align="center">方法</th>
@@ -306,7 +306,7 @@
 <td align="center">返回第一个参数的第二个参数次方。</td>
 </tr>
 </tbody></table>
-<h4 id="8-三角函数"><a href="#8-三角函数" class="headerlink" title="8. 三角函数"></a>8. 三角函数</h4><table>
+<h3 id="8-三角函数"><a href="#8-三角函数" class="headerlink" title="8. 三角函数"></a>8. 三角函数</h3><table>
 <thead>
 <tr>
 <th align="center">方法</th>
