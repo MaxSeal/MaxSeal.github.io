@@ -18,7 +18,7 @@
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>abstract 关键字的使用 - maxseal</title>
+  <title>abstract 关键字 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="abstract 关键字的使用">
+            <span class="h2" id="subtitle" title="abstract 关键字">
               
             </span>
 
@@ -237,7 +237,7 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">abstract 关键字的使用</h1>
+            <h1 style="display: none">abstract 关键字</h1>
             
             <div class="markdown-body">
               <p>abstract 方法和类的使用方式和注意事项。</p>
@@ -245,8 +245,7 @@
 
 
 
-<h4 id="1-abstract-关键字"><a href="#1-abstract-关键字" class="headerlink" title="1. abstract 关键字"></a>1. abstract 关键字</h4><p>abstract修饰符，可以修饰类、方法。</p>
-<h4 id="1-1-abstract-方法"><a href="#1-1-abstract-方法" class="headerlink" title="1.1 abstract 方法"></a>1.1 abstract 方法</h4><ul>
+<h2 id="1-abstract-方法"><a href="#1-abstract-方法" class="headerlink" title="1. abstract 方法"></a>1. abstract 方法</h2><ul>
 <li><p>抽象方法是一种没有任何实现的方法，该方法的的具体实现由子类提供。</p>
 </li>
 <li><p>抽象方法不能被声明成 final 和 static。</p>
@@ -264,7 +263,7 @@
 
 
 
-<h4 id="1-2-abstract-类"><a href="#1-2-abstract-类" class="headerlink" title="1. 2 abstract 类"></a>1. 2 abstract 类</h4><ul>
+<h2 id="2-abstract-类"><a href="#2-abstract-类" class="headerlink" title="2. abstract 类"></a>2. abstract 类</h2><ul>
 <li><p>抽象类不能用来实例化对象，声明抽象类的唯一目的是为了<strong>将来对该类进行扩充</strong>。</p>
 </li>
 <li><p>一个类不能同时被 abstract 和 final 修饰。</p>
@@ -280,7 +279,7 @@
 
 
 
-<h4 id="2-接口"><a href="#2-接口" class="headerlink" title="2. 接口"></a>2. 接口</h4><ul>
+<h2 id="2-接口"><a href="#2-接口" class="headerlink" title="2. 接口"></a>2. 接口</h2><ul>
 <li><p>接口的内部主要就是<strong>封装了抽象方法和静态常量</strong>。</p>
 </li>
 <li><p>接口的定义和类很类似，但是接口需要使用 interface 关键字来定义。</p>
@@ -296,7 +295,7 @@
 <li><p>JDK9中，还允许在接口中编写私有方法。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//使用interface关键字来定义接口</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span> </span>&#123;<br>  <span class="hljs-comment">//接口中的静态常量</span><br>  <span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String OPS_MODE = <span class="hljs-string">&quot;auto&quot;</span>;<br>  <br>  <span class="hljs-comment">//接口中的抽象方法</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">()</span></span>;<br>  <br>  <span class="hljs-comment">//接口的抽象方法</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">stop</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br></code></pre></td></tr></table></figure></li>
 </ul>
-<h5 id="2-1-接口实现"><a href="#2-1-接口实现" class="headerlink" title="2.1 接口实现"></a>2.1 接口实现</h5><ul>
+<h3 id="2-1-接口实现"><a href="#2-1-接口实现" class="headerlink" title="2.1 接口实现"></a>2.1 接口实现</h3><ul>
 <li>类和类之间的关系是继承，类和接口之间的关系是实现。</li>
 <li>一个类只能继承一个类，但是<strong>能实现了一个或多个接口</strong>。</li>
 <li><strong>一个类实现了接口，那么就要实现接口中所有的抽象方法，否则这个类自己就必须声明为抽象类。</strong></li>
@@ -309,14 +308,14 @@
 
 
 
-<h5 id="2-2-接口继承"><a href="#2-2-接口继承" class="headerlink" title="2.2 接口继承"></a>2.2 接口继承</h5><p>类和类之间是单继承，接口和接口之间是多继承。</p>
+<h3 id="2-2-接口继承"><a href="#2-2-接口继承" class="headerlink" title="2.2 接口继承"></a>2.2 接口继承</h3><p>类和类之间是单继承，接口和接口之间是多继承。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//实现该接口的类，将具有run的功能</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runable</span> </span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br><span class="hljs-comment">//实现该接口的类，将具有fly的功能</span><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Flyable</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br><span class="hljs-comment">//实现该接口的类，将具有run的功能，fly的功能，以及Action接口独有的doSomething功能</span><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Runable</span>,<span class="hljs-title">Flyable</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span></span>;<br>&#125;<br><br><span class="hljs-comment">//实现类，实现Action接口，就必须要实现Action及其父接口中的所有抽象方法</span><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Demo</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Action</span></span>&#123;<br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//...</span><br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//...</span><br>  &#125;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">//...</span><br>  &#125;<br>&#125;<br><br><br></code></pre></td></tr></table></figure>
 
 
 
 
 
-<h5 id="2-3-接口的引用指向它的实现类对象"><a href="#2-3-接口的引用指向它的实现类对象" class="headerlink" title="2.3 接口的引用指向它的实现类对象"></a>2.3 接口的引用指向它的实现类对象</h5><p>多态的前提是继承，必须要先有子父类关系才行，而类和接口之间的实现关系，其实也是继承的一 种形式，所以在类和接口的实现关系中，也可以使用多态。</p>
+<h3 id="2-3-接口的引用指向它的实现类对象"><a href="#2-3-接口的引用指向它的实现类对象" class="headerlink" title="2.3 接口的引用指向它的实现类对象"></a>2.3 接口的引用指向它的实现类对象</h3><p>多态的前提是继承，必须要先有子父类关系才行，而类和接口之间的实现关系，其实也是继承的一 种形式，所以在类和接口的实现关系中，也可以使用多态。</p>
 <p>接口的引用指向它的实现类对象：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span> </span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Student</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Action</span></span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-comment">//...</span><br>    &#125;<br>&#125;<br><br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Teacher</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Action</span></span>&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>      <span class="hljs-comment">//...</span><br>    &#125;<br>&#125;<br><br><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">StudentTest</span></span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>      <span class="hljs-comment">//声明接口的引用</span><br>      Action a;<br>      <span class="hljs-comment">//可以指向它任意一个实现类对象</span><br>      a = <span class="hljs-keyword">new</span> Student();<br>      a = <span class="hljs-keyword">new</span> Teacher();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
 
@@ -331,7 +330,7 @@
                   <div class="post-meta mr-3">
                     <i class="iconfont icon-category"></i>
                     
-                      <a class="hover-with-bg" href="/categories/Java/">Java</a>
+                      <a class="hover-with-bg" href="/categories/CoreJava/">CoreJava</a>
                     
                   </div>
                 
@@ -339,7 +338,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/CoreJava/">CoreJava</a>
+                      <a class="hover-with-bg" href="/tags/abstract-%E5%85%B3%E9%94%AE%E5%AD%97-%E4%BF%AE%E9%A5%B0%E7%AC%A6-%E6%8E%A5%E5%8F%A3/">abstract 关键字,修饰符,接口</a>
                     
                   </div>
                 
