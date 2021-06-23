@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.8k 字
+      2k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      22
+      24
        分钟
     </span>
   
@@ -256,8 +256,7 @@
 <p>使用 javap 命令对Color.class文件进行反向解析：</p>
 <img src="https://i.loli.net/2021/06/18/tkOny1p3wcAbBlZ.png" srcset="/img/loading.gif" lazyload alt="反编译枚举类.png" style="zoom: 67%;" />
 
-
-
+<p>可以看出：</p>
 <ul>
 <li><p>枚举类是一个 final 修饰的类，枚举类型都会默认继承<code>java.lang.Enum</code> 类，而不是 Object 类。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Enum</span>&lt;<span class="hljs-title">E</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Enum</span>&lt;<span class="hljs-title">E</span>&gt;&gt;</span>&#123;&#125;<br></code></pre></td></tr></table></figure></li>
@@ -277,29 +276,34 @@
 <ul>
 <li><p><code>String name()</code>：返回这个枚举对象的名字 。</p>
 </li>
-<li><p><code>int ordinal()</code>：返回这个枚举对象的编号，默认从0开始。</p>
+<li><p><code>int ordinal()</code>：返回这个枚举对象的编号，默认从 0 开始。</p>
 </li>
 </ul>
 </li>
 </ul>
-<h2 id="2-意义"><a href="#2-意义" class="headerlink" title="2. 意义"></a>2. 意义</h2><p>java中的类，从语法形式上来说，可以创建出一个类的无数个对象。 </p>
-<p>例如，学生类 Student，我们可以创建出10个、20个等不同数量的学生对象，并且从意义讲确实也没有问题，因为实际情况中确实会存在很多不同的学生。 </p>
-<p>但是这其实还存在另一种情况：一个类的对象，从意义上来说，对象个数是固定的。 </p>
-<p>例如， Gender 这个类，表示人的性别，从语法上来说，可以创建出无数个性别对象，但是从实际意义 上看，我们只需要俩个对象就可以了，一个表示男、一个表示女。 </p>
-<p>那么，在这个时候，我们就需要去对 Gender 类的对象创建作出限制，不让用户创建很Gender类型的对象，因为如果创建了很多对象，那么会占用内存空间，同时这么多对象也没什么实际意义，最终还是只能表示俩种情况，男和女。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    <span class="hljs-comment">//声明枚举类型的引用</span><br>    Color c;<br>  <br>    <span class="hljs-comment">//引用指向对象</span><br>    c = Color.BLACK;<br>  <br>    <span class="hljs-comment">//默认调用toString方法，父类中重写了toString方法，返回枚举对象的名字</span><br>    System.out.println(c);<br>  <br>    <span class="hljs-comment">//引用指向对象</span><br>    c = Color.WHITE;<br>  <br>    <span class="hljs-comment">//默认调用toString方法，父类中重写了toString方法，返回枚举对象的名字</span><br>    System.out.println(c);<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br>BLACK<br>WHITE<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="2-意义"><a href="#2-意义" class="headerlink" title="2. 意义"></a>2. 意义</h2><p>java中的类，从语法形式上来说，可以创建出一个类的无数个对象。 例如，学生类 Student，我们可以创建出10个、20个等不同数量的学生对象，并且从意义讲确实也没有问题，因为实际情况中确实会存在很多不同的学生。 </p>
+<p>但是这其实还存在另一种情况：一个类的对象，从意义上来说，对象个数是固定的。 例如， Gender 这个类，表示人的性别，从语法上来说，可以创建出无数个性别对象，但是从实际意义 上看，我们只需要俩个对象就可以了，一个表示男、一个表示女。 </p>
+<p>那么，在这个时候，我们就需要去对 Gender 类的对象创建作出限制，不让用户创建很 Gender 类型的对象，因为如果创建了很多对象，那么会占用内存空间，同时这么多对象也没什么实际意义，最终还是只能表示俩种情况，男和女。 </p>
 <p>解决这个问题的方式是，可以将 Gender 定义为一个枚举类型（enum），我们就可以在枚举类型中，提前将这个类型的对象个数和对象名字都固定下来，并且之后的使用中不会改变，也不会再创建其他对象。</p>
 <h2 id="3-获取枚举对象"><a href="#3-获取枚举对象" class="headerlink" title="3. 获取枚举对象"></a>3. 获取枚举对象</h2><p>以 Gender 这个枚举类型为例：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>	MALE,FEMALE<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>方式1：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>    <span class="hljs-comment">//使用类名直接访问类中定义的俩对象</span><br>  <br>    <span class="hljs-comment">//最常用的一种方式</span><br>    Gender g = Gender.MALE;<br>    g = Gender.FEMALE;<br>  <br>    <span class="hljs-comment">//可以调用从父类型Enum以及Object中继承过来的方法</span><br>    System.out.println(g.name());<br>    System.out.println(g.ordinal());<br>    System.out.println(g.toString());<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>方式1：使用类名直接访问类中定义的对象。</p>
+<p>因为类中定义的对 static final 修饰的态常量，所以可以使用 <code>类名.对象</code>的方式访问。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>  <br>    <span class="hljs-comment">//最常用的一种方式</span><br>    Gender g = Gender.MALE;<br>    g = Gender.FEMALE;<br>  <br>    <span class="hljs-comment">//可以调用从父类型Enum以及Object中继承过来的方法</span><br>    System.out.println(g.name());<br>    System.out.println(g.ordinal());<br>    System.out.println(g.toString());<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
-<p>方式2：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>		<span class="hljs-comment">//通过字符串参数的改变，可以获取到Gender中的指定的一个对象</span><br>    String name = <span class="hljs-string">&quot;MALE&quot;</span>;<br>    Gender g = Gender.valueOf(name);<br>    System.out.println(g.name());<br>    System.out.println(g.ordinal());<br>    System.out.println(g.toString());<br>&#125;<br></code></pre></td></tr></table></figure>
+<p>方式2：通过 valueOf() 方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>		<span class="hljs-comment">//通过字符串参数，可以获取到 Gender 中的指定的一个对象</span><br>    String name = <span class="hljs-string">&quot;MALE&quot;</span>;<br>    Gender g = Gender.valueOf(name);<br>    System.out.println(g.name());<br>    System.out.println(g.ordinal());<br>    System.out.println(g.toString());<br>&#125;<br></code></pre></td></tr></table></figure>
 
 
 
@@ -329,7 +333,7 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span></span>&#123;<br>    MALE()&#123;<br>    		<span class="hljs-meta">@Override</span><br>      	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>        		System.out.println(<span class="hljs-string">&quot;男生测试&quot;</span>);<br>        &#125;<br>     &#125;,FEMALE()&#123;<br>          <span class="hljs-meta">@Override</span><br>          <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span> </span>&#123;<br>          		System.out.println(<span class="hljs-string">&quot;女生测试&quot;</span>);<br>          &#125;<br>      &#125;;<br>  <br>       <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>这种写法和匿名内部类的写法很相似， <code>MALE()&#123;...&#125;,</code> <code>FEMALE()&#123;...&#125;;</code></p>
-<h2 id="7-枚举类实现接口"><a href="#7-枚举类实现接口" class="headerlink" title="7. 枚举类实现接口"></a>7. 枚举类实现接口</h2><p>枚举类型已经有默认的父类型<code>java.lang.Enum</code>，我们就不能让它在继承其他父类了，但是我们可 以让枚举类型实现指定的接口。</p>
+<h2 id="7-枚举类实现接口"><a href="#7-枚举类实现接口" class="headerlink" title="7. 枚举类实现接口"></a>7. 枚举类实现接口</h2><p>枚举类型已经有默认的父类型<code>java.lang.Enum</code>，我们就不能让它在继承其他父类了，但是我们可以让枚举类型实现指定的接口。</p>
 <p>方法1：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">Gender</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Action</span></span>&#123;<br>	MALE,FEMALE;<br>  <br>  <span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>  	System.out.println(<span class="hljs-string">&quot;枚举中统一实现接口中的抽象方法&quot;</span>);<br>  &#125;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
 
@@ -342,7 +346,7 @@
 
 
 
-<h2 id="8-枚举使用总结"><a href="#8-枚举使用总结" class="headerlink" title="8. 枚举使用总结"></a>8. 枚举使用总结</h2><p>对于枚举类型的使用，大多数情况下，我们在枚举中列出它的的每一个对象即可，偶尔会添加几个自定 义的属性和方法，并不会写的那么复杂，否则就没什么意义了。 </p>
+<h2 id="8-枚举使用总结"><a href="#8-枚举使用总结" class="headerlink" title="8. 枚举使用总结"></a>8. 枚举使用总结</h2><p>对于枚举类型的使用，大多数情况下，我们在枚举中列出它的的每一个对象即可，偶尔会添加几个自定义的属性和方法，并不会写的那么复杂，否则就没什么意义了。 </p>
 <p>在项目中，只要一个类型的对象个数和名称能固定下来的，就可以考虑使用枚举类型来表示。</p>
 
             </div>

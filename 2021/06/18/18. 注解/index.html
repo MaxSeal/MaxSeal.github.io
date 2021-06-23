@@ -253,8 +253,8 @@
 
 <p>注解和注释的区别：</p>
 <ul>
-<li>注解是给其他程序看的，通过参数的设置，可以在编译后class文件中【保留】注解的信息，其他程序读取后，可以完成特定的操作。 </li>
-<li>注释是给程序员看的，无论怎么设置，编译后 class文件中都是【没有】注释信息，方便程序员快速了解代码的作用或结构。</li>
+<li>注解是给其他程序看的，通过参数的设置，可以在编译后 class 文件中保留注解的信息，其他程序读取后，可以完成特定的操作。 </li>
+<li>注释是给程序员看的，无论怎么设置，编译后 class 文件中都是【没有】注释信息，方便程序员快速了解代码的作用或结构。</li>
 </ul>
 <h2 id="2-Java-的内置注解"><a href="#2-Java-的内置注解" class="headerlink" title="2. Java 的内置注解"></a>2. Java 的内置注解</h2><p>Java 定义了一套注解，共有 7 个，3 个在 <code>java.lang</code> 中，剩下 4 个在 <code>java.lang.annotation</code> 中。</p>
 <p>作用在代码的注解是：</p>
@@ -402,7 +402,7 @@
 
 
 <h2 id="6-注解的作用"><a href="#6-注解的作用" class="headerlink" title="6. 注解的作用"></a>6. 注解的作用</h2><h3 id="6-1-编译检查"><a href="#6-1-编译检查" class="headerlink" title="6.1 编译检查"></a>6.1 编译检查</h3><p> 注解具有“让编译器进行编译检查的作用”。</p>
-<p>例如：@SuppressWarnings, @Deprecated 和 @Override 都具有编译检查作用。</p>
+<p>例如：@SuppressWarnings, @Deprecated 和 @Override 都具有编译检查作用。 </p>
 <h3 id="6-2-在反射中使用注解"><a href="#6-2-在反射中使用注解" class="headerlink" title="6.2 在反射中使用注解"></a>6.2 在反射中使用注解</h3><p>在反射的 Class, Method, Field 等函数中，有许多于 Annotation 相关的接口。</p>
 <p>这也意味着，我们可以在反射中解析并使用 Annotation。</p>
 <h3 id="6-3-根据-Annotation-生成帮助文档"><a href="#6-3-根据-Annotation-生成帮助文档" class="headerlink" title="6.3 根据 Annotation 生成帮助文档"></a>6.3 根据 Annotation 生成帮助文档</h3><p>通过给 Annotation 注解加上 @Documented 标签，能使该 Annotation 标签出现在 javadoc 中。</p>

@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      91
+      92
        分钟
     </span>
   
@@ -538,9 +538,10 @@
 
 <p>比较器的使用规则： <code>int result = compare(o1, o2); </code></p>
 <ul>
-<li>result 的值大于 0，说明 o1 比 o2 大。</li>
-<li>result 的值小于 0，说明 o1 比 o2 小 。</li>
-<li>result 的值等于 0，说明 o1 与 o2 相等 。</li>
+<li>result 的值大于 0，说明 o1 比 o2 大，o2 放在 o1 前面。</li>
+<li>result 的值小于 0，说明 o1 比 o2 小 ，o1 放在 o2 前面。</li>
+<li>result 的值等于 0，说明 o1 与 o2 相等 ，位置不变。</li>
+<li>o1 是新加入的值，o2 是已经加入的值（顺序和加入顺序一样）</li>
 </ul>
 <p>注意，这里和自然排序的规则是一样的，<strong>只关心正数、负数、零，不关心具体的值是多少。</strong></p>
 <p>在TreeSet类重载的构造器中，有一个构造器可以接收比较器对象：</p>

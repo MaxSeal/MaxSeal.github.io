@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      310 字
+      2.2k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      3
+      28
        分钟
     </span>
   
@@ -245,20 +245,302 @@
 
 
 
-<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>JAVA 反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意一个方法和属性；这种动态获取的信息以及动态调用对象的方法的功能称为 java 语言的反射机制。</p>
-<h2 id="2-Class-类"><a href="#2-Class-类" class="headerlink" title="2. Class 类"></a>2. Class 类</h2><p>一个类有成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。</p>
+<h2 id="1-类加载过程"><a href="#1-类加载过程" class="headerlink" title="1. 类加载过程"></a>1. 类加载过程</h2><h2 id="2-反射的作用"><a href="#2-反射的作用" class="headerlink" title="2. 反射的作用"></a>2. 反射的作用</h2><p>Java中编译类型有两种：</p>
 <ul>
-<li>类本身也是一个对象，我们定义的所有类都是 Class 类的对象。（所有类的类）</li>
+<li><strong>静态编译</strong>：在编译时确定类型，绑定对象即通过。</li>
+<li><strong>动态编译</strong>：运行时确定类型，绑定对象。动态编译最大限度地发挥了Java的灵活性，体现了多态的应用，可以减低类之间的耦合性。</li>
+</ul>
+<p><strong>Java反射是Java被视为动态（或准动态）语言的一个关键性质</strong>。反射可以在运行时加载、探知、使用编译期间完全未知的类。即 Java 程序可以加载一个运行时才得知名称的类，获取其完整构造，并生成其对象实体、或对其属性设值、或唤起其方法。</p>
+<p>实现Java反射机制的类都位于<code>java.lang.reflect</code>包中：</p>
+<ol>
+<li><p>Class 类：代表一个类。</p>
+</li>
+<li><p>Field 类：代表类的成员变量（类的属性）。</p>
+</li>
+<li><p>Method 类：代表类的方法。</p>
+</li>
+<li><p>Constructor 类：代表类的构造方法。</p>
+</li>
+<li><p>Array 类：提供了动态创建数组，以及访问数组的元素的静态方法。</p>
+</li>
+</ol>
+<h2 id="3-Class-类"><a href="#3-Class-类" class="headerlink" title="3. Class 类"></a>3. Class 类</h2><p>一个类有成员变量、方法、构造方法、包等等信息，利用反射技术可以对一个类进行解剖，把个个组成部分映射成一个个对象。</p>
+<ul>
+<li>类本身也是一个对象，我们定义的所有类都是 Class 类的对象。</li>
 <li>类里面的属性都是 Field 类的对象。</li>
 <li>类里面的方法都是 Method 类的对象。</li>
 <li>类里面的构造器都是 Constructor 类的对象。</li>
 </ul>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><br></code></pre></td></tr></table></figure>
+<h3 id="3-1-使用-Class-对象表示其他类型"><a href="#3-1-使用-Class-对象表示其他类型" class="headerlink" title="3.1 使用 Class 对象表示其他类型"></a>3.1 使用 Class 对象表示其他类型</h3><h4 id="3-1-1-使用Class类的对象来表示基本类型"><a href="#3-1-1-使用Class类的对象来表示基本类型" class="headerlink" title="3.1.1 使用Class类的对象来表示基本类型"></a>3.1.1 使用Class类的对象来表示基本类型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">//这个对象c就代表java中的int类型</span><br>    Class c = <span class="hljs-keyword">int</span>.class;<br>  <br>    <span class="hljs-comment">//判断对象c所代表的类型是否是基本类型</span><br>    System.out.println(c.isPrimitive());<br>  <br>    <span class="hljs-comment">//获取对象c所代表的类型的名字</span><br>    System.out.println(c.getName());<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br><span class="hljs-keyword">true</span><br><span class="hljs-keyword">int</span><br><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-2-使用-Class-类的对象来表示类类型"><a href="#3-1-2-使用-Class-类的对象来表示类类型" class="headerlink" title="3.1.2 使用 Class 类的对象来表示类类型"></a>3.1.2 使用 Class 类的对象来表示类类型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">//这个对象c就代表Student类</span><br>    Class c = Student.class;<br>    System.out.println(c.getName());<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br>com.briup.demo.Student<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-3-使用-Class-类的对象来表示接口类型"><a href="#3-1-3-使用-Class-类的对象来表示接口类型" class="headerlink" title="3.1.3 使用 Class 类的对象来表示接口类型"></a>3.1.3 使用 Class 类的对象来表示接口类型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    <span class="hljs-comment">//这个对象c就代表List接口类型</span><br>    Class c = List.class;<br>    System.out.println(c.isInterface());<br>    System.out.println(c.getName());<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br><span class="hljs-keyword">true</span><br>java.util.List<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-1-4-使用Class类的对象来表示数组类型"><a href="#3-1-4-使用Class类的对象来表示数组类型" class="headerlink" title="3.1.4 使用Class类的对象来表示数组类型"></a>3.1.4 使用Class类的对象来表示数组类型</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>  <span class="hljs-comment">//这个对象c代表数组类型</span><br>  Class c;<br>  c = <span class="hljs-keyword">int</span>[].class;<br>  c = <span class="hljs-keyword">int</span>[][].class;<br>  c = Student[].class;<br>  System.out.println(c.isArray());<br>  System.out.println(c.getSimpleName());<br>  <span class="hljs-comment">//返回组成该数组具体类型是什么</span><br>  System.out.println(c.getComponentType().getSimpleName());<br>&#125;<br><br><span class="hljs-comment">//运行结果：</span><br><span class="hljs-keyword">true</span><br>Student[]<br>Student<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="3-2-获取-Class-对象"><a href="#3-2-获取-Class-对象" class="headerlink" title="3.2 获取 Class 对象"></a>3.2 获取 Class 对象</h3><p>在 java 中，每种类型（基本类型和引用类型）加载到内存之后，都会在内存中生成一个 Class 类型对象， 这个对象就代表这个具体的 java 类型，并且保存了这个类型中的基本信息。 </p>
+<h4 id="3-2-1-获取基本类型的-class-对象"><a href="#3-2-1-获取基本类型的-class-对象" class="headerlink" title="3.2.1 获取基本类型的 class 对象"></a>3.2.1 获取基本类型的 class 对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">Class c = 基本类型.class;<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-2-获取接口类型的-Class-对象"><a href="#3-2-2-获取接口类型的-Class-对象" class="headerlink" title="3.2.2 获取接口类型的 Class 对象"></a>3.2.2 获取接口类型的 Class 对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Class c1 = 接口名.class;<br>Class c2 = Class.forName(<span class="hljs-string">&quot;包名+接口名&quot;</span>)<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-3-获取数组类型的-Class-对象"><a href="#3-2-3-获取数组类型的-Class-对象" class="headerlink" title="3.2.3 获取数组类型的 Class 对象"></a>3.2.3 获取数组类型的 Class 对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">Class c1 = 类型[].class;<br>Class c2 = 数组对象.getClass();<br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="3-2-4-获取类类型的-Class-对象"><a href="#3-2-4-获取类类型的-Class-对象" class="headerlink" title="3.2.4 获取类类型的 Class 对象"></a>3.2.4 获取类类型的 Class 对象</h4><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">Class c1 = 类名.class;<br>Class c2 = Class.forName(<span class="hljs-string">&quot;包名+类名&quot;</span>);<br>Class c3 = 该类的对象.getClass();<br></code></pre></td></tr></table></figure>
 
 
 
 
 
+<h2 id="4-通过反射获取类的信息"><a href="#4-通过反射获取类的信息" class="headerlink" title="4. 通过反射获取类的信息"></a>4. 通过反射获取类的信息</h2><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getName()</code></td>
+<td>获取类的名字，全限定名。</td>
+</tr>
+<tr>
+<td><code>getSimpleName()</code></td>
+<td>获取类的名字，简单类名。</td>
+</tr>
+<tr>
+<td><code>getPackage()</code></td>
+<td>获取类所属包名。</td>
+</tr>
+<tr>
+<td><code>getModifiers()</code></td>
+<td>获取类的修饰符。</td>
+</tr>
+<tr>
+<td><code>getSuperclass()</code></td>
+<td>获取类的父类。</td>
+</tr>
+<tr>
+<td><code>getInterfaces()</code></td>
+<td>获取类实现的所有接口。</td>
+</tr>
+<tr>
+<td><code>isAssignableFrom()</code></td>
+<td>某个类是否是另一类的父类。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    Student stu = <span class="hljs-keyword">new</span> Student();<br>    Class c = stu.getClass();<br>  <br>    <span class="hljs-comment">//获取类的名字，全限定名</span><br>    System.out.println(c.getName());<br>  <br>    <span class="hljs-comment">//获取类的名字，简单类名</span><br>    System.out.println(c.getSimpleName());<br>  <br>    <span class="hljs-comment">//获取类所属包的名字</span><br>    System.out.println(c.getPackage().getName());<br>  <br>    <span class="hljs-comment">//获取类的修饰符</span><br>    System.out.println(Modifier.toString(c.getModifiers()));<br>  <br>    <span class="hljs-comment">//获取类的父类型的名字</span><br>    System.out.println(c.getSuperclass().getName());<br>  <br>    <span class="hljs-comment">//获取类实现的所有接口</span><br>    System.out.println(Arrays.toString(c.getInterfaces()));<br>  <br>    Class c2 = Object.class;<br>    Class c3 = Action.class;<br><br>    <span class="hljs-comment">//判断c2代表的类型是不是c代表类型 的父类型</span><br>    System.out.println(c2.isAssignableFrom(c));<br>  <br>    <span class="hljs-comment">//判断c3代表的类型是不是c代表类型 的父类型</span><br>    System.out.println(c3.isAssignableFrom(c));<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="5-通过反射获取属性信息"><a href="#5-通过反射获取属性信息" class="headerlink" title="5. 通过反射获取属性信息"></a>5. 通过反射获取属性信息</h2><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getFields()</code></td>
+<td>获取类中所有属性，包括从父类继承的。（不包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getField(String name)</code></td>
+<td>根据名字获取类中属性。（不能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredFields()</code></td>
+<td>获取类的所有属性。（包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredField(String name)</code></td>
+<td>根据名字获取类中属性。（能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>setAccessible()</code></td>
+<td>设置私有属性可以被访问。</td>
+</tr>
+<tr>
+<td><code>getName()</code></td>
+<td>获取方法名。</td>
+</tr>
+<tr>
+<td><code>getModifiers()</code></td>
+<td>获取属性的修饰符。</td>
+</tr>
+<tr>
+<td><code>getType()</code></td>
+<td>获取属性的类型。</td>
+</tr>
+<tr>
+<td><code>set()</code></td>
+<td>设置属性值。</td>
+</tr>
+<tr>
+<td><code>get()</code></td>
+<td>获取属性值。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span></span>&#123;<br>    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">int</span> id;<br>    <span class="hljs-keyword">public</span> String name; <br>    <span class="hljs-keyword">private</span> String password;<br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">checkName</span><span class="hljs-params">(String name)</span></span>&#123; <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> User <span class="hljs-title">getName</span><span class="hljs-params">(String name)</span></span>&#123;  <span class="hljs-keyword">return</span> <span class="hljs-keyword">null</span>;&#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">()</span></span>&#123; System.out.println(<span class="hljs-string">&quot;被调用了&quot;</span>); &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">(String name,String password)</span></span>&#123;  &#125;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">doSomething</span><span class="hljs-params">(<span class="hljs-keyword">int</span> id,String name,String password)</span></span>&#123;  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InstantiationException, IllegalAccessException </span>&#123;<br>        Class&lt;?&gt; userClass = User.class;<br>        Object user = userClass.newInstance(); <br><br>  		 <span class="hljs-comment">// 获取类中的所有属性</span><br>        Field[] userFields = userClass.getDeclaredFields();<br><br>        <span class="hljs-comment">// 获取属性的信息</span><br>        <span class="hljs-keyword">for</span> (Field userField: userFields) &#123;<br>            <span class="hljs-keyword">int</span> modifiers = userField.getModifiers();  <span class="hljs-comment">// 获取修饰符</span><br>            String modifierName =  Modifier.toString(modifiers);<br>            String fieldName = userField.getName();    <span class="hljs-comment">// 获取属性名</span><br>            String fieldType = userField.getType().getSimpleName();  <span class="hljs-comment">// 获取属性类型</span><br>            System.out.println(modifierName + <span class="hljs-string">&quot; &quot;</span> + fieldType + <span class="hljs-string">&quot; &quot;</span> + fieldName);<br>        &#125;<br><br>        <span class="hljs-keyword">for</span> (Field userField: userFields) &#123;<br>            <span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;name&quot;</span>.equals(userField.getName()))&#123;<br>                userField.set(user, <span class="hljs-string">&quot;tom&quot;</span>);   <span class="hljs-comment">//修改属性值</span><br>                System.out.println(userField.get(user).toString());  <span class="hljs-comment">// 获取属性值</span><br>            &#125;<br>        &#125;<br><br>    &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="6-通过反射获取方法信息"><a href="#6-通过反射获取方法信息" class="headerlink" title="6. 通过反射获取方法信息"></a>6. 通过反射获取方法信息</h2><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getMethods()</code></td>
+<td>获取类中所有的方法。（不包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getMethod(String name, Class... parameterTypes)</code></td>
+<td>根据方法名和参数列表获取类中的方法。（不能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredMethods()</code></td>
+<td>获取类中所有的方法。（包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredMethod(String name, Class... parameterTypes)</code></td>
+<td>根据方法名和参数列表获取类中的方法。（能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getModifiers()</code></td>
+<td>获取方法的修饰符。</td>
+</tr>
+<tr>
+<td><code>getReturnType()</code></td>
+<td>获取方法的返回值类型。</td>
+</tr>
+<tr>
+<td><code>getExceptionTypes()</code></td>
+<td>获取方法抛出的异常类型。</td>
+</tr>
+<tr>
+<td><code>getName()</code></td>
+<td>获取方法名。</td>
+</tr>
+<tr>
+<td><code>getParameters()</code></td>
+<td>获取方法的参数列表。</td>
+</tr>
+<tr>
+<td><code>getParameterTypes()</code></td>
+<td>获取方法的参数的类型。</td>
+</tr>
+<tr>
+<td><code>getParameterCount()</code></td>
+<td>获取方法的参数个数。</td>
+</tr>
+<tr>
+<td><code>invoke()</code></td>
+<td>调用方法</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> <span class="hljs-keyword">throws</span> InstantiationException, IllegalAccessException </span>&#123;<br>       Class&lt;?&gt; userClass = User.class;<br>       Object user = userClass.newInstance();<br><br>       Method[] userMethods = userClass.getDeclaredMethods();<br>       <span class="hljs-keyword">for</span> (Method userMethod : userMethods) &#123;<br>           String methodName = userMethod.getName();  <span class="hljs-comment">// 获取方法名</span><br>           String userModifiers = Modifier.toString(userMethod.getModifiers()); <span class="hljs-comment">// 获取修饰符</span><br>           String returnType = userMethod.getReturnType().toString(); <span class="hljs-comment">// 获取返回值类型</span><br>           Class&lt;?&gt;[] exceptionTypes = userMethod.getExceptionTypes(); <span class="hljs-comment">// 返回异常类型</span><br>           Parameter[] parameters = userMethod.getParameters();  <span class="hljs-comment">// 获取所有参数</span><br>           Class&lt;?&gt;[] parameterTypes = userMethod.getParameterTypes(); <span class="hljs-comment">// 获取参数类型</span><br>           <span class="hljs-keyword">int</span> parameterCount = userMethod.getParameterCount(); <span class="hljs-comment">// 获取参数个数</span><br>           System.out.println(userModifiers + <span class="hljs-string">&quot; &quot;</span> + returnType + <span class="hljs-string">&quot; &quot;</span> + methodName);<br>       &#125;<br>  <br>  			Method doSomething = userClass.getMethod(<span class="hljs-string">&quot;doSomething&quot;</span>);<br>        doSomething.invoke(user);  <span class="hljs-comment">// 调用方法</span><br>   &#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="7-通过反射获取构造器"><a href="#7-通过反射获取构造器" class="headerlink" title="7. 通过反射获取构造器"></a>7. 通过反射获取构造器</h2><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getConstructors()</code></td>
+<td>获取当前类中的所有构造器。（不包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getConstructor(Class... parameterTypes)</code></td>
+<td>根据参数列表获取类中特定的构造器。（不能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredConstructors()</code></td>
+<td>获取当前类中的所有构造器。（包括 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getDeclaredConstructor(Class... parameterTypes)</code></td>
+<td>根据参数列表获取类中特定的构造器。（能获取 private 修饰的）</td>
+</tr>
+<tr>
+<td><code>getName()</code></td>
+<td>获取构造器的名字。</td>
+</tr>
+<tr>
+<td><code>getModifiers()</code></td>
+<td>获取构造器的修饰符。</td>
+</tr>
+<tr>
+<td><code>getParameterTypes()</code></td>
+<td>获取构造器所有参数的参数类型。</td>
+</tr>
+<tr>
+<td><code>getExceptionTypes()</code></td>
+<td>获取构造器抛出的异常类型。</td>
+</tr>
+</tbody></table>
+<h2 id="8-通过反射创建对象"><a href="#8-通过反射创建对象" class="headerlink" title="8. 通过反射创建对象"></a>8. 通过反射创建对象</h2><h3 id="8-1-通过反射使用无参构造器"><a href="#8-1-通过反射使用无参构造器" class="headerlink" title="8.1 通过反射使用无参构造器"></a>8.1 通过反射使用无参构造器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    Class c = Student.class;<br>  <br>    <span class="hljs-comment">//默认调用类中的无参构造器来创建对象</span><br>    Object obj = c.newInstance();<br>    System.out.println(obj);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="8-2-通过反射使用有参构造器"><a href="#8-2-通过反射使用有参构造器" class="headerlink" title="8.2 通过反射使用有参构造器"></a>8.2 通过反射使用有参构造器</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span><span class="hljs-keyword">throws</span> Exception </span>&#123;<br>    Class c = Student.class;<br>    <span class="hljs-comment">//获取类中的俩参构造器</span><br>    Constructor constructor = c.getConstructor(String.class, <span class="hljs-keyword">int</span>.class);<br>  <br>    <span class="hljs-comment">//调用有参构造器创建对象，并传入对应的参数值</span><br>    Object obj = constructor.newInstance(<span class="hljs-string">&quot;tom&quot;</span>,<span class="hljs-number">20</span>);<br>    System.out.println(obj);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h2 id="9-通过反射获取注解"><a href="#9-通过反射获取注解" class="headerlink" title="9. 通过反射获取注解"></a>9. 通过反射获取注解</h2><p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>getAnnotations()</code></td>
+<td>获取类上所有的注解。</td>
+</tr>
+<tr>
+<td><code>getAnnotation(注解名.class)</code></td>
+<td>获取类上的指定注解。</td>
+</tr>
+<tr>
+<td><code>isAnnotationPresent(注解名.class)</code></td>
+<td>是否使用某注解。</td>
+</tr>
+<tr>
+<td><code>annotationType()</code></td>
+<td>获取注解的类型。</td>
+</tr>
+</tbody></table>
 
             </div>
             <hr>
