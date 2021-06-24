@@ -8,7 +8,7 @@
     <link href="/2021/06/24/25.%20%E7%BA%BF%E7%A8%8B%EF%BC%88%E5%9B%9B%EF%BC%89%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/"/>
     <url>/2021/06/24/25.%20%E7%BA%BF%E7%A8%8B%EF%BC%88%E5%9B%9B%EF%BC%89%E7%BA%BF%E7%A8%8B%E5%90%8C%E6%AD%A5/</url>
     
-    <content type="html"><![CDATA[]]></content>
+    <content type="html"><![CDATA[<h2 id="1-线程安全"><a href="#1-线程安全" class="headerlink" title="1. 线程安全"></a>1. 线程安全</h2><p>JVM 内存中的堆区，是一个共享的区域，是所有线程都可以访问的内存空间。</p><p>JVM 内存中的栈区，是线程的私有空间，每个线程都有自己的栈区，别的线程无法访问到自己栈区的数据。</p>]]></content>
     
     
     
