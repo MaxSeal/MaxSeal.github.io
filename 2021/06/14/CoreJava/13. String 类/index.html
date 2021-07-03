@@ -1,0 +1,604 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="String 类代表字符串。Java 程序中的所有字符串字面值都作为此类的实例实现。">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>String 类 - maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="String 类">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-14 18:39" pubdate>
+        2021年6月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.1k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      38
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">String 类</h1>
+            
+            <div class="markdown-body">
+              <p>String 类代表字符串。Java 程序中的所有字符串字面值都作为此类的实例实现。</p>
+<span id="more"></span>
+
+
+
+<h2 id="1-String-特点"><a href="#1-String-特点" class="headerlink" title="1. String 特点"></a>1. String 特点</h2><ul>
+<li><p>String 类代表字符串。Java 程序中的所有字符串字面值（如 “abc” ）都作为此类的实例实现。</p>
+</li>
+<li><p><strong>String 类的值是 final 类型的</strong>，一旦声明则不可以改变，所以<strong>只要一个值改变就会生成一个新的 String 类型对象</strong>，但是原来的字符串还是存在的，并且产生垃圾。</p>
+</li>
+<li><p>String 底层使用一个字符数组来维护的。</p>
+</li>
+<li><p>存储 String 数据也不一定从数组的第 0 个元素开始的，而是从 offset 所指的元素开始。</p>
+</li>
+</ul>
+<h2 id="2-创建字符串对象两种方式"><a href="#2-创建字符串对象两种方式" class="headerlink" title="2. 创建字符串对象两种方式"></a>2. 创建字符串对象两种方式</h2><h3 id="2-1-直接赋值方式创建对象"><a href="#2-1-直接赋值方式创建对象" class="headerlink" title="2.1 直接赋值方式创建对象"></a>2.1 直接赋值方式创建对象</h3><p>直接赋值方式创建对象是在方法区的常量池。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String str=<span class="hljs-string">&quot;hello&quot;</span>;   <span class="hljs-comment">//直接赋值的方式</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="2-2-通过构造方法创建字符串对象"><a href="#2-2-通过构造方法创建字符串对象" class="headerlink" title="2.2 通过构造方法创建字符串对象"></a>2.2 通过构造方法创建字符串对象</h3><p>通过构造方法创建字符串对象是在堆内存。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String str=<span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;hello&quot;</span>);  <span class="hljs-comment">//实例化的方式</span><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h3 id="2-3-两种创建方法的比较"><a href="#2-3-两种创建方法的比较" class="headerlink" title="2.3  两种创建方法的比较"></a>2.3  两种创建方法的比较</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestString</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String str1 = <span class="hljs-string">&quot;hello&quot;</span>;<br>        String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;hello&quot;</span>);<br>        String str3 = str2;  <span class="hljs-comment">//引用传递，str3 直接指向 st2 的堆内存地址</span><br>        String str4 = <span class="hljs-string">&quot;hello&quot;</span>;<br>       <br>         System.out.println(str1==str2);  <span class="hljs-comment">//false</span><br>         System.out.println(str1==str3);  <span class="hljs-comment">//false</span><br>         System.out.println(str3==str2);  <span class="hljs-comment">//true</span><br>         System.out.println(str1==str4);  <span class="hljs-comment">//true</span><br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>在字符串中，如果采用直接赋值的方式（String str=”Lance”）进行对象的实例化，则会将匿名对象 “Lance” 放入对象池，<strong>每当下一次对不同的对象进行直接赋值的时候会直接利用池中原有的匿名对象</strong>，这样，所有直接赋值的String对象，如果利用相同的 “Lance” ，则 String对象 == 返回 true；</p>
+<ul>
+<li><p>直接赋值<code>String str = &quot;hello&quot;</code>：只开辟一块堆内存空间，并且会自动入池，不会产生垃圾。</p>
+</li>
+<li><p>构造方法<code>String str =  new String(&quot;hello&quot;);</code>会开辟两块堆内存空间，其中一块堆内存会变成垃圾被系统回收，而且不能够自动入池，需要通过<code>public  String intern();</code>方法进行手工入池。<strong>在开发的过程中不会采用构造方法进行字符串的实例化。</strong></p>
+</li>
+</ul>
+<h2 id="3-和-equals"><a href="#3-和-equals" class="headerlink" title="3. == 和 equals"></a>3. == 和 equals</h2><p>==：</p>
+<ul>
+<li>基本数据类型：比较的是基本数据类型的值是否相同</li>
+<li>引用数据类型：比较的是引用数据类型的地址值是否相同</li>
+</ul>
+<p>equals:</p>
+<ul>
+<li>equals比较的是字符串内容。</li>
+<li>在开发的过程中，equals()通过接受参数，可以避免空指向。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">String str = <span class="hljs-keyword">null</span>;<br><span class="hljs-keyword">if</span>(str.equals(<span class="hljs-string">&quot;hello&quot;</span>))&#123;  <span class="hljs-comment">//此时会出现空指向异常</span><br>  ...<br>&#125;<br><span class="hljs-keyword">if</span>(<span class="hljs-string">&quot;hello&quot;</span>.equals(str))&#123;  <span class="hljs-comment">//此时equals会处理null值，可以避免空指向异常</span><br>  ...<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="4-常用方法"><a href="#4-常用方法" class="headerlink" title="4. 常用方法"></a>4. 常用方法</h2><h3 id="4-1-String-的判断功能"><a href="#4-1-String-的判断功能" class="headerlink" title="4.1 String 的判断功能"></a>4.1 String 的判断功能</h3><ul>
+<li><code>boolean equals(Object obj)</code>：比较字符串的内容是否相同。</li>
+<li><code>boolean equalsIgnoreCase(String str)</code>： 比较字符串的内容是否相同，忽略大小写。</li>
+<li><code>boolean startsWith(String str)</code>： 判断字符串对象是否以指定的 str 开头。</li>
+<li><code>boolean endsWith(String str)</code>： 判断字符串对象是否以指定的 str 结尾。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs JAVA"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestString</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>           <span class="hljs-comment">// 创建字符串对象</span><br>        String s1 = <span class="hljs-string">&quot;hello&quot;</span>;<br>        String s2 = <span class="hljs-string">&quot;hello&quot;</span>;<br>        String s3 = <span class="hljs-string">&quot;Hello&quot;</span>;<br> <br>        <span class="hljs-comment">// boolean equals(Object obj):比较字符串的内容是否相同</span><br>        System.out.println(s1.equals(s2));<br>        System.out.println(s1.equals(s3));<br>        System.out.println(<span class="hljs-string">&quot;-----------&quot;</span>);<br> <br>        <span class="hljs-comment">// boolean equalsIgnoreCase(String str):比较字符串的内容是否相同,忽略大小写</span><br>        System.out.println(s1.equalsIgnoreCase(s2));<br>        System.out.println(s1.equalsIgnoreCase(s3));<br>        System.out.println(<span class="hljs-string">&quot;-----------&quot;</span>);<br> <br>        <span class="hljs-comment">// boolean startsWith(String str):判断字符串对象是否以指定的str开头</span><br>        System.out.println(s1.startsWith(<span class="hljs-string">&quot;he&quot;</span>));<br>        System.out.println(s1.startsWith(<span class="hljs-string">&quot;lo&quot;</span>));<br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-2-String-的获取功能"><a href="#4-2-String-的获取功能" class="headerlink" title="4.2 String 的获取功能"></a>4.2 String 的获取功能</h3><ul>
+<li> <code>int length()</code>：获取字符串的长度，其实也就是字符个数。</li>
+<li> <code>char charAt(int index)</code>：获取指定索引处的字符。</li>
+<li> <code>int indexOf(String str)</code>：获取 str 在字符串对象中第一次出现的索引。</li>
+<li> <code>String substring(int start)</code>：从 start 开始截取字符串。</li>
+<li> <code>String substring(int start,int end)</code>：从 start 开始，到 end 结束截取字符串。包括 start，不包括 end。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestString</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>          <span class="hljs-comment">// 创建字符串对象</span><br>        String s = <span class="hljs-string">&quot;helloworld&quot;</span>;<br> <br>        <span class="hljs-comment">// int length():获取字符串的长度，其实也就是字符个数</span><br>        System.out.println(s.length());<br>        System.out.println(<span class="hljs-string">&quot;--------&quot;</span>);<br> <br>        <span class="hljs-comment">// char charAt(int index):获取指定索引处的字符</span><br>        System.out.println(s.charAt(<span class="hljs-number">0</span>));<br>        System.out.println(s.charAt(<span class="hljs-number">1</span>));<br>        System.out.println(<span class="hljs-string">&quot;--------&quot;</span>);<br> <br>        <span class="hljs-comment">// int indexOf(String str):获取str在字符串对象中第一次出现的索引</span><br>        System.out.println(s.indexOf(<span class="hljs-string">&quot;l&quot;</span>));<br>        System.out.println(s.indexOf(<span class="hljs-string">&quot;owo&quot;</span>));<br>        System.out.println(s.indexOf(<span class="hljs-string">&quot;ak&quot;</span>));<br>        System.out.println(<span class="hljs-string">&quot;--------&quot;</span>);<br> <br>        <span class="hljs-comment">// String substring(int start):从start开始截取字符串</span><br>        System.out.println(s.substring(<span class="hljs-number">0</span>));<br>        System.out.println(s.substring(<span class="hljs-number">5</span>));<br>        System.out.println(<span class="hljs-string">&quot;--------&quot;</span>);<br> <br>        <span class="hljs-comment">// String substring(int start,int end):从start开始，到end结束截取字符串</span><br>        System.out.println(s.substring(<span class="hljs-number">0</span>, s.length()));<br>        System.out.println(s.substring(<span class="hljs-number">3</span>, <span class="hljs-number">8</span>));<br>        <br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-3-String的转换功能"><a href="#4-3-String的转换功能" class="headerlink" title="4.3 String的转换功能"></a>4.3 String的转换功能</h3><ul>
+<li><code>char[] toCharArray()</code>：把字符串转换为字符数组。</li>
+<li><code>String toLowerCase()</code>：把字符串转换为小写字符串。</li>
+<li><code>String toUpperCase()</code>：把字符串转换为大写字符串。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestString</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>         <span class="hljs-comment">// 创建字符串对象</span><br>        String s = <span class="hljs-string">&quot;abcde&quot;</span>;<br> <br>        <span class="hljs-comment">// char[] toCharArray():把字符串转换为字符数组</span><br>        <span class="hljs-keyword">char</span>[] chs = s.toCharArray();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt; chs.length; x++) &#123;<br>            System.out.println(chs[x]);<br>        &#125;<br> <br>        System.out.println(<span class="hljs-string">&quot;-----------&quot;</span>);<br> <br>        <span class="hljs-comment">// String toLowerCase():把字符串转换为小写字符串</span><br>        System.out.println(<span class="hljs-string">&quot;HelloWorld&quot;</span>.toLowerCase());<br>        <span class="hljs-comment">// String toUpperCase():把字符串转换为大写字符串</span><br>        System.out.println(<span class="hljs-string">&quot;HelloWorld&quot;</span>.toUpperCase());<br>        <br>    &#125;<br><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="4-4-其他常用方法"><a href="#4-4-其他常用方法" class="headerlink" title="4.4 其他常用方法"></a>4.4 其他常用方法</h3><ul>
+<li><code>String trim()</code>：去除字符串两端空格。</li>
+<li><code>String[] split(String str)</code>：按照指定符号分割字符串。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TestString</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>          <span class="hljs-comment">// 创建字符串对象</span><br>        String s1 = <span class="hljs-string">&quot;helloworld&quot;</span>;<br>        String s2 = <span class="hljs-string">&quot; helloworld &quot;</span>;<br>        String s3 = <span class="hljs-string">&quot; hello world &quot;</span>;<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s1 + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s1.trim() + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s2 + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s2.trim() + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s3 + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;---&quot;</span> + s3.trim() + <span class="hljs-string">&quot;---&quot;</span>);<br>        System.out.println(<span class="hljs-string">&quot;-------------------&quot;</span>);<br> <br>        <span class="hljs-comment">// String[] split(String str)</span><br>        <span class="hljs-comment">// 创建字符串对象</span><br>        String s4 = <span class="hljs-string">&quot;aa,bb,cc&quot;</span>;<br>        String[] strArray = s4.split(<span class="hljs-string">&quot;,&quot;</span>);<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> x = <span class="hljs-number">0</span>; x &lt; strArray.length; x++) &#123;<br>            System.out.println(strArray[x]);<br>        &#125;<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="5-String-的不可变性"><a href="#5-String-的不可变性" class="headerlink" title="5. String 的不可变性"></a>5. String 的不可变性</h2><p><strong>String 类的值是 final 类型的</strong>，一旦声明则不可以改变。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Apple</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        String a = <span class="hljs-string">&quot;abc&quot;</span>;<br>        String b = <span class="hljs-string">&quot;abc&quot;</span>;<br>        String c = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>);<br>        System.out.println(a==b);  <span class="hljs-comment">//true</span><br>        System.out.println(a.equals(b));  <span class="hljs-comment">//true</span><br>        System.out.println(a==c);  <span class="hljs-comment">//false</span><br>        System.out.println(a.equals(c));  <span class="hljs-comment">//true</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h3 id="5-1-内存分析"><a href="#5-1-内存分析" class="headerlink" title="5.1 内存分析"></a>5.1 内存分析</h3><p><img src="https://i.loli.net/2021/06/14/3nJWdZQxhqO6cMi.png" srcset="/img/loading.gif" lazyload alt="String.png"></p>
+<p>因为String太过常用，JAVA类库的设计者在实现时做了个小小的变化，即采用了享元模式，每当生成一个新内容的字符串时，他们都被添加到一个共享池中，当第二次再次生成同样内容的字符串实例时，就共享此对象，而不是创建一个新对象，但是这样的做法<strong>仅仅适合于通过 = 符号进行的初始化</strong>。　　</p>
+<h3 id="5-2-String不可变的好处"><a href="#5-2-String不可变的好处" class="headerlink" title="5.2 String不可变的好处"></a>5.2 String不可变的好处</h3><ul>
+<li>可以实现多个变量引用堆内存中的同一个字符串实例，避免创建的开销。</li>
+<li>我们的程序中大量使用了 String 字符串，有可能是出于安全性考虑。</li>
+<li>当我们在传参的时候，使用不可变类不需要去考虑谁可能会修改其内部的值，如果使用可变类的话，可能需要每次记得重新拷贝出里面的值，性能会有一定的损失。</li>
+</ul>
+<h2 id="6-字符串常量池"><a href="#6-字符串常量池" class="headerlink" title="6. 字符串常量池"></a>6. 字符串常量池</h2><h3 id="6-1-字符串常量池概述"><a href="#6-1-字符串常量池概述" class="headerlink" title="6.1 字符串常量池概述"></a>6.1 字符串常量池概述</h3><ul>
+<li><p>常量池表（Constant_Pool table）</p>
+<p>​    Class文件中存储所有常量（包括字符串）的table。</p>
+<p>​    这是Class文件中的内容，还不是运行时的内容，不要理解它是个池子，其实就是Class文件中的字节码指令。</p>
+</li>
+<li><p>运行时常量池（Runtime Constant Pool）　</p>
+<p>​    JVM内存中方法区的一部分，这是运行时的内容。这部分内容（绝大部分）是随着JVM运行时候，从常量池转化而来，每个Class    对应一个运行时常量池。上一句中说绝大部分是因为：除了 Class中常量池内容，还可能包括动态生成并加入这里的内容。</p>
+</li>
+<li><p>字符串常量池（String Pool）</p>
+</li>
+</ul>
+<p>​            这部分也在方法区中，但与运行时常量池不是一个概念，字符串常量池是 JVM 实例全局共享的，全局只有一个。</p>
+<p>​            JVM 规范要求进入这里的String实例叫“被驻留的 interned string ”，各个JVM可以有不同的实现，HotSpot 是设置了一个哈希表            StringTable 来引用堆中的字符串实例，被引用就是被驻留。</p>
+<h3 id="6-2-亨元模式"><a href="#6-2-亨元模式" class="headerlink" title="6.2 亨元模式"></a>6.2 亨元模式</h3><p>其实字符串常量池这个问题涉及到一个设计模式，叫“享元模式”，顾名思义 ——共享元素模式。</p>
+<p>一个系统中如果有多处用到了相同的一个元素，那么我们应该只存储一份此元素，而让所有地方都引用这一个元素。Java中String部分就是根据享元模式设计的，而那个存储元素的地方就叫做“字符串常量池 - String Pool”</p>
+<h3 id="6-3-详细分析"><a href="#6-3-详细分析" class="headerlink" title="6.3 详细分析"></a>6.3 详细分析</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java">String str1 = <span class="hljs-string">&quot;abc&quot;</span>;  <span class="hljs-comment">// 在常量池中</span><br><br>String str2 = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>); <span class="hljs-comment">// 在堆上</span><br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>当直接赋值时，字符串 “abc” 会被存储在常量池中，只有1份，此时的赋值操作等于是创建 0 个或 1 个对象。如果常量池中已经存在了 “abc”，那么不会再创建对象，直接将引用赋值给 str1；如果常量池中没有 “abc”，那么创建一个对象，并将引用赋值给 str1。</p>
+</li>
+<li><p>通过<code>new String(“abc”);</code>的形式又是如何呢？答案是 1 个或 2 个。当 JVM 遇到上述代码时，会先检索常量池中是否存在 “abc”，如果不存在 “abc” 这个字符串，则会先在常量池中创建这个一个字符串。然后再执行 new 操作，会在堆内存中创建一个存储 “abc” 的 String 对象，对象的引用赋值给 str2。此过程创建了2个对象。当然，如果检索常量池时发现已经存在了对应的字符串，那么只会在堆内创建一个新的String对象，此过程只创建了1个对象。</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;abc&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>答案是2个？还真不一定。之所以单独列出这个问题是想提醒大家一点：没有直接的赋值操作（str=“abc”），并不代表常量池中没有“abc”这个字符串。也就是说衡量创建几个对象、常量池中是否有对应的字符串，不仅仅由你是否创建决定，还要看程序启动时其他类中是否包含该字符串。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String str = <span class="hljs-string">&quot;abc&quot;</span> + <span class="hljs-string">&quot;def&quot;</span>;<br></code></pre></td></tr></table></figure>
+
+<p>上面的问题涉及到字符串常量重载“+”的问题，当一个字符串由多个字符串常量拼接成一个字符串时，它自己也肯定是字符串常量。字符串常量的“+”号连接Java虚拟机会在程序编译期将其优化为连接后的值。</p>
+<p>就上面的示例而言，在编译时已经被合并成“abcdef”字符串，因此，<strong>只会创建1个对象</strong>。并没有创建临时字符串对象abc和def，这样减轻了垃圾收集器的压力。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">String str = <span class="hljs-string">&quot;abc&quot;</span> + <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;def&quot;</span>);<br></code></pre></td></tr></table></figure>
+
+<p>创建了4个，5个，还是6个对象？</p>
+<p>4个对象的说法：常量池中分别有 “abc” 和 “def”，堆中对象 new String(“def”) 和 “abcdef”。</p>
+<p>这种说法对吗？不完全对，如果说上述代码创建了几个字符串对象，那么可以说是正确的。但上述的代码 Java 虚拟机在编译的时候同样会优化，会创建一个 StringBuilder 来进行字符串的拼接，实际效果类似：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java">String s = <span class="hljs-keyword">new</span> String(<span class="hljs-string">&quot;def&quot;</span>);<br><span class="hljs-keyword">new</span> StringBuilder().append(<span class="hljs-string">&quot;abc&quot;</span>).append(s).toString();<br></code></pre></td></tr></table></figure>
+
+<p>很显然，多出了一个 StringBuilder 对象，上面的准确回答应该是创建了4个字符串对象和1个 StringBuilder 对象。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CoreJava/">CoreJava</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/String-%E7%B1%BB/">String 类</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/15/CoreJava/16.%20%E9%9B%86%E5%90%88%E7%B1%BB/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">集合</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/14/CoreJava/11.%20Math%20%E7%B1%BB/">
+                        <span class="hidden-mobile">Math 类</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

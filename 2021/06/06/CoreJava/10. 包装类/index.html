@@ -1,0 +1,540 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="Number 类是 java.lang 包下的一个抽象类，提供了将包装类型拆箱成基本类型的方法，所有基本类型（数据类型）的包装类型都继承了该抽象类，并且是 final 声明不可继承改变。">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>包装类 - maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="包装类">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-06 15:46" pubdate>
+        2021年6月6日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      22
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">包装类</h1>
+            
+            <div class="markdown-body">
+              <p>Number 类是 java.lang 包下的一个抽象类，提供了将包装类型拆箱成基本类型的方法，所有基本类型（数据类型）的包装类型都继承了该抽象类，并且是 final 声明不可继承改变。</p>
+<span id="more"></span>
+
+<h4 id="1-Number-类"><a href="#1-Number-类" class="headerlink" title="1. Number 类"></a>1. Number 类</h4><p>所有的包装类<strong>（Integer、Long、Byte、Double、Float、Short）</strong>都是抽象类 Number 的子类。</p>
+<img src="https://i.loli.net/2021/06/06/GXh94qejMatDkO7.png" srcset="/img/loading.gif" lazyload alt="number类.png" style="zoom:50%;" />
+
+
+
+<h5 id="1-1-装箱-amp-拆箱"><a href="#1-1-装箱-amp-拆箱" class="headerlink" title="1.1 装箱 &amp; 拆箱"></a>1.1 装箱 &amp; 拆箱</h5><p>这种由编译器特别支持的包装称为装箱，所以当基本数据类型被当作对象使用的时候，编译器会把它们装箱为包装类。</p>
+<p>相似的，编译器也可以把一个对象拆箱为内置类型。Number 类属于 java.lang 包。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>      Integer x = <span class="hljs-number">5</span>;            <span class="hljs-comment">// 当 x 被赋为整型值时，由于x是一个对象，所以编译器要对x进行装箱。</span><br>      x =  x + <span class="hljs-number">10</span>;              <span class="hljs-comment">// 然后，为了使x能进行加运算，所以要对x进行拆箱。</span><br>      System.out.println(x); <br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="1-2-常用的方法"><a href="#1-2-常用的方法" class="headerlink" title="1.2 常用的方法"></a>1.2 常用的方法</h5><ul>
+<li><p>xxxValue()<br>将 Number 对象转换为xxx数据类型的值并返回。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">Number n = <span class="hljs-number">1</span>;<br>n.doubleValue();     <span class="hljs-comment">// 转化为 double 类型。</span><br>n.byteValue();			<span class="hljs-comment">// 转化为 byte 类型。</span><br>n.floatValue();			<span class="hljs-comment">// 转化为 float 类型。</span><br>n.longValue();			<span class="hljs-comment">// 转化为 long 类型。</span><br>n.shortValue();			<span class="hljs-comment">// 转化为 short 类型。</span><br>n.intValue();				<span class="hljs-comment">// 转化为 int 类型。</span><br></code></pre></td></tr></table></figure></li>
+<li><p>valueOf()</p>
+<p>用于返回给定参数的原生 Number 对象值，参数可以是基本数据类型，String等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x =Integer.valueOf(<span class="hljs-number">9</span>);<br>Double c = Double.valueOf(<span class="hljs-number">5.0</span>);<br>Float a = Float.valueOf(<span class="hljs-string">&quot;80&quot;</span>);              <br>Integer b = Integer.valueOf(<span class="hljs-string">&quot;444&quot;</span>,<span class="hljs-number">16</span>);   <span class="hljs-comment">// 使用 16 进制</span><br><br>System.out.println(x);<br>System.out.println(c);<br>System.out.println(a);<br>System.out.println(b);<br></code></pre></td></tr></table></figure></li>
+<li><p>compareTo()</p>
+<p>用于将 Number 对象与方法的参数进行比较。参数可以是 Byte, Double, Integer, Float, Long 或 Short 类型。</p>
+<p>该方法<strong>用于两个相同数据类型的比较</strong>，两个不同类型的数据不能用此方法来比较。</p>
+<ul>
+<li>如果指定的数与参数相等返回 0。</li>
+<li>如果指定的数小于参数返回 -1。</li>
+<li>如果指定的数大于参数返回 1。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x = <span class="hljs-number">5</span>;<br>System.out.println(x.compareTo(<span class="hljs-number">3</span>));    <span class="hljs-comment">// 结果为 1</span><br>System.out.println(x.compareTo(<span class="hljs-number">5</span>));    <span class="hljs-comment">// 结果为 0</span><br>System.out.println(x.compareTo(<span class="hljs-number">8</span>));    <span class="hljs-comment">// 结果为 -1</span><br></code></pre></td></tr></table></figure></li>
+<li><p>equals()</p>
+<p>判断 Number 对象是否与参数相等。</p>
+<p>如 Number 对象不为 Null，且与方法的<strong>参数类型与数值都相等</strong>返回 True，否则返回 False。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x = <span class="hljs-number">5</span>;<br>Double y = <span class="hljs-number">5.0</span>;<br>Long z = <span class="hljs-number">5</span>;<br>Short a = <span class="hljs-number">5</span>;<br>Float b = <span class="hljs-number">5.0</span>;<br>Byte c = <span class="hljs-number">5</span>; <br><br>System.out.println(x.equals(y));  <span class="hljs-comment">// false</span><br>System.out.println(x.equals(z));  <span class="hljs-comment">// false</span><br>System.out.println(x.equals(a));  <span class="hljs-comment">// false</span><br></code></pre></td></tr></table></figure></li>
+<li><p>toString(）</p>
+<p>返回以一个字符串表示的 Number 对象值。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java">Integer x = <span class="hljs-number">5</span>;<br>System.out.println(x.toString());<br>System.out.println(Integer.toString(<span class="hljs-number">12</span>));<br>System.out.println(Integer.toString(<span class="hljs-number">12</span>, <span class="hljs-number">16</span>)); <span class="hljs-comment">// 用 16 进制 </span><br></code></pre></td></tr></table></figure></li>
+<li><p>parseXXX() </p>
+<p>用于将字符串参数作为有符号的十进制（默认）XXX类型进行解析。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">int</span> x =Integer.parseInt(<span class="hljs-string">&quot;9&quot;</span>);<br><span class="hljs-keyword">double</span> c = Double.parseDouble(<span class="hljs-string">&quot;5&quot;</span>);<br><span class="hljs-keyword">int</span> b = Integer.parseInt(<span class="hljs-string">&quot;444&quot;</span>,<span class="hljs-number">16</span>);   <span class="hljs-comment">// 用 16 进制 </span><br><br>System.out.println(x);<br>System.out.println(c);<br>System.out.println(b);<br></code></pre></td></tr></table></figure></li>
+</ul>
+<h4 id="2-Object-类"><a href="#2-Object-类" class="headerlink" title="2. Object 类"></a>2. Object 类</h4><p>Object 类是所有类的父类型，类中定义的方法，java 中所有对象都可以调用。</p>
+<h5 id="2-1-toString"><a href="#2-1-toString" class="headerlink" title="2.1 toString()"></a>2.1 toString()</h5><ul>
+<li>返回对象的字符串表示形式。</li>
+<li>默认返回格式：<strong>对象的 class 名称 + @ + hashCode 的十六进制字符串</strong>。</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>  	<span class="hljs-keyword">return</span> getClass().getName() + <span class="hljs-string">&quot;@&quot;</span> + Integer.toHexString(hashCode());<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        Object obj1 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj1.toString());<br>      	<span class="hljs-comment">// java.lang.Object@d716361</span><br><br>        Object obj2 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj2.toString());<br>      	<span class="hljs-comment">//java.lang.Object@6ff3c5b5</span><br> <br>        Object obj3 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj3.toString());<br>      	<span class="hljs-comment">//java.lang.Object@3764951d</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-2-getClass"><a href="#2-2-getClass" class="headerlink" title="2.2 getClass()"></a>2.2 getClass()</h5><p>getClass() 方法用于获取对象的运行时对象的类类型。返回值是 Class&lt;?&gt;。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>&#123;<br>		<span class="hljs-keyword">public</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">native</span> Class&lt;?&gt; getClass();<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br> <br>    Object obj1 = <span class="hljs-keyword">new</span> Object();<br>    System.out.println(<span class="hljs-string">&quot;obj1 的类为: &quot;</span> + obj1.getClass());<br> 		<span class="hljs-comment">// obj1 的类为: class java.lang.Object</span><br>      <br>    String obj2 = <span class="hljs-keyword">new</span> String();<br>    System.out.println(<span class="hljs-string">&quot;obj2 的类为: &quot;</span> + obj2.getClass());<br>    <span class="hljs-comment">// obj2 的类为: class java.lang.String</span><br> <br>    ArrayList&lt;Integer&gt; obj3 = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    System.out.println(<span class="hljs-string">&quot;obj3 的类为: &quot;</span> + obj3.getClass());<br>    <span class="hljs-comment">// obj3 的类为: class java.util.ArrayList</span><br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<h5 id="2-3-hashCode"><a href="#2-3-hashCode" class="headerlink" title="2.3 hashCode()"></a>2.3 hashCode()</h5><p>该方法返回一个 int 值，该 int 值是 JVM 根据对象在内存的中的特征（地址值），通过hash算法计算出的一 个结果。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>&#123;<br>	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>Hash，一般翻译做“散列”，也可以音译为“哈希”，就是把任意长度的数据输入，通过散列算法，变换成固定长度的输出，该输出就是散列值。 一个任意长度的输入转为一个固定长度的输出，是一种压缩映射，也就是说，散列值的空间通常远小于输入的空间，不同的输入可能会散列成相同的输出，所以<strong>不可能从散列值来确定唯一的输入值</strong>。</p>
+<p>我们可以认为，Object 中的 hashCode 方法默认返回的是对象的内存地址，但是实际上可能并不是。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        Object obj1 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj1.hashCode()); <br> <br>        Object obj2 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj2.hashCode());<br> <br>        Object obj3 = <span class="hljs-keyword">new</span> Object();<br>        System.out.println(obj3.hashCode()); <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>对于俩个对象的 hashCode 值： </p>
+<ul>
+<li>相等的俩个对象，hashCode 值一定相等。 </li>
+<li>hashCode 值相同，俩个对象有可能相等，也可能不同等。 </li>
+<li>hashCode 值不同，俩个对象一定不同。</li>
+</ul>
+<h5 id="2-4-equals"><a href="#2-4-equals" class="headerlink" title="2.4 equals()"></a>2.4 equals()</h5><p>用于比较两个对象是否相等。</p>
+<p>Object 中的 equals 方法，是直接使用的 == 号进行的比较，比较俩个对象的地址值是否相等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Object</span></span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span> </span>&#123;<br>  	<span class="hljs-keyword">return</span> (<span class="hljs-keyword">this</span> == obj);<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>equal 方法可以被重写，如 String 类重写了 equals() 方法，用于比较两个字符串是否相等。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        String obj1 = <span class="hljs-keyword">new</span> String();<br>        String obj2 = <span class="hljs-keyword">new</span> String();<br> <br>        <span class="hljs-comment">// 判断 obj1 与 obj2 是否相等</span><br>        <span class="hljs-comment">// 初始化的两个对象都为 null，所以是相等，返回 true</span><br>        System.out.println(obj1.equals(obj2)); <span class="hljs-comment">// true</span><br> <br>        <span class="hljs-comment">// 给对象赋值</span><br>        obj1 = <span class="hljs-string">&quot;Baidu&quot;</span>;<br>        obj2 = <span class="hljs-string">&quot;Google&quot;</span>;<br> <br>        <span class="hljs-comment">// 判断 obj1 与 obj2 是否相等</span><br>        <span class="hljs-comment">// 两个值不同，内存地址也不同，所以不相等，返回 false</span><br>        System.out.println(obj1.equals(obj2)); <span class="hljs-comment">// false</span><br> <br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>对equals方法重写，一般需要注意以下几点： </p>
+<ol>
+<li>自反性：对任意引用 obj，obj.equals(obj) 的返回值一定为 true. </li>
+<li>对称性：对于任何引用 o1、o2，当且仅当 o1.equals(o2) 返回值为 true 时，o2.equals(o1) 的返回值一 定为 true; </li>
+<li>传递性：如果 o1.equals(o2) 为 true, o2.equals(o3) 为 true,则 o1.equals(o3) 也一定为 true </li>
+<li>一致性：如果参与比较的对象没任何改变，则对象比较的结果也不应该有任何改变 </li>
+<li>非空性：任何非空的引用 obj，obj.equals(null) 的返回值一定为false</li>
+</ol>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CoreJava/">CoreJava</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8C%85%E8%A3%85%E7%B1%BB/">包装类</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/07/CoreJava/2.%20java%20%E4%B8%AD%E7%9A%84%E5%91%BD%E5%90%8D%E8%A7%84%E8%8C%83/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">java 中的命名规则</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/06/CoreJava/5.%20%E4%BF%AE%E9%A5%B0%E7%AC%A6/">
+                        <span class="hidden-mobile">修饰符</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

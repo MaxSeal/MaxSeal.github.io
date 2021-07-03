@@ -1,0 +1,672 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="在 java 中使用线程。">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>线程（二）线程和线程组 - maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="线程（二）线程和线程组">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-06-23 11:11" pubdate>
+        2021年6月23日 上午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.3k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      42
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">线程（二）线程和线程组</h1>
+            
+            <div class="markdown-body">
+              <p>在 java 中使用线程。</p>
+<span id="more"></span>
+
+
+
+<h2 id="1-线程的创建与启动"><a href="#1-线程的创建与启动" class="headerlink" title="1. 线程的创建与启动"></a>1. 线程的创建与启动</h2><p><code>java.lang.Thread</code> 是java中的线程类，所有的线程对象都必须是 Thread 类或其子类的实例。</p>
+<p>每个线程的作用，就是完成我们给它指定的任务，实际上就是执行一段我们指定的代码。我们只需要在 Thread 类的子类中重写 run 方法，把执行的代码写入到 run 方法中即可，这就是线程的执行任务！ </p>
+<p>当进行一些耗时的操作时，可以创建一个线程来执行这些操作，以提高效率。</p>
+<h3 id="1-1-通过继承-Thread-类创建线程"><a href="#1-1-通过继承-Thread-类创建线程" class="headerlink" title="1.1 通过继承 Thread 类创建线程"></a>1.1 通过继承 Thread 类创建线程</h3><p>Java中通过继承 Thread 类来创建并启动一个新的线程的步骤如下：</p>
+<ol>
+<li>定义 Thread 类的子类（可以是匿名内部类），并重写 Thread 类中的 run 方法， run 方法中的 代码就是线程的执行任务。</li>
+<li>创建 Thread 子类的对象，这个对象就代表了一个要独立运行的新线程。</li>
+<li>调用线程对象的 start 方法来启动该线程。</li>
+</ol>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CreateThread</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Thread</span></span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;新建了一个线程&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Thread t = <span class="hljs-keyword">new</span> CreateThread();<br>        t.start();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<h3 id="1-2-通过实现-Runnable-接口创建线程"><a href="#1-2-通过实现-Runnable-接口创建线程" class="headerlink" title="1.2 通过实现 Runnable 接口创建线程"></a>1.2 通过实现 Runnable 接口创建线程</h3><p>除了继承 Thread 类后重写 run 方法之外，还可以利于 Runnable 接口来完成线程任务的指定。</p>
+<p><code>java.lang.Runnable</code> 接口中只有一个抽象方法 run。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Runnable</span> </span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>其实 Thread 类也是 Runnable 接口的实现类，并且有通过 Runnable 对象创建对象的构造器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java">publicclass Thread implements Runnable &#123;<br>  <span class="hljs-comment">//...</span><br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Thread</span><span class="hljs-params">(Runnable target)</span> </span>&#123;<br>        <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>, target, <span class="hljs-string">&quot;Thread-&quot;</span> + nextThreadNum(), <span class="hljs-number">0</span>);<br>    &#125;<br>  <span class="hljs-comment">//...</span><br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+<p>例如：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CreateThread2</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Runnable</span></span>&#123;<br><br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        System.out.println(<span class="hljs-string">&quot;创建一个线程。&quot;</span>);<br>    &#125;<br><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        Runnable runnable = <span class="hljs-keyword">new</span> CreateThread2();<br>        Thread t = <span class="hljs-keyword">new</span> Thread(runnable);<br>        t.start();<br>    &#125;<br>&#125;<br><br></code></pre></td></tr></table></figure>
+
+
+
+<p>实现 Runnable 接口比继承 Thread 类所具有的优势：</p>
+<ol>
+<li>可以把相同的一个执行任务（Runnable 接口的实现），交给不同的线程对象去执行。</li>
+<li>可以避免 java 中的单继承的局限性。 </li>
+<li>线程和执行代码各自独立，实现代码解耦</li>
+</ol>
+<h3 id="1-3-run-方法与-strat-方法"><a href="#1-3-run-方法与-strat-方法" class="headerlink" title="1.3 run 方法与 strat 方法"></a>1.3 run 方法与 strat 方法</h3><p>Thread 类中的 start() 方法：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">synchronized</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-comment">/**</span><br><span class="hljs-comment">     * This method is not invoked for the main method thread or &quot;system&quot;</span><br><span class="hljs-comment">     * group threads created/set up by the VM. Any new functionality added</span><br><span class="hljs-comment">     * to this method in the future may have to also be added to the VM.</span><br><span class="hljs-comment">     *</span><br><span class="hljs-comment">     * A zero status value corresponds to state &quot;NEW&quot;.</span><br><span class="hljs-comment">     */</span><br>    <span class="hljs-keyword">if</span> (threadStatus != <span class="hljs-number">0</span>)<br>        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> IllegalThreadStateException();<br><br>    <span class="hljs-comment">/* Notify the group that this thread is about to be started</span><br><span class="hljs-comment">     * so that it can be added to the group&#x27;s list of threads</span><br><span class="hljs-comment">     * and the group&#x27;s unstarted count can be decremented. */</span><br>    group.add(<span class="hljs-keyword">this</span>);<br><br>    <span class="hljs-keyword">boolean</span> started = <span class="hljs-keyword">false</span>;<br>    <span class="hljs-keyword">try</span> &#123;<br>        start0();<br>        started = <span class="hljs-keyword">true</span>;<br>    &#125; <span class="hljs-keyword">finally</span> &#123;<br>        <span class="hljs-keyword">try</span> &#123;<br>            <span class="hljs-keyword">if</span> (!started) &#123;<br>                group.threadStartFailed(<span class="hljs-keyword">this</span>);<br>            &#125;<br>        &#125; <span class="hljs-keyword">catch</span> (Throwable ignore) &#123;<br>            <span class="hljs-comment">/* do nothing. If start0 threw a Throwable then</span><br><span class="hljs-comment">              it will be passed up the call stack */</span><br>        &#125;<br>    &#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">native</span> <span class="hljs-keyword">void</span> <span class="hljs-title">start0</span><span class="hljs-params">()</span></span>;<br><br><span class="hljs-comment">/**</span><br><span class="hljs-comment"> * If this thread was constructed using a separate</span><br><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@code</span> Runnable&#125; run object, then that</span><br><span class="hljs-comment"> * &#123;<span class="hljs-doctag">@code</span> Runnable&#125; object&#x27;s &#123;<span class="hljs-doctag">@code</span> run&#125; method is called;</span><br><span class="hljs-comment"> * otherwise, this method does nothing and returns.</span><br><span class="hljs-comment"> * &lt;p&gt;</span><br><span class="hljs-comment"> * Subclasses of &#123;<span class="hljs-doctag">@code</span> Thread&#125; should override this method.</span><br><span class="hljs-comment"> *</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@see</span>     #start()</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@see</span>     #stop()</span><br><span class="hljs-comment"> * <span class="hljs-doctag">@see</span>     #Thread(ThreadGroup, Runnable, String)</span><br><span class="hljs-comment"> */</span><br><span class="hljs-meta">@Override</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">if</span> (target != <span class="hljs-keyword">null</span>) &#123;<br>        target.run();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>从源码可以看到 start 方法启动线程后，线程会自动执行 run 方法。 </p>
+<p>千万不要直接调用 run 方法，这样就不是启动线程执行任务，而是普通的方法调用。</p>
+<h2 id="2-线程的名字"><a href="#2-线程的名字" class="headerlink" title="2.线程的名字"></a>2.线程的名字</h2><h3 id="2-1-指定线程的名字"><a href="#2-1-指定线程的名字" class="headerlink" title="2.1 指定线程的名字"></a>2.1 指定线程的名字</h3><p>在 Thread 类中有这样三个构造器：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"> <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Thread</span><span class="hljs-params">()</span> </span>&#123;<br>       <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-string">&quot;Thread-&quot;</span> + nextThreadNum(), <span class="hljs-number">0</span>);<br>   &#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Thread</span><span class="hljs-params">(String name)</span> </span>&#123;<br>       <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, name, <span class="hljs-number">0</span>);<br> &#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Thread</span><span class="hljs-params">(Runnable target, String name)</span> </span>&#123;<br>       <span class="hljs-keyword">this</span>(<span class="hljs-keyword">null</span>, target, name, <span class="hljs-number">0</span>);<br> &#125;<br></code></pre></td></tr></table></figure>
+
+<p>说明可以在创建线程的同时为线程指定一个名字。如果没有给线程命名，线程的默认名字是 Thread-x。</p>
+<h3 id="2-2-获取线程的名字"><a href="#2-2-获取线程的名字" class="headerlink" title="2.2 获取线程的名字"></a>2.2 获取线程的名字</h3><p>通过 Thread 类中的 currentThread 方法，可以获取当前线程的对象，然后调用线程对象的 getName 方法， 可以获取当前线程的名字。 注意，这里说的当前线程，指的是执行当前方法的线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    String name = Thread.currentThread().getName();<br>    System.out.println(<span class="hljs-string">&quot;执行当前main方法的线程是：&quot;</span>+name);<br><br>    Runnable run = <span class="hljs-keyword">new</span> Runnable() &#123;<br>        <span class="hljs-meta">@Override</span><br>        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            String name = Thread.currentThread().getName();<br>            System.out.println(<span class="hljs-string">&quot;执行当前run方法的线程是：&quot;</span>+name);<br>        &#125;<br>    &#125;;<br>  <br>  Thread t = <span class="hljs-keyword">new</span> Thread(run);<br>	t.start();<br>	&#125;<br>&#125;<br><span class="hljs-comment">//运行结果为：</span><br>执行当前main方法的线程是：main<br>执行当前run方法的线程是：Thread-<span class="hljs-number">0</span> <br><br></code></pre></td></tr></table></figure>
+
+
+
+
+
+<h2 id="3-main-线程"><a href="#3-main-线程" class="headerlink" title="3. main 线程"></a>3. main 线程</h2><p>使用 java 命令来运行一个类的时候，首先会启动 JVM（进程），JVM会在创建一个名字叫做 main 的线程，来执行类中的程序入口（main方法）。所以我们写在 main 方法中的代码，其实都是由名字叫做 main 的线程去执行的。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        <span class="hljs-comment">//获取执行当前方法的线程对象</span><br>        Thread currentThread = Thread.currentThread();<br>        System.out.println(<span class="hljs-string">&quot;执行当前方法的线程名字为：&quot;</span>+currentThread.getName());<br>    &#125;<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br>执行当前方法的线程名字为：main<br></code></pre></td></tr></table></figure>
+
+<img src="D:\Users\MaxSeal\Desktop\杰普实训\corejava\笔记\图片\main线程.png" srcset="/img/loading.gif" lazyload style="zoom: 67%;" />
+
+<ol>
+<li>使用 java 命令运行 Test 类，会先启动 JVM（启动进程）。 </li>
+<li>应用类加载器通过 CLASSPATH 环境变量配置的路径，找到 Test.class 文件，并加载到方法区。 注意，这里会同时生产一个 Class 类型对象，来代表这个 Test 类型，并且会优先处理类中的静态代码（静态属性、静态方法、静态代码块） 。</li>
+<li>JVM 创建并启动一个名字叫做 main 的线程。 </li>
+<li>main 线程将 Test 中的 main 方法加载到栈区中。</li>
+<li>在栈里面，main 线程就可以一行行的执行方法中的代码了 </li>
+<li>如果在执行代码中，遇到了方法调用，那么线程会继续把被调用的方法，加载到栈中（压栈操作），然后执行栈顶这个最新添加进来的方法，栈顶方法执行完，就释放（出栈操作），然后在进行执行当前最新的栈顶方法。</li>
+<li>代码执行过程输出执行结果 </li>
+<li>当前是单线程程序，main 线程结束了，JVM 就停止了，如果是多线程程序，那么 JVM 要等所有线程都结束了才会停止。</li>
+</ol>
+<h2 id="4-线程分类"><a href="#4-线程分类" class="headerlink" title="4. 线程分类"></a>4. 线程分类</h2><p>java 中，线程可以分为：</p>
+<ul>
+<li><p>前台线程，又叫做执行线程、用户线程：</p>
+<ul>
+<li>这种线程专门用来执行用户编写的代码，地位比较高。</li>
+<li>JVM 是否会停止运行，就是要看当前是否还有前台线程没有执行完。</li>
+</ul>
+</li>
+<li><p>后台线程，又叫做守护线程、精灵线程：</p>
+<ul>
+<li>这种线程是用来给前台线程服务的，给前台线程提供一个良好的运行环境，地位比较低。</li>
+<li>JVM是否停止 运行，根本不关心后台线程的运行情况和状态。</li>
+</ul>
+</li>
+</ul>
+<p>后台线程不一定比前台线程执行晚，主要看线程的优先级。</p>
+<p>在主线程中，创建出来的线程对象，默认就是前台线程。在它启动之前，可以通过 <code>setDaemon(true)</code>方法把它设置为后台线程。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Thread t = <span class="hljs-keyword">new</span> Thread(<span class="hljs-string">&quot;t线程&quot;</span>)&#123;<br>    <span class="hljs-meta">@Override</span><br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>        String name = Thread.currentThread().getName();<br>        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10</span>; i++) &#123;<br>            System.out.println(name+<span class="hljs-string">&quot;: hello &quot;</span>+i);<br>        &#125;<br>    	&#125;<br>    &#125;;<br>  <br>    <span class="hljs-comment">//在启动线程之前，可以将其设置为后台线程，否则默认是前台线程</span><br>    t.setDaemon(<span class="hljs-keyword">true</span>);<br>    t.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+
+
+
+
+
+
+<h2 id="5-线程的优先级"><a href="#5-线程的优先级" class="headerlink" title="5. 线程的优先级"></a>5. 线程的优先级</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MIN_PRIORITY = <span class="hljs-number">1</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> NORM_PRIORITY = <span class="hljs-number">5</span>;<br><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> <span class="hljs-keyword">int</span> MAX_PRIORITY = <span class="hljs-number">10</span>;<br></code></pre></td></tr></table></figure>
+
+<p>在 Thread 类的源码中，可以看到线程的优先级使用 int 类型数字表示，最大是10，最小是1，默认是5。</p>
+<p>常用方法：</p>
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>setPriority()</code></td>
+<td>设置优先级。</td>
+</tr>
+<tr>
+<td><code>getPriority()</code></td>
+<td>获取优先级。</td>
+</tr>
+</tbody></table>
+<p>当俩个线程争夺 CPU 的时候： </p>
+<ul>
+<li>优先级相同，获得CPU使用权的概率相同。</li>
+<li>优先级不同，那么高优先级的线程<strong>有更高的概率</strong>获取到 CPU 的使用权。</li>
+</ul>
+<p>例如，t1 和 t2 线程各自运行10000次循环，看哪个线程先运行完。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Thread t1 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-string">&quot;t1线程&quot;</span>)&#123;<br>    		<span class="hljs-meta">@Override</span><br>    		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    			String name = Thread.currentThread().getName();<br>    			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;<br>   				 &#125;<br>    			System.out.println(name+<span class="hljs-string">&quot;线程执行完毕&quot;</span>);<br>    		&#125;<br>    &#125;;<br>  <br>    Thread t2 = <span class="hljs-keyword">new</span> Thread(<span class="hljs-string">&quot;t2线程&quot;</span>)&#123;<br>    <span class="hljs-meta">@Override</span><br>    		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>    			String name = Thread.currentThread().getName();<br>    			<span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; <span class="hljs-number">10000</span>; i++) &#123;<br>   				 &#125;<br>    			System.out.println(name+<span class="hljs-string">&quot;线程执行完毕&quot;</span>);<br>    		&#125;<br>    &#125;;<br>  <br>    <span class="hljs-comment">// t1.setPriority(Thread.MAX_PRIORITY);</span><br>    <span class="hljs-comment">// t2.setPriority(Thread.MIN_PRIORITY);</span><br>    System.out.println(<span class="hljs-string">&quot;t1线程的优先级：&quot;</span>+t1.getPriority());<br>    System.out.println(<span class="hljs-string">&quot;t2线程的优先级：&quot;</span>+t2.getPriority());<br>    t1.start();<br>    t2.start();<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>默认情况下，两个线程的优先级都是 5，那么两个线程争夺到 CPU 的使用权的概率一样。基本上俩个线程都有相同的概率先执行完。其实 t1 先稍微占了那么一点点的优势，因为毕竟在主线程的代码中，先启动了t1先，然后又启动了 t2。但是设置 t1 和 t2 优先级之后，在运行查看结果，会明显看到优先级高的线程，有更高的概率先执行完代码。</p>
+<h2 id="6-线程组"><a href="#6-线程组" class="headerlink" title="6. 线程组"></a>6. 线程组</h2><p>Java中使用 <code>java.lang.ThreadGroup</code> 类来表示线程组，它可以对一批线程进行管理，对线程组进行操作，同时也会对线程组里面的这一批线程操作。</p>
+<h3 id="6-1-创建线程组"><a href="#6-1-创建线程组" class="headerlink" title="6.1 创建线程组"></a>6.1 创建线程组</h3><p>查看 ThreadGroup 类的源码，可以发现有 2 个线程组构造器。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">// 创建一个线程组，并指定一个名字。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadGroup</span><span class="hljs-params">(String name)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>(Thread.currentThread().getThreadGroup(), name);<br>&#125;<br><br><span class="hljs-comment">//创建一个线程组，并指定一个名字，同时指定其父线程组。</span><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">ThreadGroup</span><span class="hljs-params">(ThreadGroup parent, String name)</span> </span>&#123;<br>  <span class="hljs-keyword">this</span>(checkParentAccess(parent), parent, name);<br>&#125;<br></code></pre></td></tr></table></figure>
+
+<p>创建线程组的时候，需要指定该线程组的名字。 </p>
+<p>还可以指定其父线程组，如果没有指定，那么这个新创建的线程组的父线程组就是当前线程组。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    Thread t = <span class="hljs-keyword">new</span> Thread();<br>    ThreadGroup threadGroup = t.getThreadGroup();<br>    System.out.println(threadGroup);<br>    &#125;<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br>java.lang.ThreadGroup[name=main,maxpri=<span class="hljs-number">10</span>]<br></code></pre></td></tr></table></figure>
+
+<p>只有在创建线程对象的时候，才能指定其所在的线程组，线程运行中途不能改变它所属的线程组。</p>
+<h3 id="6-2-常用方法"><a href="#6-2-常用方法" class="headerlink" title="6.2 常用方法"></a>6.2 常用方法</h3><table>
+<thead>
+<tr>
+<th>方法</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>activeCount()</code></td>
+<td>返回此线程组及其子组中活动线程数的估计。</td>
+</tr>
+<tr>
+<td><code>activeGroupCount()</code></td>
+<td>返回此线程组及其子组中活动组数的估计。</td>
+</tr>
+<tr>
+<td><code>destroy()</code></td>
+<td>销毁此线程组及其所有子组。</td>
+</tr>
+<tr>
+<td><code>isDestroyed()</code></td>
+<td>测试此线程组是否已被破坏。</td>
+</tr>
+<tr>
+<td><code>checkAccess()</code></td>
+<td>确定当前运行的线程是否有权限修改此线程组。</td>
+</tr>
+<tr>
+<td><code>interrupt()</code></td>
+<td>中断此线程组中的所有线程。</td>
+</tr>
+<tr>
+<td><code>getMaxPriority()</code></td>
+<td>返回此线程组的最大优先级。</td>
+</tr>
+<tr>
+<td><code>setMaxPoriority(int pri)</code></td>
+<td>设置组的最大优先级。</td>
+</tr>
+<tr>
+<td><code>getName()</code></td>
+<td>返回此线程组的名称。</td>
+</tr>
+<tr>
+<td><code>getParent()</code></td>
+<td>返回此线程组的父级。</td>
+</tr>
+<tr>
+<td><code>parentOf(ThreadGroup g)</code></td>
+<td>测试此线程组是线程组参数还是其祖先线程组之一。</td>
+</tr>
+<tr>
+<td><code>setDaemon(boolean daemon)</code></td>
+<td>更改此线程组的守护程序状态。</td>
+</tr>
+<tr>
+<td><code>isDaemon()</code></td>
+<td>测试此线程组是否是守护线程组。</td>
+</tr>
+<tr>
+<td><code>list()</code></td>
+<td>将有关此线程组的信息打印到标准输出。</td>
+</tr>
+<tr>
+<td><code>toString()</code></td>
+<td>返回此Thread组的字符串表示形式。</td>
+</tr>
+<tr>
+<td><code>enumerate(Thread[] list)</code></td>
+<td>将此线程组及其子组中的每个活动线程复制到指定的数组中。</td>
+</tr>
+<tr>
+<td><code>enumerate(Thread[] list, boolean recurse)</code></td>
+<td>将此线程组中的每个活动线程复制到指定的数组中。</td>
+</tr>
+<tr>
+<td><code>enumerate(ThreadGroup[] list)</code></td>
+<td>复制到该线程组及其子组中每个活动子组的指定数组引用。</td>
+</tr>
+<tr>
+<td><code>enumerate(ThreadGroup[] list, boolean recurse)</code></td>
+<td>复制到该线程组中每个活动子组的指定数组引用。</td>
+</tr>
+</tbody></table>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>&#123;<br>    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>        ThreadGroup group = <span class="hljs-keyword">new</span> ThreadGroup(<span class="hljs-string">&quot;我的线程组&quot;</span>);<br>        Runnable run = <span class="hljs-keyword">new</span> Runnable() &#123;<br>            <span class="hljs-meta">@Override</span><br>            <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>&#123;<br>            <span class="hljs-keyword">try</span> &#123;<br>              <span class="hljs-comment">//让线程休眠一会，否则运行太快，死亡太快了</span><br>              Thread.sleep(<span class="hljs-number">10000</span>);<br>            &#125; <span class="hljs-keyword">catch</span> (InterruptedException e) &#123;<br>              e.printStackTrace();<br>            &#125;<br>            &#125;<br>        &#125;;<br>        Thread t1 = <span class="hljs-keyword">new</span> Thread(group,run,<span class="hljs-string">&quot;t1线程&quot;</span>);<br>        Thread t2 = <span class="hljs-keyword">new</span> Thread(group,run,<span class="hljs-string">&quot;t2线程&quot;</span>);<br>        Thread t3 = <span class="hljs-keyword">new</span> Thread(group,run,<span class="hljs-string">&quot;t3线程&quot;</span>);<br>        <span class="hljs-comment">//注意，启动后，三个线程都会进行休眠，等run方法运行完就“死亡”了</span><br>        t1.start();<br>        t2.start();<br>        t3.start();<br>        <span class="hljs-comment">//返回当前线程组中还没有“死亡”的线程个数</span><br>        System.out.println(<span class="hljs-string">&quot;线程组中还在存活的线程个数为：&quot;</span>+group.activeCount());<br>        <span class="hljs-comment">//准备好数组，保存线程组中还存活的线程</span><br>        Thread[] arr = <span class="hljs-keyword">new</span> Thread[group.activeCount()];<br>        <span class="hljs-comment">//将存活的线程集中存放到指定数组中，并返回本次存放到数组的存活线程个数</span><br>        System.out.println(<span class="hljs-string">&quot;arr数组中存放的线程个数为：&quot;</span>+group.enumerate(arr));<br>        <span class="hljs-comment">//输出数组中的内容</span><br>        System.out.println(<span class="hljs-string">&quot;arr数组中的内容为：&quot;</span>+Arrays.toString(arr));<br>    &#125;<br>&#125;<br><span class="hljs-comment">//运行结果：</span><br>线程组中还在存活的线程个数为：<span class="hljs-number">3</span><br>arr数组中存放的线程个数为：<span class="hljs-number">3</span><br>arr数组中的内容为：[Thread[t1线程,<span class="hljs-number">5</span>,我的线程组], Thread[t2线程,<span class="hljs-number">5</span>,我的线程组], Thread[t3线程,<span class="hljs-number">5</span>,我的线程组]]<br></code></pre></td></tr></table></figure>
+
+
+
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/CoreJava/">CoreJava</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%9A%E7%BA%BF%E7%A8%8B/">多线程</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/06/23/CoreJava/24.%20%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%89%EF%BC%89%E7%BA%BF%E7%A8%8B%E7%8A%B6%E6%80%81/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">线程（三）线程的状态</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/06/22/CoreJava/22.%20%E7%BA%BF%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">线程（一）基本概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
