@@ -241,21 +241,21 @@
             
             <div class="markdown-body">
               <p>注解（Annotation），是 jdk1.5 引入的技术，用它可以对 java 中的某一个段程序进行说明或标注，并且这个注解的信息可以被其他程序使用特定的方式读取到，从而完成相应的操作。</p>
-<span id="more"></span>
-
-
+<span id="more"></span> 
 
 <h2 id="1-注解的定义"><a href="#1-注解的定义" class="headerlink" title="1. 注解的定义"></a>1. 注解的定义</h2><p>注解（Annotation），是 jdk1.5 引入的技术，用它可以对 java 中的某一个段程序进行说明或标注，并且这个注解的信息可以被其他程序使用特定的方式读取到，从而完成相应的操作。</p>
 <p>例如 <code>@Override</code> 注解：</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Person</span> </span>&#123;<br><span class="hljs-meta">@Override</span><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">toString</span><span class="hljs-params">()</span> </span>&#123;<br>  	<span class="hljs-keyword">return</span> <span class="hljs-keyword">super</span>.toString();<br>  &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <p>注解和注释的区别：</p>
 <ul>
 <li>注解是给其他程序看的，通过参数的设置，可以在编译后 class 文件中保留注解的信息，其他程序读取后，可以完成特定的操作。 </li>
 <li>注释是给程序员看的，无论怎么设置，编译后 class 文件中都是【没有】注释信息，方便程序员快速了解代码的作用或结构。</li>
 </ul>
+<br/>
+
 <h2 id="2-Java-的内置注解"><a href="#2-Java-的内置注解" class="headerlink" title="2. Java 的内置注解"></a>2. Java 的内置注解</h2><p>Java 定义了一套注解，共有 7 个，3 个在 <code>java.lang</code> 中，剩下 4 个在 <code>java.lang.annotation</code> 中。</p>
 <p>作用在代码的注解是：</p>
 <ul>
@@ -276,6 +276,8 @@
 <li><code>@FunctionalInterface</code> - Java 8 开始支持，标识一个匿名函数或函数式接口。</li>
 <li><code>@Repeatable</code> - Java 8 开始支持，标识某注解可以在同一个声明上使用多次。</li>
 </ul>
+<br/>
+
 <h2 id="3-Annotation-接口"><a href="#3-Annotation-接口" class="headerlink" title="3. Annotation 接口"></a>3. Annotation 接口</h2><h3 id="3-1-Annotation-接口的结构"><a href="#3-1-Annotation-接口的结构" class="headerlink" title="3.1 Annotation 接口的结构"></a>3.1 Annotation 接口的结构</h3><img src="https://i.loli.net/2021/06/18/qgfIcj7kQaedTn2.png" srcset="/img/loading.gif" lazyload alt="Annotation结构.png" style="zoom: 50%;" />
 
 
@@ -292,35 +294,37 @@
 <li><p>Annotation 有许多实现类，包括：Deprecated, Documented, Inherited, Override 等等。</p>
 </li>
 </ul>
+<br/>
+
 <h3 id="3-2-Annotation-组成部分"><a href="#3-2-Annotation-组成部分" class="headerlink" title="3.2 Annotation 组成部分"></a>3.2 Annotation 组成部分</h3><p>java Annotation 的组成中，有 3 个非常重要的主干类。它们分别是：</p>
 <ul>
 <li>Annotation 接口</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.lang.annotation;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Annotation</span> </span>&#123;<br><br>    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">equals</span><span class="hljs-params">(Object obj)</span></span>;<br><br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">hashCode</span><span class="hljs-params">()</span></span>;<br><br>    <span class="hljs-function">String <span class="hljs-title">toString</span><span class="hljs-params">()</span></span>;<br><br>    Class&lt;? extends Annotation&gt; annotationType();  <br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <ul>
 <li>枚举类型 ElementType</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.lang.annotation;<br><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">ElementType</span> </span>&#123;<br>    TYPE,               <span class="hljs-comment">/* 类、接口（包括注释类型）或枚举声明  */</span><br><br>    FIELD,              <span class="hljs-comment">/* 字段声明（包括枚举常量）  */</span><br><br>    METHOD,             <span class="hljs-comment">/* 方法声明  */</span><br><br>    PARAMETER,          <span class="hljs-comment">/* 参数声明  */</span><br><br>    CONSTRUCTOR,        <span class="hljs-comment">/* 构造方法声明  */</span><br><br>    LOCAL_VARIABLE,     <span class="hljs-comment">/* 局部变量声明  */</span><br><br>    ANNOTATION_TYPE,    <span class="hljs-comment">/* 注释类型声明  */</span><br><br>    PACKAGE             <span class="hljs-comment">/* 包声明  */</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <ul>
 <li>枚举类型 RetentionPolicy</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">package</span> java.lang.annotation;<br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">enum</span> <span class="hljs-title">RetentionPolicy</span> </span>&#123;<br>    SOURCE,            <span class="hljs-comment">/* Annotation信息仅存在于编译器处理期间，编译器处理完之后就没有该注解信息了  */</span><br><br>    CLASS,             <span class="hljs-comment">/* 编译器将注解存储于类对应的.class文件中。默认行为  */</span><br><br>    RUNTIME            <span class="hljs-comment">/* 编译器将注解存储于class文件中，并且可由JVM读入 */</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
+<br/>
 
 <h2 id="4-自定义注解的写法"><a href="#4-自定义注解的写法" class="headerlink" title="4. 自定义注解的写法"></a>4. 自定义注解的写法</h2><p>日常开发中新建 Java 类，我们使用 class、interface 比较多，而注解和它们一样，也是一种类的类型，他是用的修饰符为 @interface。</p>
 <p>使用 @interface 定义注解时，意味着它实现了 <code>java.lang.annotation.Annotation</code> 接口。它和我们通常的 implemented 实现接口的方法不同。Annotation 接口的实现细节都由编译器完成。通过 @interface 定义注解后，该注解不能继承其他的注解或接口。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> 注解名称 &#123;<br>  	<span class="hljs-keyword">public</span> 属性类型 属性名();   <span class="hljs-comment">// 实际上是一个抽象方法，当时可以在括号里传值。</span><br>		<span class="hljs-comment">// public 属性类型 属性名() default 默认值;</span><br>&#125;<br></code></pre></td></tr></table></figure>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> 注解名称 &#123;<br>  	<span class="hljs-keyword">public</span> 属性类型 属性名();   <span class="hljs-comment">// 实际上是一个抽象方法，但是可以在括号里传值。</span><br>		<span class="hljs-comment">// public 属性类型 属性名() default 默认值;</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
 <p>public 可以省去不写，默认就是 public。</p>
+<br/>
+
 <h3 id="4-1-注解属性类型"><a href="#4-1-注解属性类型" class="headerlink" title="4.1 注解属性类型"></a>4.1 注解属性类型</h3><ul>
 <li><p>基本数据类型</p>
 </li>
@@ -335,12 +339,13 @@
 <li><p>以上类型的一维数组类型</p>
 </li>
 </ul>
+<br/>
+
+
 <h3 id="4-2-注解成员变量赋值"><a href="#4-2-注解成员变量赋值" class="headerlink" title="4.2 注解成员变量赋值"></a>4.2 注解成员变量赋值</h3><p>如果注解又多个属性，则可以在注解括号中用“，”号隔开分别给对应的属性赋值，如下例子，注解在父类中赋值属性。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Documented</span><br><span class="hljs-meta">@Inherited</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Target(ElementType.TYPE)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyTestAnnotation &#123;<br>    <span class="hljs-function">String <span class="hljs-title">name</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;mao&quot;</span>;<br>    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">age</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> 18</span>;<br>&#125;<br><br><span class="hljs-meta">@MyTestAnnotation(name = &quot;father&quot;,age = 50)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
+<br/>
 
 <h2 id="5-元注解"><a href="#5-元注解" class="headerlink" title="5. 元注解"></a>5. 元注解</h2><p>在我们进行自定义注解的时候，一般会使用到元注解，来设置自定义注解的基本特点。所以，<strong>元注解也就是对注解进行基本信息设置的注解</strong>。</p>
 <p>元注解分别有：</p>
@@ -356,6 +361,8 @@
 <li><p><code>@Repeatable</code>（JDK1.8加入）：用于标识某注解可以在同一个声明上使用多次。</p>
 </li>
 </ul>
+<br/>
+
 <h3 id="5-1-Target"><a href="#5-1-Target" class="headerlink" title="5.1 @Target"></a>5.1 @Target</h3><p>使用 <code>@Target</code> 元注解<strong>表示注解作用的范围</strong>。注解的使用范围，都定义在了一个枚举类  ElementType 中。</p>
 <ul>
 <li><code>@Target(ElementType.TYPE)</code> ：作用接口、类、枚举、注解。</li>
@@ -371,7 +378,7 @@
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-meta">@Target(ElementType.TYPE)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyTestAnnotation &#123;<br><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <h3 id="5-2-Retention"><a href="#5-2-Retention" class="headerlink" title="5.2 @Retention"></a>5.2 @Retention</h3><p>使用 <code>@Retention</code> 元注解<strong>表示注解存在阶段</strong>。通过使用枚举类 RetentionPolicy 来表示注解保留时期。</p>
 <ul>
@@ -388,24 +395,32 @@
 <li>如果只是做一些检查性的操作，比如 @Override 和 @SuppressWarnings，使用 SOURCE 注解。</li>
 </ul>
 <p>因为 RUNTIME 的生命周期最长，所以其他俩种情况能作用到的阶段，使用 RUNTIME 也一定能作用到。</p>
+<br/>
+
 <h3 id="5-3-Inherited"><a href="#5-3-Inherited" class="headerlink" title="5.3 @Inherited"></a>5.3 @Inherited</h3><p>一个被 <code>@Inherited</code>注解了的注解修饰了一个父类，如果他的子类没有被其他注解修饰，则它的子类也继承了父类的注解。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**自定义注解*/</span><br><span class="hljs-meta">@Documented</span><br><span class="hljs-meta">@Inherited</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Target(ElementType.TYPE)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> MyTestAnnotation &#123;<br>&#125;<br><br><span class="hljs-comment">/**父类标注自定义注解*/</span><br><span class="hljs-meta">@MyTestAnnotation</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Father</span> </span>&#123;<br>&#125;<br><br><span class="hljs-comment">/**子类*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Son</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Father</span> </span>&#123;<br>&#125;<br><br><span class="hljs-comment">/**测试子类获取父类自定义注解*/</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">test</span> </span>&#123;<br>   <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br><br>      <span class="hljs-comment">//获取 Son 的 class 对象</span><br>       Class&lt;Son&gt; sonClass = Son.class;<br>      <span class="hljs-comment">// 获取Son类上的注解 MyTestAnnotation 可以执行成功</span><br>      MyTestAnnotation annotation = sonClass.getAnnotation(MyTestAnnotation.class);<br>   &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <h3 id="5-4-Documented"><a href="#5-4-Documented" class="headerlink" title="5.4 @Documented"></a>5.4 @Documented</h3><p>它的作用是能够将注解中的元素包含到 Javadoc 中去。</p>
+<br/>
+
 <h3 id="5-5-Repeatable"><a href="#5-5-Repeatable" class="headerlink" title="5.5 @Repeatable"></a>5.5 @Repeatable</h3><p>被这个元注解修饰的注解可以同时作用一个对象多次，但是每次作用注解又可以代表不同的含义。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">/**一个人喜欢玩游戏，他喜欢玩英雄联盟，绝地求生，极品飞车，尘埃4等，则我们需要定义一个人的注解，他属性代表喜欢玩游戏集合，一个游戏注解，游戏属性代表游戏名称*/</span><br><br><span class="hljs-comment">/**玩家注解*/</span><br><span class="hljs-meta">@Documented</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Target(ElementType.TYPE)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> People &#123;<br>    Game[] value() ;<br>&#125;<br><br><span class="hljs-comment">/**游戏注解*/</span><br><span class="hljs-meta">@Repeatable(People.class)</span><br><span class="hljs-meta">@Retention(RetentionPolicy.RUNTIME)</span><br><span class="hljs-meta">@Target(ElementType.TYPE)</span><br><span class="hljs-keyword">public</span> <span class="hljs-meta">@interface</span> Game &#123;<br>    <span class="hljs-function">String <span class="hljs-title">value</span><span class="hljs-params">()</span> <span class="hljs-keyword">default</span> &quot;&quot;</span>;<br>&#125;<br><br><span class="hljs-comment">/**玩游戏类*/</span><br><span class="hljs-meta">@Game(value = &quot;LOL&quot;)</span><br><span class="hljs-meta">@Game(value = &quot;PUBG&quot;)</span><br><span class="hljs-meta">@Game(value = &quot;NFS&quot;)</span><br><span class="hljs-meta">@Game(value = &quot;Dirt4&quot;)</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlayGame</span> </span>&#123;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
+<br/>
 
 <h2 id="6-注解的作用"><a href="#6-注解的作用" class="headerlink" title="6. 注解的作用"></a>6. 注解的作用</h2><h3 id="6-1-编译检查"><a href="#6-1-编译检查" class="headerlink" title="6.1 编译检查"></a>6.1 编译检查</h3><p> 注解具有“让编译器进行编译检查的作用”。</p>
 <p>例如：@SuppressWarnings, @Deprecated 和 @Override 都具有编译检查作用。 </p>
+<br/>
+
 <h3 id="6-2-在反射中使用注解"><a href="#6-2-在反射中使用注解" class="headerlink" title="6.2 在反射中使用注解"></a>6.2 在反射中使用注解</h3><p>在反射的 Class, Method, Field 等函数中，有许多于 Annotation 相关的接口。</p>
 <p>这也意味着，我们可以在反射中解析并使用 Annotation。</p>
+<br/>
+
 <h3 id="6-3-根据-Annotation-生成帮助文档"><a href="#6-3-根据-Annotation-生成帮助文档" class="headerlink" title="6.3 根据 Annotation 生成帮助文档"></a>6.3 根据 Annotation 生成帮助文档</h3><p>通过给 Annotation 注解加上 @Documented 标签，能使该 Annotation 标签出现在 javadoc 中。</p>
+<br/>
+
 <h3 id="6-4-能够帮忙查看查看代码"><a href="#6-4-能够帮忙查看查看代码" class="headerlink" title="6.4 能够帮忙查看查看代码"></a>6.4 能够帮忙查看查看代码</h3><p>通过 @Override, @Deprecated 等，我们能很方便的了解程序的大致结构。</p>
 <p>另外，我们也可以通过自定义 Annotation 来实现一些功能。</p>
 

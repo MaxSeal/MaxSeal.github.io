@@ -243,31 +243,31 @@
               <p>泛型，即“参数化类型”。顾名思义，就是将类型由原来的具体的类型参数化，类似于方法中的变量参数，此时类型也定义成参数形式（可以称之为类型形参），然后在使用/调用时传入具体的类型（类型实参）。</p>
 <span id="more"></span>
 
-
-
 <h2 id="1-泛型的定义"><a href="#1-泛型的定义" class="headerlink" title="1. 泛型的定义"></a>1. 泛型的定义</h2><p>泛型，即“参数化类型”。顾名思义，就是<strong>将类型由原来的具体的类型参数化</strong>，类似于方法中的变量参数，此时类型也定义成参数形式（可以称之为类型形参），然后在使用/调用时传入具体的类型（类型实参）。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>&lt;<span class="hljs-title">T</span>&gt;</span>&#123;<br>    T x;<br>    T y;<br>&#125;<br></code></pre></td></tr></table></figure>
 
 <ul>
-<li>T 是泛型参数，表示一种数据类型，具体是什么类型，需要将来使用Point的时候进行传参来确定。</li>
+<li>T 是泛型参数，表示一种数据类型，具体是什么类型，需要将来使用 Point 的时候进行传参来确定。</li>
 <li>如果将来 Point 在使用的时候，没有给泛型参数 T 传值，那么 T 默认就表示为 Object 类型。</li>
 <li>T 是泛型参数的名字，也就是相当于形参，名字随便起，但是一般用一个有意义的大写字母。</li>
 <li>给泛型参照传的值，只能是引用类型，不能是基本类型： Point(int) 编译报错。</li>
 </ul>
+<br/>
+
 <h2 id="2-泛型的类型"><a href="#2-泛型的类型" class="headerlink" title="2. 泛型的类型"></a>2. 泛型的类型</h2><h3 id="2-1-泛型的种类"><a href="#2-1-泛型的种类" class="headerlink" title="2.1 泛型的种类"></a>2.1 泛型的种类</h3><p>java中的泛型分三种使用情况： 泛型类，泛型接口和泛型方法。</p>
 <ul>
 <li>泛型类，如果泛型参数定义在类上面，那么这个类就是一个泛型类。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>&lt;<span class="hljs-title">T</span>&gt;</span>&#123;...&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>	Point&lt;String&gt; p = <span class="hljs-keyword">new</span> Point&lt;&gt;();<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <ul>
 <li>泛型接口，如果泛型参数定义在接口上面，那么这个接口就是一个泛型接口。</li>
 </ul>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span>&lt;<span class="hljs-title">T</span>&gt;</span>&#123;...&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>  <span class="hljs-comment">//创建匿名内部类</span><br>  Action&lt;String&gt; a = <span class="hljs-keyword">new</span> Action&lt;&gt;()&#123;<br>  <span class="hljs-comment">//...</span><br>  &#125;;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <ul>
 <li>泛型方法，如果泛型参数定义在方法上面，那么这个方法就是一个泛型方法。</li>
@@ -282,14 +282,20 @@
 <li><p>当泛型方法中的泛型 T 与类中的泛型 T 同名时会产生警报，因为编译器不确定你要使用哪个持有对象。</p>
 </li>
 </ul>
+<br/>
+
 <h3 id="2-2-思考题1"><a href="#2-2-思考题1" class="headerlink" title="2.2 思考题1"></a>2.2 思考题1</h3><p>在泛型接口、泛型类和泛型方法的定义过程中，我们常见的如T、E、K、V等形式的参数常用于表示泛型形参，由于接收来自外部使用时候传入的类型实参。<strong>那么对于不同传入的类型实参，生成的相应对象实例的类型是不是一样的呢？</strong></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Box</span>&lt;<span class="hljs-title">T</span>&gt; </span>&#123;<br>  <span class="hljs-keyword">private</span> T data;<br><br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Box</span><span class="hljs-params">()</span> </span>&#123;&#125; <br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Box</span><span class="hljs-params">(T data)</span> </span>&#123;         <br>    <span class="hljs-keyword">this</span>.data = data;<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> T <span class="hljs-title">getData</span><span class="hljs-params">()</span> </span>&#123;<br>    <span class="hljs-keyword">return</span> data;<br>  &#125;<br>  <br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br><br>        Box&lt;String&gt; name = <span class="hljs-keyword">new</span> Box&lt;String&gt;(<span class="hljs-string">&quot;corn&quot;</span>);<br>        Box&lt;Integer&gt; age = <span class="hljs-keyword">new</span> Box&lt;Integer&gt;(<span class="hljs-number">712</span>);<br><br>        System.out.println(<span class="hljs-string">&quot;name class:&quot;</span> + name.getClass());      <span class="hljs-comment">// Box</span><br>        System.out.println(<span class="hljs-string">&quot;age class:&quot;</span> + age.getClass());        <span class="hljs-comment">// Box</span><br>        System.out.println(name.getClass() == age.getClass());    <span class="hljs-comment">// true</span><br><br>    &#125;<br>&#125; <br></code></pre></td></tr></table></figure>
 
 <p>在使用泛型类时，虽然传入了不同的泛型实参，但<strong>并没有真正意义上生成不同的类型</strong>，传入不同泛型实参的泛型类在内存上只有一个，即还是原来的最基本的类型（本实例中为Box）。</p>
+<br/>
+
 <h3 id="2-3-思考题2"><a href="#2-3-思考题2" class="headerlink" title="2.3 思考题2"></a>2.3 思考题2</h3><p> Integer 是 Object 的子类型，那么  ArrayList<Integer> 和 ArrayList<Object> 之间是否有子父类的关系。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//编译通过，父类型的引用，指向子类对象。</span><br>Object o = <span class="hljs-keyword">new</span> Integer(<span class="hljs-number">1</span>);<br><br><span class="hljs-comment">//编译通过，Object[] 类型兼容所有的【引用】类型数组。</span><br>Object[] arr = <span class="hljs-keyword">new</span> Integer[<span class="hljs-number">1</span>];<br><br><span class="hljs-comment">//编译失败，类型不兼容，int[] 是基本类型数组。</span><br>Object[] arr = <span class="hljs-keyword">new</span> <span class="hljs-keyword">int</span>[<span class="hljs-number">1</span>];<br><br><span class="hljs-comment">//编译失败，错误信息：ArrayList&lt;Integer&gt;无法转为ArrayList&lt;Object&gt;</span><br><span class="hljs-comment">//在编译期间，ArrayList&lt;Integer&gt; 和 ArrayList&lt;Object&gt;是俩个不同的类型，并且没有子父类型的关系</span><br>ArrayList&lt;Object&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br></code></pre></td></tr></table></figure>
 
-<p>虽然 Integer 是 Object 的子类型，但是 ArrayList<Integer> 和 ArrayList<Object> 之间没有子父类型的关系，它们就是俩个不同的类型。因此，两边的 &lt;&gt; 里的类型要一致。</p>
+<p>虽然 Integer 是 Object 的子类型，但是 ArrayList<Integer> 和 ArrayList<Object> 之间没有子父类型的关系，它们就是两个不同的类型。因此，两边的 &lt;&gt; 里的类型要一致。</p>
+<br/>
+
 <h3 id="2-4-类型擦除"><a href="#2-4-类型擦除" class="headerlink" title="2.4 类型擦除"></a>2.4 类型擦除</h3><p>泛型类型仅存在于编译期间，编译后的字节码和运行时不包含泛型信息，所有的泛型类型映射到同一份字节码。 </p>
 <p>由于泛型是 JDK1.5 才加入到 Java 语言特性的，Java 让编译器擦除掉关于泛型类型的信息，这样使得 Java 可以向后兼容之前没有使用泛型的类库和代码，因为在字节码（class）层面是没有泛型概念的。</p>
 <p>例如：</p>
@@ -301,6 +307,8 @@
 <li>泛型信息被擦除后，所有的泛型类型都会统一变为原始类型：Object 。</li>
 <li>Java 的泛型只存在于编译时期，泛型使编译器可以在编译期间对类型进行检查以提高类型安全，减少运行时由于对象类型不匹配引发的异常。</li>
 </ul>
+<br/>
+
 <h2 id="3-通配符"><a href="#3-通配符" class="headerlink" title="3. 通配符"></a>3. 通配符</h2><h3 id="3-1-通配符使用"><a href="#3-1-通配符使用" class="headerlink" title="3.1 通配符使用"></a>3.1 通配符使用</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test1</span><span class="hljs-params">(Collection&lt;Integer&gt; c)</span></span>&#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test2</span><span class="hljs-params">(Collection&lt;String&gt; c)</span></span>&#123;&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test3</span><span class="hljs-params">(Collection&lt;Object&gt; c)</span></span>&#123;&#125;<br></code></pre></td></tr></table></figure>
 
 <ul>
@@ -309,44 +317,48 @@
 <li>test3 方法【只能】接收泛型是 Object 类型的集合对象 </li>
 </ul>
 <p>原因：由于泛型的类型之间没有多态。</p>
+<br/>
+
 <p>可以使用通配符（?）来表示泛型的父类型：这时候 test 方法中的参数类型，使用了泛型，并且使用问号来表示这个泛型的类型，这个问号就是通配符，可以匹配所有的泛型类型。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(Collection&lt;?&gt; c)</span></span>&#123;&#125;<br></code></pre></td></tr></table></figure>
 
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>&#123;<br>    Test t = <span class="hljs-keyword">new</span> Test();<br>    t.test(<span class="hljs-keyword">new</span> ArrayList&lt;String&gt;());<br>    t.test(<span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;());<br>    t.test(<span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;());<br>    t.test(<span class="hljs-keyword">new</span> ArrayList&lt;任意类型&gt;());<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <h3 id="3-2-通配符带来的问题"><a href="#3-2-通配符带来的问题" class="headerlink" title="3.2 通配符带来的问题"></a>3.2 通配符带来的问题</h3><p>使用通配符（?）的集合，不能再往其中添加数据，但是可以添加 null。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><code class="hljs java">Collection&lt;?&gt; c;<br>c = <span class="hljs-keyword">new</span> ArrayList&lt;String&gt;();<br><br><span class="hljs-comment">//编译报错</span><br><span class="hljs-comment">//因为变量c所声明的类型是Collection，同时泛型类型是通配符（?）</span><br><span class="hljs-comment">//那么编译器也不知道这个?将来会是什么类型，因为这个?只是一个通配符</span><br><span class="hljs-comment">//所以，编译器不允许使用变量c来向集合中添加新数据。</span><br>c.add(<span class="hljs-string">&quot;hello&quot;</span>);<br><br><span class="hljs-comment">//编译通过</span><br><span class="hljs-comment">//但是有一个值是可以添加到集合中的，null</span><br><span class="hljs-comment">//集合中一定存的是引用类型，null是所有引用类型共同的一个值，所以一定可以添加进去。</span><br>c.add(<span class="hljs-keyword">null</span>);<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <p>虽然不能添加数据，但可以遍历数据。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    ArrayList&lt;String&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();<br>    list.add(<span class="hljs-string">&quot;hello1&quot;</span>);<br>    list.add(<span class="hljs-string">&quot;hello2&quot;</span>);<br>    list.add(<span class="hljs-string">&quot;hello3&quot;</span>);<br>    list.add(<span class="hljs-string">&quot;hello4&quot;</span>);<br>    Collection&lt;?&gt; c = list;<br><br>    <span class="hljs-keyword">for</span>(Object obj : c)&#123;<br>    		System.out.println(obj);<br>    &#125;<br>&#125;<br></code></pre></td></tr></table></figure>
 
-
-
-
+<br/>
 
 <h2 id="4-泛型的边界"><a href="#4-泛型的边界" class="headerlink" title="4. 泛型的边界"></a>4. 泛型的边界</h2><h3 id="4-1-泛型的上限"><a href="#4-1-泛型的上限" class="headerlink" title="4.1 泛型的上限"></a>4.1 泛型的上限</h3><p>使用 extends 可以定义泛型的上限，这个就表示将来泛型所接收的类型最大是什么类型。</p>
 <p>泛型简单的用 extends 统一的表示了原有的 extends 和 implements 的概念，但仍要遵循应用的体系，即<strong>只能继承一个类，但可以实现多个接口</strong>。所以某个类型需要用 extends 限定，且有多种类型的时候，只能存在一个是类，并且类写在第一位，接口列在后面。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java">&lt;T extends SomeClass &amp; interface1 &amp; interface2 &amp; interface3&gt;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <p>例如：list 就可以接收泛型是 Number 或者 Number 子类型的 List 集合对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    List&lt;? extends Number&gt; list;<br>  <br>    <span class="hljs-comment">//list可以指向泛型是Number或者Number【子】类型的集合对象</span><br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Number&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Double&gt;();<br>  <br>    <span class="hljs-comment">//编译报错，因为String不是Number类型，也不是Number的子类型</span><br>    <span class="hljs-comment">//list = new ArrayList&lt;String&gt;();</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <h3 id="4-2-extends-的使用场景"><a href="#4-2-extends-的使用场景" class="headerlink" title="4.2 extends 的使用场景"></a>4.2 extends 的使用场景</h3><ul>
 <li><p>在声明泛型类或者泛型接口的时候可以使用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>&lt;<span class="hljs-title">T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Number</span>&gt;</span>&#123;<br>    <span class="hljs-keyword">private</span> T x;<br>    <span class="hljs-keyword">private</span> T y;<br>&#125;<br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span>&lt;<span class="hljs-title">T</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Number</span>&gt;</span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(T t)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
 </ul>
+<br/>
+
 <ul>
 <li><p>在声明泛型方法的时候可以使用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> &lt;T extends Action&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(T t)</span></span>;<br></code></pre></td></tr></table></figure></li>
 </ul>
+<br/>
+
 <ul>
 <li><p>在声明变量的时候可以使用。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(List&lt;? extends Number&gt; list)</span></span>&#123;&#125;<br>&#125;<br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    List&lt;? extends Number&gt; list = <span class="hljs-keyword">new</span> ArrayList&lt;Long&gt;();<br>    t.test(list);<br>&#125;<br></code></pre></td></tr></table></figure></li>
@@ -355,14 +367,20 @@
 <p>例如：list 就可以接收泛型是 Number 或者 Number 父类型的 List 集合对象。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    List&lt;? <span class="hljs-keyword">super</span> Number&gt; list;<br>  <br>    <span class="hljs-comment">//list可以指向泛型是Number或者Number【父】类型的集合对象</span><br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Number&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Serializable&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;();<br>  <br>    <span class="hljs-comment">//编译报错，因为String不是Number类型，也不是Number的父类型</span><br>    <span class="hljs-comment">//list = new ArrayList&lt;String&gt;();</span><br>  <br>    <span class="hljs-comment">//编译报错，因为Integer不是Number类型，也不是Number的父类型</span><br>    <span class="hljs-comment">//list = new ArrayList&lt;Integer&gt;();</span><br>&#125;<br></code></pre></td></tr></table></figure>
 
-
+<br/>
 
 <h3 id="4-4-super-的使用场景"><a href="#4-4-super-的使用场景" class="headerlink" title="4.4  super 的使用场景"></a>4.4  super 的使用场景</h3><ul>
 <li><p>在<strong>声明泛型类</strong>或者<strong>泛型接口</strong>的时候<strong>不能使用</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//编译报错</span><br><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Point</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">super</span> <span class="hljs-title">Number</span>&gt;</span>&#123;<br>  <span class="hljs-keyword">private</span> T x;<br>  <span class="hljs-keyword">private</span> T y;<br>&#125;<br><br><span class="hljs-comment">//编译报错</span><br><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Action</span>&lt;<span class="hljs-title">T</span> <span class="hljs-title">super</span> <span class="hljs-title">Person</span>&gt;</span>&#123;<br>  <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(T t)</span></span>;<br>&#125;<br></code></pre></td></tr></table></figure></li>
+</ul>
+<br/>
+
+<ul>
 <li><p>在<strong>声明泛型方法</strong>的时候<strong>不能使用</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-comment">//编译报错</span><br><span class="hljs-keyword">public</span> &lt;T <span class="hljs-keyword">super</span> Action&gt; <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(T t)</span></span>;<br></code></pre></td></tr></table></figure></li>
 </ul>
+<br/>
+
 <ul>
 <li><p>在<strong>声明变量</strong>的时候<strong>可以使用</strong>。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs java"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span></span>&#123;<br>		<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">test</span><span class="hljs-params">(List&lt;? <span class="hljs-keyword">super</span> Number&gt; list)</span></span>&#123;&#125;<br>&#125;<br><br><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>&#123;<br>    List&lt;? <span class="hljs-keyword">super</span> Number&gt; list;<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Number&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;();<br><br>    <span class="hljs-comment">//假设Student 继承了 Person</span><br>    List&lt;? <span class="hljs-keyword">super</span> Student&gt; list;<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Student&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Pesson&gt;();<br>    list = <span class="hljs-keyword">new</span> ArrayList&lt;Object&gt;();<br>&#125;<br></code></pre></td></tr></table></figure></li>
