@@ -1,0 +1,488 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-08 18:37" pubdate>
+        2021年7月8日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      1.4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      16
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-方案"><a href="#1-方案" class="headerlink" title="1. 方案"></a>1. 方案</h2><p>​        <strong>方案就是某用户拥有的所有的数据库对象的逻辑集合</strong>，可以看做是 SQL Server 或 MySQL 中的一个数据库。</p>
+<p>​        在 SQL Server 或者 MySQL 中，一般情况下（暂不考虑多租户等特殊情况），一个项目对应DBMS 中的一个数据库，连接字符串中是用 “用户名+密码+数据库名” 来唯一标识数据库，一个用户可以管理多个数据库；而连接 Oracle 中的字符串主要是用 “户名+密码” 来标识数据库，即一个用户管理一个方案。</p>
+<p>​        通俗来说，除了数据库地址，一个程序连接 MySQL 或 SQLServer 需要提供用户名、密码和它需要连接的数据库名，而连接 Oracle 只需要提供用户名和密码。</p>
+<br/>
+
+<h2 id="2-模式-Schema"><a href="#2-模式-Schema" class="headerlink" title="2. 模式 Schema"></a>2. 模式 Schema</h2><p>schema 的定义：<br>A <strong>schema</strong> is a collection of database objects (used by a user.).<br><strong>Schema objects</strong> are the logical structures that directly refer to the database’s data.<br>A <strong>user</strong> is a name defined in the database that can connect to and access objects.<br><strong>Schemas and users</strong> help database administrators manage database security.</p>
+<p>​        从定义中我们可以看出 schema 为数据库对象的集合，为了区分各个集合，我们需要给这个集合起个名字。这些名字就是我们在企业管理器的方案下看到的许多类似用户名的节点，这些类似用户名的节点其实就是一个 schema，schema 里面包含了各种对象，如：tables, views, sequences, stored procedures, synonyms, indexes, clusters, and database links。</p>
+<p>​        一个用户一般对应一个 schema，该用户的 schema 名等于用户名，并作为该用户默认 schema。这也就是我们在企业管理器的方案下看到 schema 名都为数据库用户名的原因。Oracle 数据库中不能新创建一个 schema，要想创建一个 schema，只能通过创建一个用户的方法解决(Oracle中虽然有 create schema 语句，但是它并不是用来创建一个 schema 的)。在创建一个用户的同时为这个用户创建一个与用户名同名的 schema 并作为该用户的默认 shcema。<strong>即 schema 的个数同 user 的个数相同，而且 schema 名字同 user 名字一一对应并且相同</strong>，所有我们可以称schema 为 user 的别名，虽然这样说并不准确，但是更容易理解一些。</p>
+<p>​        <strong>一个用户有一个默认的 schema，其 schema 名就等于用户名。</strong>当然一个用户还可以使用其他的 schema。<strong>如果我们访问一个表时，没有指明该表属于哪一个 schema 中的，系统就会自动给我们在表上加上默认的 sheman 名。</strong>比如我们在访问数据库时，访问 scott 用户下的 emp 表，通过 <code>select * from emp;</code> 其实，这 sql 语句的完整写法为 <code>select * from scott.emp</code>。<strong>在数据库中一个对象的完整名称为 <code>schema.object</code>，而不属 <code>user.object</code>。</strong>类似如果我们在创建对象时不指定该对象的 schema，在该对象的 schema 为用户的默认 schema。这就像一个用户有一个默认的表空间，但是该用户还可以使用其他的表空间，如果我们在创建对象时不指定表空间，则对象存储在默认表空间中，要想让对象存储在其他表空间中，我们需要在创建对象时指定该对象的表空间。</p>
+<br/>
+
+<h2 id="2-模式对象"><a href="#2-模式对象" class="headerlink" title="2. 模式对象"></a>2. 模式对象</h2><p>​        Oracle 数据库对象又称模式对象。数据库对象包括表，视图，同义词，约束、索引，序列，游标，触发器，函数，变量，（控制块，异常），存储过程，包。对数据库的操作可以基本归结为对数据对象的操作，常常用 CREATE 命令进行创建，可以使用 ALTER 命令修改，用 DROP 执行删除操作等。数据库对象是逻辑结构的集合，最基本的数据库对象是表。</p>
+<br/>
+
+<h2 id="3-用户、表和表空间"><a href="#3-用户、表和表空间" class="headerlink" title="3. 用户、表和表空间"></a>3. 用户、表和表空间</h2><p>下面通过一个在 Oracle 中建立方案的例子来说明 Oracle 中表空间、用户、表之间的关系。</p>
+<h3 id="3-1-建立方案"><a href="#3-1-建立方案" class="headerlink" title="3.1 建立方案"></a>3.1 建立方案</h3><p>​        一般在 Oracle 中建立方案的步骤为：创建表空间、创建用户并设置其表空间和权限、创建数据库对象。</p>
+<p>步骤 1：使用 system 用户登录 Oracle 数据库</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">SQLPLUS<br>输入用户名:<span class="hljs-keyword">system</span><br>输入口令：<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>步骤 2：创建表空间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span>space demo_tablespace<br>datafile <span class="hljs-string">&#x27;D:\app\MaxSeal\oradata\TableSpace\DemoTablespace.dbf&#x27;</span>   <br>size <span class="hljs-number">50</span>M   <br>autoextend <span class="hljs-keyword">on</span> next <span class="hljs-number">5</span>M maxsize <span class="hljs-number">100</span>M; <br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>步骤 3：新建用户</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> MaxSeal identified <span class="hljs-number">123456</span>;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>步骤 4：为用户赋予权限</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">connect</span>, resource <span class="hljs-keyword">to</span> MaxSeal;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>步骤 5：为用户分配表空间</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">user</span> MaxSeal quota unlimited <span class="hljs-keyword">on</span> demo_tablespace;  <br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>步骤 6：创建表</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">connect</span> MaxSeal;<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> s_dept(<br>  id NUMBER(<span class="hljs-number">7</span>) <span class="hljs-keyword">CONSTRAINT</span> s_dept_id_nn <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  name VARCHAR2(<span class="hljs-number">25</span>) <span class="hljs-keyword">CONSTRAINT</span> s_dept_name_nn <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,<br>  region_id NUMBER(<span class="hljs-number">7</span>),<br>  <span class="hljs-keyword">CONSTRAINT</span> s_dept_id_pk <span class="hljs-keyword">PRIMARY</span> KEY (id),<br>  <span class="hljs-keyword">CONSTRAINT</span> s_dept_name_region_id_uk <span class="hljs-keyword">UNIQUE</span> (name, region_id)<br>) tablespace demo_tablespace;<br></code></pre></td></tr></table></figure>
+
+<p>当然也可以不指定表空间，建表时如果不指定表空间，表自动放到用户默认表空间下。</p>
+<br/>
+
+<h3 id="3-2-关系总结"><a href="#3-2-关系总结" class="headerlink" title="3.2 关系总结"></a>3.2 关系总结</h3><p>下面用一张图来分析一下上面的过程：</p>
+<img src="C:\Users\MaxSeal\AppData\Roaming\Typora\typora-user-images\image-20210708191935243.png" srcset="/img/loading.gif" lazyload alt="image-20210708191935243" style="zoom:50%;" />
+
+<p>​        一个方案对应一个项目，对应一个用户；每个用户可以管理多个表空间，每个表空间由一个或多个数据文件组成，一个用户可以分配多个表空间，但只能有一个默认表空间，每张表可以存在于一个或多个表空间中。</p>
+<p>​        实际上多个用户可以共享一个表空间，只不过这些用户都只有权查看和管理属于自己的数据库对象。但是一般不会这么做，因为如果多个用户都共享一个表空间的话，那就体现不了表空间的意义啦！</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/5.%20%E5%BA%8F%E5%88%97/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/1.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%B8%80%EF%BC%89/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

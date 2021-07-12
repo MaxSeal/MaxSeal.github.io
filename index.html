@@ -194,22 +194,18 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/5.%20Optional/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89%E5%AD%90%E6%9F%A5%E8%AF%A2/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/5.%20Optional/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89%E5%AD%90%E6%9F%A5%E8%AF%A2/" target="_self">
           
           
             
           
-          1. 概念java.util.Optional 类，是用来防止 NullPointerException 异常的辅助类型， Optional 对象中封装的值，可以是 null ，也可以不是 null。
-在 Java8 之前，一个函数可能因为代码逻辑问题，最终返回一个 null，这时候程序中很可能出现空指针异常。而在 Java8 中，不推荐返回 null ，而是返回 Optional。
-
-
-2. 常
+          
         </a>
       </p>
 
@@ -217,8 +213,8 @@
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-06 14:08" pubdate>
-              2021-07-06
+            <time datetime="2021-07-12 10:06" pubdate>
+              2021-07-12
             </time>
           </div>
         
@@ -234,20 +230,50 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/4.%20Stream/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/4.%20Stream/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/" target="_self">
           
           
             
           
-          1. 概述java.util.stream.Stream 接口，表示能应用在一组元素上，一次执行的操作序列，也就是可以对一组数据进行连续的多次操作。
-Stream 在使用的时候，需要指定一个数据源，比如 java.util.Collection 的子类， List 或者 Set 都可以，但是 Map 类型的集合不支持。
-Stream 是对集合功能的增强，它提供了各种非常便利、高效的聚合操作，可以大
+          1. 概述聚合函数一般会操作多组数据，并对每一组中的某个列，执行计算并返回单一的值。聚合函数经常与 select 语句的 group by 子句一同使用，所以也把其它称之为分组函数。
+常用的聚合函数有：
+
+
+
+函数
+作用
+
+
+
+avg(列名)
+求平均值。
+
+
+count(列名)
+计算有多少条数据。
+
+
+max(列名)
+求最大值。
+
+
+min(列名)
+求最小值。
+
+
+sum(列名)
+求和。
+
+
+
+
+
         </a>
       </p>
 
@@ -255,8 +281,8 @@ Stream 是对集合功能的增强，它提供了各种非常便利、高效的�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-06 14:08" pubdate>
-              2021-07-06
+            <time datetime="2021-07-12 10:05" pubdate>
+              2021-07-12
             </time>
           </div>
         
@@ -272,19 +298,18 @@ Stream 是对集合功能的增强，它提供了各种非常便利、高效的�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/3.%20%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/11.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/06/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/3.%20%E6%96%B9%E6%B3%95%E5%BC%95%E7%94%A8/" target="_self">
+        <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/11.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%89%EF%BC%89%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/" target="_self">
           
           
             
           
-          1. 概念我们用 Lambda 表达式来实现匿名方法。但有些情况下，我们用 Lambda 表达式仅仅是调用一些已经存在的方法，除了调用动作外，没有其他任何多余的动作。在这种情况下，我们倾向于通过方法名来调用它，而 Lambda 表达式可以帮助我们实现这一要求，它使得 Lambda 在调用那些已经拥有方法名的方法的代码更简洁、更容易理解。方法引用可以理解为 Lambda 表达式的另外一种表现形式。
-
+          
         </a>
       </p>
 
@@ -292,8 +317,8 @@ Stream 是对集合功能的增强，它提供了各种非常便利、高效的�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-06 14:08" pubdate>
-              2021-07-06
+            <time datetime="2021-07-12 09:30" pubdate>
+              2021-07-12
             </time>
           </div>
         
@@ -309,40 +334,23 @@ Stream 是对集合功能的增强，它提供了各种非常便利、高效的�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/04/CoreJava/2.%20%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
+        <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/9.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%9F%A5%E8%AF%A2/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/04/CoreJava/2.%20%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
+        <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/9.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%9F%A5%E8%AF%A2/" target="_self">
           
           
             
           
-          1. 概念Java 语言是一个面向对象的语言，但是 Java 中的基本数据类型却是不面向对象的。这在实际使用时存在很多的不便，为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类。
+          1. SQL1.1 概念SQL（Structured Query Language），结构化查询语言，是专门操作关系型数据库的一种语言。
+SQL语言属于第四代编程语言： 
 
-
-
-基本类型
-大小
-包装器类型
-
-
-
-boolean
-/
-Boolean
-
-
-char
-16bit
-Character
-
-
-byte
-8bit
-Byte
+第一代编程语言，机器语言，是面向机器的，通过二进制代码对其计算机操作。
+第二代编程语言， 汇编语言，使用指令对应的符号，来代替二进制代码。
+第三代编程语言，高级开发语言 ，例如C、C++ Java等，语言更加简单，操作更方便。
         </a>
       </p>
 
@@ -350,8 +358,8 @@ Byte
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-04 19:16" pubdate>
-              2021-07-04
+            <time datetime="2021-07-09 16:34" pubdate>
+              2021-07-09
             </time>
           </div>
         
@@ -367,24 +375,23 @@ Byte
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/04/CoreJava/1.%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" target="_self">
+        <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/01.%20Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/04/CoreJava/1.%E5%9F%BA%E6%9C%AC%E7%B1%BB%E5%9E%8B/" target="_self">
+        <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/01.%20Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93%E7%BB%93%E6%9E%84/" target="_self">
           
           
             
           
-          1. java 中的类型Java 是一种静态编程语言，所有变量和表达式是在编译时就确定的。同时，Java 又是一种强类型语言，所有的变量和表达式都有具体的类型，并且每种类型是严格定义的。
-类型限制了变量可以拥有什么样的值，表达式最终会产生什么样的值，可以进行哪些操作。在Java中共有 8 中基本类型数据，同时每种基本类型又有对应的包装类。
+          Oracle 数据库结构数据库服务器是信息管理的关键。
+通常，数据库服务器能在多用户的环境下地靠地管理大量数据，以便用户可以并发地访问相同的数据。此外，数据库服务器还可以防止未经授权的访问，并为故障恢复提供有效的解决方案。
 
 
-2. 基本类型Java 共有 8 种基本数据类型。
-
-
+1. 数据库和实例Oracle 数据库服务器由一个数据库和至少一个数据库实例组成，通常被简称为实例。
+因为数据库和实例联系紧密，所以 Oracle 数据库这个术语有时同时用
         </a>
       </p>
 
@@ -392,8 +399,8 @@ Byte
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-04 18:15" pubdate>
-              2021-07-04
+            <time datetime="2021-07-09 15:14" pubdate>
+              2021-07-09
             </time>
           </div>
         
@@ -409,25 +416,18 @@ Byte
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/01/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/2.%20Lambda/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/4.%20%E8%A1%A8/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/01/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/2.%20Lambda/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/4.%20%E8%A1%A8/" target="_self">
           
           
             
           
-          1. 概念Lambda 表达式是 JDK1.8 新增的一种语法，以确保在 java 代码中可以支持函数式编程，让代码的表示含义更简单。
-
-
-1.2. 行为参数化行为参数化，就是可以帮助你处理频繁变更的需求的一种软件开发模式。
-行为参数化，旨在抽象出具有某种功能的代码（它的输入参数和返回值是固定的），以某种方式将此代码传入到其他的方法中，以辅助它们的操作。
-
-
-1.2.1 实例应对不断变化的需求的一
+          
         </a>
       </p>
 
@@ -435,8 +435,8 @@ Byte
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-01 10:14" pubdate>
-              2021-07-01
+            <time datetime="2021-07-08 22:06" pubdate>
+              2021-07-08
             </time>
           </div>
         
@@ -452,20 +452,18 @@ Byte
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/01/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/1.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/7.%20%E7%BA%A6%E6%9D%9F/" target="_self">
           
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/01/JDK%201.8%20%E6%96%B0%E7%89%B9%E6%80%A7/1.%20%E5%87%BD%E6%95%B0%E5%BC%8F%E6%8E%A5%E5%8F%A3/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/7.%20%E7%BA%A6%E6%9D%9F/" target="_self">
           
           
             
           
-          1. 接口方法JDK1.8之前，接口中的方法都必须是抽象方法。实现接口的类，必须实现接口中定义的每一个抽象方法。
-如果在程序设计过程中，设计了一个接口，其中包含两个方法，这个接口被多次实现并引用。 后续升级过程中，发现需要在接口中新增 2-3 个方法的定义，会出现什么情况？
-为了解决这个问题，JDK1.8 中引入了一种新的机制：接口可以支持在声明方法的同时，提供实现。 主要通过两种方式可以完成这种
+          
         </a>
       </p>
 
@@ -473,8 +471,8 @@ Byte
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-01 09:36" pubdate>
-              2021-07-01
+            <time datetime="2021-07-08 22:06" pubdate>
+              2021-07-08
             </time>
           </div>
         
@@ -490,27 +488,27 @@ Byte
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/30/CoreJava/32.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" target="_self">
-          网络编程（二）网络编程
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/3.%20%E7%94%A8%E6%88%B7/" target="_self">
+          
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/30/CoreJava/32.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E4%BA%8C%EF%BC%89%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/3.%20%E7%94%A8%E6%88%B7/" target="_self">
           
           
             
           
-          TCP 和 UDP 网络编程。
-1. TCP 网络编程1.1 概念在 TCP 通信协议下，能实现两台计算机之间的数据交互，并且它们要严格区分客户端（Client）与服务端 （Server）。
+          1. Oracle 权限分类
+系统权限：系统规定用户使用数据库的权限。（系统权限是对用户而言)。
+实体权限：某种权限用户对其它用户的表或视图的存取权限。（是针对表或视图而言的）。
 
 
-客户端和服务端通信的步骤：
 
-服务端先进行启动，并占用一个指定的端口号，等待客户端的连接。
-客户端主动发起服务端的连接，在连接成功之后，就可以进行数据发送了。
-
-在整个过程中，服务端不能主动连接客户端，必
+2. 系统权限管理2.1 系统权限分类
+DBA：拥有全部特权，是系统最高权限，只有 DBA 才可以创建数据库结构。
+RESOURCE：拥有 RESOURCE 权限的用户只可以创建实体，不可以创建数据库结构。
+CON
         </a>
       </p>
 
@@ -518,26 +516,12 @@ Byte
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-30 10:21" pubdate>
-              2021-06-30
+            <time datetime="2021-07-08 22:05" pubdate>
+              2021-07-08
             </time>
           </div>
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CoreJava/">CoreJava</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-            
-          </div>
         
       </div>
     </article>
@@ -549,22 +533,18 @@ Byte
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/30/CoreJava/31.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
-          网络编程（一）基本概念
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/6.%20%E7%B4%A2%E5%BC%95/" target="_self">
+          
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/30/CoreJava/31.%20%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B%EF%BC%88%E4%B8%80%EF%BC%89%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/6.%20%E7%B4%A2%E5%BC%95/" target="_self">
           
           
             
           
-          一些计算机网络的基础知识。
-1. 软件结构常见的软件结构有 C/S 和 B/S：
-
-Client / Server：表示客户端 / 服务器的软件结构。例如 QQ、微信、网盘客户端等，只要是需要我们下载安装，并且和服务器通信的这一类软件，都属于 C/S 的软件结构。
-Browser / Server：表示浏览器 / 服务器的软件结构。例如淘宝网、京东商城等，只要是需要使用浏览器，并且和服务器通信的这
+          
         </a>
       </p>
 
@@ -572,26 +552,12 @@ Browser / Server：表示浏览器 / 服务器的软件结构。例如淘宝网�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-30 09:27" pubdate>
-              2021-06-30
+            <time datetime="2021-07-08 22:05" pubdate>
+              2021-07-08
             </time>
           </div>
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CoreJava/">CoreJava</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/%E7%BD%91%E7%BB%9C%E7%BC%96%E7%A8%8B/">网络编程</a>
-            
-          </div>
         
       </div>
     </article>
@@ -603,20 +569,18 @@ Browser / Server：表示浏览器 / 服务器的软件结构。例如淘宝网�
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/06/30/CoreJava/30.%20IO%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%B6%E4%BB%96%E6%B5%81/" target="_self">
-          IO 流（五）其他流
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/8.%20%E8%A7%86%E5%9B%BE/" target="_self">
+          
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/06/30/CoreJava/30.%20IO%E6%B5%81%EF%BC%88%E4%BA%94%EF%BC%89%E5%85%B6%E4%BB%96%E6%B5%81/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/8.%20%E8%A7%86%E5%9B%BE/" target="_self">
           
           
             
           
-          一些其他常用的流。
-1. 数据流1.1 概述字节流操作数据的时候，以字节为单位，一个个的进行读写，很多时候这样并不方便。 我们希望读出来的若干个字节，自动转换为指定类型的数据，例如 int、float、char 等。 类似的，我们也希望每次能直接把一个数据，自动转成字节再写出去。 例如，把一个long类型数据，写入到一个字节数组中。
-12345long a = 1;// long 是 64 位，8
+          
         </a>
       </p>
 
@@ -624,26 +588,12 @@ Browser / Server：表示浏览器 / 服务器的软件结构。例如淘宝网�
         
           <div class="post-meta mr-3">
             <i class="iconfont icon-date"></i>
-            <time datetime="2021-06-30 09:26" pubdate>
-              2021-06-30
+            <time datetime="2021-07-08 22:05" pubdate>
+              2021-07-08
             </time>
           </div>
         
         
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-category"></i>
-            
-              <a href="/categories/CoreJava/">CoreJava</a>
-            
-          </div>
-        
-        
-          <div class="post-meta">
-            <i class="iconfont icon-tags"></i>
-            
-              <a href="/tags/IO-%E6%B5%81/">IO 流</a>
-            
-          </div>
         
       </div>
     </article>
@@ -653,7 +603,7 @@ Browser / Server：表示浏览器 / 服务器的软件结构。例如淘宝网�
 
   <nav aria-label="navigation">
     <span class="pagination" id="pagination">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><a class="page-number" href="/page/4/#board">4</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/#board">2</a><a class="page-number" href="/page/3/#board">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/#board">6</a><a class="extend next" rel="next" href="/page/2/#board"><i class="iconfont icon-arrowright"></i></a>
     </span>
   </nav>
 

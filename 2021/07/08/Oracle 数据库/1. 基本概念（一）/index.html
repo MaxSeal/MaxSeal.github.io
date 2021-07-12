@@ -1,0 +1,562 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-08 15:15" pubdate>
+        2021年7月8日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      3.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      37
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-Oracle-简介"><a href="#1-Oracle-简介" class="headerlink" title="1. Oracle 简介"></a>1. Oracle 简介</h2><p>1977年6月，Larry Ellison（拉里，埃里森）与Bob Miner 和 Ed Oates 在硅谷共同创办了一家名为软件开发 实验室（Software Development Laboratories，SDL）的计算机公司，这就是 ORACLE公司的前身。</p>
+<p>如今，ORACLE（甲骨文）公司，已经是全球最大的企业级软件公司，它的软件和硬件产品众多，其中 oracle 数据库更是其核心的软件产品，同时它还收购了 SUN 公司，从而获取了对 Java 的“掌控权”。 </p>
+<p>作为企业级数据库的主打产品，Oracle 数据库在众多关系型数据库之中表现突出，性能优越。但是 Oracle 数据库的价格昂贵，如果再考虑到搭载 Oracle 的服务器和存储设备的话，那么需要付出的成本也会更高。 Oracle 的版本很多，除了这些商用的收费版本之后，还有一些免费版本。</p>
+<br/>
+
+<h2 id="2-服务"><a href="#2-服务" class="headerlink" title="2. 服务"></a>2. 服务</h2><p>Oracle 数据库安装成功后，系统中会增加几个和 Oracle 相关的服务：</p>
+<ul>
+<li>OracleServiceXE 服务：如果不启动的话，Oracle 无法正常使用，也不能使用 sqlplus 登录到Oracle 数据库中 </li>
+<li>OracleXETNSListener 服务：如果不启动的话，就无法使用 Oracle 自带管理系统登录到数据库中，之后也无法在代码中使用 JDBC 连接到数据库中。</li>
+</ul>
+<br/>
+
+<h2 id="3-Oracle-数据的组成部分"><a href="#3-Oracle-数据的组成部分" class="headerlink" title="3. Oracle 数据的组成部分"></a>3. Oracle 数据的组成部分</h2><p>​        Oracle DataBase 是一款关系型数据库管理系统。同类的产品还有 mySql，sqlServer 等，很多时候，我们会把那个承载我们核心数据的系统笼统地成为数据库服务器，但从严格意义上来讲Oracle DataBase 是由两个部分组成:　</p>
+<ul>
+<li>实例：实例是数据库启动时初始化的一组进程和内存结构。</li>
+<li>数据库：数据库则指的是用户存储数据的一些物理文件。</li>
+</ul>
+<p>​        从实例和数据库的概念上来看，我们能知道：<strong>实例暂时的</strong>，它不过是一组逻辑划分的内存结构和进程结构，它会<strong>随着数据库的关闭而消失</strong>；而<strong>数据库其实就是一堆物理文件</strong>（控制文件，数据文件，日志文件等等），它是<strong>永久存在的</strong>（除非磁盘损坏）。<strong>数据库和实例通常是一对一的</strong>，这种结构我们成为单实例体系结构；当然还有一些复杂的分布式的结构，一个数据库可以对多个实例，像 Oracle 的 RAC。</p>
+<br/>
+
+<h2 id="4-Oracle-数据库的物理结构"><a href="#4-Oracle-数据库的物理结构" class="headerlink" title="4. Oracle 数据库的物理结构"></a>4. Oracle 数据库的物理结构</h2><p> <strong>物理结构是由构成数据库的操作系统文件所决定</strong>，Oracle 数据库文件包括：</p>
+<ul>
+<li><p>数据文件（Data File）：</p>
+<p>数据文件<strong>用来存储数据库中的全部数据</strong>，例如数据库表中的数据和索引数据通常为<code>*.dbf</code>格式，例如: <code>userCIMS.dbf </code>。</p>
+<br/></li>
+<li><p>日志文件（Redo Log File）：</p>
+<p>日志文件<strong>用于记录数据库所做的全部变更（如增加、删除、修改），以便在系统发生故障时，用它对数据库进行恢复</strong>。名字通常为<code>Log*.dbf</code>格式，如：<code>Log1CIMS.dbf,Log2CIMS.dbf</code> </p>
+<br/></li>
+<li><p>控制文件（Control File）:</p>
+<p>每个 Oracle 数据库都有相应的控制文件，它们是较小的二进制文件，<strong>用于记录数据库的物理结构</strong>，如：数据库名、数据库的数据文件和日志文件的名字和位置等信息。用于打开、存取数据库。名字通常为 <code>Ctrl*.ctl</code> 格式，如 <code>Ctrl1CIMS.ctl</code>。　　</p>
+<br/></li>
+<li><p>配置文件：</p>
+<p>配置文件用于<strong>记录 Oracle 数据库运行时的一些重要参数</strong>，如：数据块的大小，内存结构的配置等。名字通常为 <code>init*.ora</code> 格式，如：<code>initCIMS.ora</code> 。　　</p>
+</li>
+</ul>
+<br/>
+
+<h2 id="5-Oracle-数据库的逻辑结构"><a href="#5-Oracle-数据库的逻辑结构" class="headerlink" title="5. Oracle 数据库的逻辑结构"></a>5. Oracle 数据库的逻辑结构</h2><p>​        <strong>Oracle 数据库的逻辑结构描述了数据库从逻辑上如何来存储数据的</strong>。逻辑结构包括表空间、段、区、数据块和模式对象。</p>
+<p>　　数据库由表空间构成，而表空间又是由段构成，而段又是由区构成，而区又是由 Oracle 块构成，即块→区→段→表空间→数据库。</p>
+<p><img src="C:\Users\MaxSeal\AppData\Roaming\Typora\typora-user-images\image-20210708162054120.png" srcset="/img/loading.gif" lazyload alt="image-20210708162054120"></p>
+<br/>
+
+<h3 id="5-1-数据库（Database）"><a href="#5-1-数据库（Database）" class="headerlink" title="5.1 数据库（Database）"></a>5.1 数据库（Database）</h3><p>​        一个数据库是由多个表空间组成，也可以说多个不同类型的表空间组成了一个数据库。</p>
+<br/>
+
+<h3 id="5-2-表空间（TableSpace）"><a href="#5-2-表空间（TableSpace）" class="headerlink" title="5.2 表空间（TableSpace）"></a>5.2 表空间（TableSpace）</h3><p>​        数据库中的基本逻辑结构，也是最大的逻辑结构。数据库的所有对象和方案都被逻辑的保存在表空间中。从物理上说数据库的数据被存放在数据文件中，而从逻辑上说是被存放在表空间中的。 </p>
+<br/>
+
+<h4 id="5-2-1-表空间的特性"><a href="#5-2-1-表空间的特性" class="headerlink" title="5.2.1 表空间的特性"></a>5.2.1 表空间的特性</h4><ul>
+<li>一个数据库可以有多个表空间。可以在数据库中创建、删除表空间； </li>
+<li>一个表空间只属于一个数据库； </li>
+<li>一个表空间必须要有一个数据文件； </li>
+<li>一个表空间的大小等于其中所有数据文件的大小之和，数据库的大小等于其中所有表空间的大小之和； </li>
+<li>表空间可以被联机和脱机，但 SYSTEM 表空间不能被脱机； </li>
+<li>表空间可以在读写、只读状态之间切换；</li>
+<li>每个表空间由一个或多个物理存在的操作系统的数据文件组成。这种数据文件可以具有固定的大小，或允许其自动变大。可以在表空间中添加、删除数据文件； </li>
+<li>方案对象、表、索引的数据都被存储在表空间的数据文件中。一个数据文件存储不下，就存储在另一个数据文件中，只要该数据文件是本表空间中的就可以； </li>
+<li>一个用户默认使用一个表空间，但他的不同方案对象的数据可以被存储在不同表空间中； </li>
+<li>.一个用户使用的表空间的数量是有一定配额的，不能超出这个配额； </li>
+<li>可以根据使用目的，创建不同类型的表空间，如永久表空间、临时表空间、撤销表空间、大表空间等。不同类型的表空间的格式、使用方式及目的是不同的。</li>
+</ul>
+<br/>
+
+<h4 id="5-2-2-表空间的分类"><a href="#5-2-2-表空间的分类" class="headerlink" title="5.2.2 表空间的分类"></a>5.2.2 表空间的分类</h4><p>​        一个数据库通常有 SYSTEM 、SYSAUX、TEMP 三个默认表空间，一个或多个临时表空间，而且还有一个撤销表空间和几个应用程序专用的应用表空间。 </p>
+<br/>
+
+<h5 id="5-2-2-1-系统表空间"><a href="#5-2-2-1-系统表空间" class="headerlink" title="5.2.2.1 系统表空间"></a>5.2.2.1 系统表空间</h5><p>​        系统表空间包括 SYSTEM 表空间和 SYSAUX 表空间，其余的表空间就是非系统表空间。系统表空间在所有数据库中都是必须的。一般存放 Oracle 的数据字典及其数据。</p>
+<br/>
+
+<h5 id="5-2-2-2-临时表空间"><a href="#5-2-2-2-临时表空间" class="headerlink" title="5.2.2.2 临时表空间"></a>5.2.2.2 临时表空间</h5><p>​        撤了撤销(UNDO)表空间、相对于临时(TEMPORARY)空间而言，其他表空间就是永久(PERMANENT) 表空间。</p>
+<p>​        当执行排序(ORDER BY)、分组汇总(GROUP BY)、索引(CREATE INDEX)等功能的SQL语句时，会产生大量的临时数据。服务器进程首先将临时数据存放到内存结构的PGA区的排序区中，当排序区不够用时，服务器进程就会在临时表空间中建立临时段，并将这些临时数据存放到临时段中。 </p>
+<p>​        临时表空间对应的是临时文件，它与数据文件是有区别的。数据文件在创建时就被完全分配和初始化，而临时文件不一定保证被分配到指定的磁盘空间。这种延迟式的分配方法允许临时文件被快速创建，但如果没有预留出实际运行时所需的磁盘空间，就可能在运行时发生问题。 </p>
+<p>​        临时表空间可以被所有用户共享使用，如TEMP表空间可以被所有用户共享使用。在 ORACLE 8I 中可以使用其他表空间作为临时表空间，而在 ORACLE 9I 中就开始引入默认临时表空间(DEFAULT TEMPORARY TABLESPACE)的设计了，使用户不能使用其他表空间作为临时表空间。 </p>
+<p>​        如果在创建用户时没有为用户指定一个临时表空间，那么就会使用SYSTEM表空间来说创建临时段，存放临时数据。这样做的结果是： </p>
+<ul>
+<li>占用了SYSTEM表空间的存储空间，使可用的存储空间下降； </li>
+<li>频繁的分配和释放临时段，会在SYSTEM表空间中产生大量的存储碎片，使磁盘的读取效率下降。</li>
+</ul>
+<p>​       如果在数据运行过程中，经常有大量的并发排序，那么为了避免在SYSTEM表空间中存储临时数据，数据库管理员应该在数据库中创建一个专门的用来存储临时数据的临时表空间。 </p>
+<br/>
+
+<h5 id="5-2-2-3-撤销表空间"><a href="#5-2-2-3-撤销表空间" class="headerlink" title="5.2.2.3 撤销表空间"></a>5.2.2.3 撤销表空间</h5><p>​        从 Oracle 9I 开始，引入了一个全新的概念，即自动撤销管理 (AUTOMATIC UNDO MANAGEMENT)。用撤销 (UNDO) 表空间取代已经使用了20年的回退段。</p>
+<p>​        实际上是将回退段 (撤销段) 放入了撤销表空间，而由例程自动处理撤销表空间中的回退段。使用自动撤销管理方式后，不仅可以减轻 DBA 的工作负担，而且还可以获得较好的回退性能。通过查询数据字典视图 DBA_ROLLBACK_SEGS，可以得到撤销表空间中回退段的信息。 </p>
+<br/>
+
+<p>撤销表空间存储撤销段，撤销段主要用于入下目的: </p>
+<ol>
+<li><p>用一条ROLLBACK语句明确的回退一个事务； </p>
+</li>
+<li><p>隐含的回退一个事务； </p>
+</li>
+<li><p>重构数据的一个读一致图像； </p>
+</li>
+<li><p>从逻辑错误中恢复。</p>
+</li>
+</ol>
+<br/>
+
+<p>​        在 Oracle 中可以创建多个撤销表空间，但同一时刻值允许激活一个撤销表空间。在初始化参数文件中用 UNDO_TABLESPACE 指出要激活的撤销表空间。撤销表空间的组织与管理由Oracle 内部自动完成。当回退段不足时，一个事务可以使用多个回退段，不会中止事务的运行。数据库管理员只需了解撤销表空间是否有足够的空间，而不必为每个事务设置回退段。</p>
+<br/>
+
+<h5 id="5-2-2-4-大表空间和小表空间"><a href="#5-2-2-4-大表空间和小表空间" class="headerlink" title="5.2.2.4 大表空间和小表空间"></a>5.2.2.4 大表空间和小表空间</h5><p>​        大文件(BIGFILE)表空间是 ORACLE 10G 新引进的表空间。大文件表空间只能放置一个数据文件(或临时文件)。但其数据文件可以包括 4G 个数据块。</p>
+<p>​        大文件表空间都是为超大型数据库设计的。如果一个超大型数据库具有上千个数据文件的话，更新数据文件头部信息的操作就会花费很长时间。如果使用了大文件表空间，就可以使用大数据文件来减少数据文件的数量，使更新数据文件头部信息的操作更快一些。 </p>
+<p>​        小文件(SMALLFILE)表空间是以前 ORACLE 表空间的新命名。在小文件表空间中可以放置多个数据文件。一个数据库可以放置多达 64K 个数据文件。 SYSTEM 和 SYSAUX 表空间总是被创建为小文件表空间。 </p>
+<br/>
+
+<h3 id="5-3-段（Segment）"><a href="#5-3-段（Segment）" class="headerlink" title="5.3 段（Segment）"></a>5.3 段（Segment）</h3><p>​        对象在数据库中占用的空间。当在数据库中创建表或索引时，系统就会创建对应的段。段是由多个可以不连续的区组成，所以段是可以跨数据文件的。当段空间不足时，系统将以区为单位为段分配空间。段按照类型可以分为数据段、索引段、Undo段、临时段等。</p>
+<br/>
+
+<h4 id="5-3-1-数据段"><a href="#5-3-1-数据段" class="headerlink" title="5.3.1 数据段"></a>5.3.1 数据段</h4><p>​        每个非集群的、不按索引组织的表都有一个数据段，但外部表、全局临时表和分区表除外。这些表中的每个表都有一个或多个段。表中的所有数据都存储在相应数据段的区中。对于分区表，每个分区都有一个数据段。每个集群也都有一个数据段。集群中每个表的数据都存储在集群的数据段中。</p>
+<br/>
+
+<h4 id="5-3-2-索引段"><a href="#5-3-2-索引段" class="headerlink" title="5.3.2 索引段"></a>5.3.2 索引段</h4><p>​        每个索引都有一个索引段，存储其所有数据。对于分区索引，每个分区都有一个索引段。</p>
+<br/>
+
+<h4 id="5-3-3-Undo-段"><a href="#5-3-3-Undo-段" class="headerlink" title="5.3.3 Undo 段"></a>5.3.3 Undo 段</h4><p>​        Oracle 为每个数据库实例创建一个 Undo 表空间，该表空间包含大量用于临时存储还原信息的 Undo 段。Undo 段中的信息用于生成读一致性数据库信息，并且在数据库恢复过程中，用于为用户回滚未提交的事务处理。</p>
+<br/>
+
+<h4 id="5-3-4-临时段"><a href="#5-3-4-临时段" class="headerlink" title="5.3.4 临时段"></a>5.3.4 临时段</h4><p>​       临时段是在需要临时工作区来执行 SQL 语句时，由 Oracle 数据库创建的。在语句执行完成后，临时段的区将返回到实例以备将来使用。Oracle 会为每个用户指定一个默认临时表空间，或指定一个在数据库范围内使用的默认临时表空间。 </p>
+<br/>
+
+<h3 id="5-4-区（Extent）"><a href="#5-4-区（Extent）" class="headerlink" title="5.4 区（Extent）"></a>5.4 区（Extent）</h3><p>​        区为数据一次性预留的一个较大的存储空间。区是一个空间分配单位，当数据库对象空间不足时，通常会以区为单位进行分配空间。区是由多个连续的数据块组成，由此可知区是不能跨数据文件的。</p>
+<br/>
+
+<h3 id="5-5-块（Block）"><a href="#5-5-块（Block）" class="headerlink" title="5.5 块（Block）"></a>5.5 块（Block）</h3><p>​        块是 Oracle 最基本的存储单位。在建立数据库的时候指定 DB_BLOCK_SIZE 值，该参数表示数据库标准数据块的大小，默认大小为8K，它是数据库一次标准 I/O 的大小。</p>
+<p>​        一个标准的 Oracle 数据块是由连续的操作系统数据块组成的。1 个 8K 的数据块理论上最多可存储 700 多行。所以，块越大，在相同情况下存储的行就越多，而 Oracle 是以块为单位进行访问的，那么产生的逻辑读就越小。需要注意的是，块越大，不同的会话访问不同的数据落在同一个块的几率就增加了，这就容易产生热点块竞争，所以，在OLAP中，可以适当将块调大。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/2.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%BA%8C%EF%BC%89/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/07/CoreJava/35.%20String%20%E7%B1%BB3/">
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
