@@ -1,0 +1,991 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="单行函数也被称为单值函数，每操作一行数据（某个字段值）都会返回结果。
+转换函数可以将一个类型的数据，转换为另一种类型的数据。">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>SQL 基础（三）单行函数和转换函数 - maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="SQL 基础（三）单行函数和转换函数">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-10 19:09" pubdate>
+        2021年7月10日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      4k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      53
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none">SQL 基础（三）单行函数和转换函数</h1>
+            
+            <div class="markdown-body">
+              <p>单行函数也被称为单值函数，每操作一行数据（某个字段值）都会返回结果。</p>
+<p>转换函数可以将一个类型的数据，转换为另一种类型的数据。</p>
+<span id="more"></span>
+
+<h2 id="1-哑表"><a href="#1-哑表" class="headerlink" title="1. 哑表"></a>1. 哑表</h2><p>Oracle 数据库中有一张特殊的表：dual（哑表）。</p>
+<p>dual 之所以被称为哑表，是因为它是一个 <strong>Oracle 内部自动创建的单行单列的虚拟表</strong>。这个表中只有一个列 dummy ，其数据类型为 verchar2(1)。Oracle 右内部逻辑保证 dual 表中永远只有一条数据，且<strong>只有 Oracle 数据库中有哑表</strong>。</p>
+<br/>
+
+<p>在实际的使用中，dual 表主要是用来选择系统变量或求一个表达式的值。</p>
+<p>例如：求表达式 1+1 的结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql">selet <span class="hljs-number">1</span><span class="hljs-operator">+</span><span class="hljs-number">1</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<p>按照 SQL 语句的要求，没有表就没法查询，而表达式 1+1 不属于任何表，那么可以使用哑表。</p>
+<br/>
+
+<h2 id="2-单行函数"><a href="#2-单行函数" class="headerlink" title="2. 单行函数"></a>2. 单行函数</h2><p>单行函数也被称为单值函数，每操作一行数据（某个字段值）都会返回员工结果。<br>单值函数可以分为：字符函数、日期函数和数值函数。</p>
+<h3 id="2-1-字符函数"><a href="#2-1-字符函数" class="headerlink" title="2.1 字符函数"></a>2.1 字符函数</h3><p>常用的字符函数有：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>lower(x)</code></td>
+<td>将字符串 x 转为小写。</td>
+</tr>
+<tr>
+<td><code>upper(x)</code></td>
+<td>将字符串 x 转为大写。</td>
+</tr>
+<tr>
+<td><code>initcap(x)</code></td>
+<td>将字符串 x 的首字母转为大写。</td>
+</tr>
+<tr>
+<td><code>length(x)</code></td>
+<td>获取字符串 x 的长度。</td>
+</tr>
+<tr>
+<td><code>ascll(x)</code></td>
+<td>返回字符串的 ASCII 码。</td>
+</tr>
+<tr>
+<td><code>concat(x, y)</code></td>
+<td>连接两个字符串 x 和 y。</td>
+</tr>
+<tr>
+<td><code> replace(x, old_str, new_str)</code></td>
+<td>在字符串 x 中用 new_str 替换 old_str。</td>
+</tr>
+<tr>
+<td><code>lpad(x, width [,pad_str])</code></td>
+<td>指定字符串 x 的长度。不够长度时，在左边填充。</td>
+</tr>
+<tr>
+<td><code>rpad(x, width [,pad_str])</code></td>
+<td>指定字符串 x 的长度。不够长度时，在右边填充。</td>
+</tr>
+<tr>
+<td><code>trim([trim_str from] x)</code></td>
+<td>把 x 的两边截去 trim_str 字符串，缺省截去空格。</td>
+</tr>
+<tr>
+<td><code>ltrim(x [,trim_str])</code></td>
+<td>把 x 的左边截取 trim_str 字符串，缺省截去空格。</td>
+</tr>
+<tr>
+<td><code>rtrim(x [,trim_str])</code></td>
+<td>把 x 的右边截取 trim_str 字符串，缺省截去空格。</td>
+</tr>
+<tr>
+<td><code>instr(x, str [, start] [,n])</code></td>
+<td>从 x 中查找 str。<br/>可以指定从 start 开始，也可以指定从 n 开始。</td>
+</tr>
+<tr>
+<td><code>substr(x, start [,length])</code></td>
+<td>在字符串 x 上截取一个子串。<br/>start 是开始位置，length 是截取的长度。<br/>缺省 length ，默认到结尾。</td>
+</tr>
+</tbody></table>
+<br/>
+
+<h4 id="2-1-1-lower"><a href="#2-1-1-lower" class="headerlink" title="2.1.1 lower"></a>2.1.1 lower</h4><p><code>lower(x)</code>：将字符串 x 转为小写。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">lower</span>(<span class="hljs-string">&#x27;HELLO WORLD&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-----------</span><br>hello world<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-2-upper"><a href="#2-1-2-upper" class="headerlink" title="2.1.2 upper"></a>2.1.2 upper</h4><p><code>upper(x)</code>：将字符串 x 转为大写。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">upper</span>(<span class="hljs-string">&#x27;hello world&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-----------</span><br>HELLO WORLD<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-3-initcap"><a href="#2-1-3-initcap" class="headerlink" title="2.1.3 initcap"></a>2.1.3 initcap</h4><p><code>initcap(x)</code>：将字符串 x 的首字母转为大写，其他字母小写。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> initcap(<span class="hljs-string">&#x27;hELLO WORLD&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-----------</span><br>Hello world<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-4-length"><a href="#2-1-4-length" class="headerlink" title="2.1.4 length"></a>2.1.4 length</h4><p><code>length(x)</code>：获取字符串 x 的长度。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> length(<span class="hljs-string">&#x27;hello world&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br>    <span class="hljs-number">11</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-5-ascii"><a href="#2-1-5-ascii" class="headerlink" title="2.1.5 ascii"></a>2.1.5 ascii</h4><p><code>ascii(x)</code>：获取字符 x 的 ascii 码。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ascii(<span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">------</span><br>    <span class="hljs-number">97</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-6-concat"><a href="#2-1-6-concat" class="headerlink" title="2.1.6 concat"></a>2.1.6 concat</h4><p><code>concat(x, y)</code>：连接连个字符串 x 和 y。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> concat(<span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-string">&#x27;world&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为 </span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-----------</span><br>helloworld<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-7-replace"><a href="#2-1-7-replace" class="headerlink" title="2.1.7 replace"></a>2.1.7 replace</h4><p><code>replace(x, old_str, new_str)</code>：在字符串 x 中用 new_str 替代 old_str。</p>
+<p>情况 1：字符串 x 中不存在 old_str。则执行后的结果是 x。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> replace(<span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-string">&#x27;a&#x27;</span>,<span class="hljs-string">&#x27;b&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>hello<br></code></pre></td></tr></table></figure>
+
+ <br/>
+
+<p>情况 2：不写 new_str，执行结果为在 x 中去掉了 old_str。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> replace(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 相当于</span><br><span class="hljs-keyword">select</span> replace(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>hllo<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 3：正常情况</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> replace(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-string">&#x27;e&#x27;</span>, <span class="hljs-string">&#x27;abc&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>habcllo<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-8-lpad-和-rpad"><a href="#2-1-8-lpad-和-rpad" class="headerlink" title="2.1.8 lpad 和 rpad"></a>2.1.8 lpad 和 rpad</h4><p><code>lpad(x, width [,pad_str])</code>：指定字符串 x 的长度。不够长度时，如果没有指定填充字符，则使用空格在左边填充。如果指定了填充字符就使用填充字符在左边填充。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 不指定 pad_str 将会用空格进行填充。</span><br><span class="hljs-keyword">select</span> lpad(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-number">10</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>     hello<br><br><span class="hljs-comment">-- 指定 pad_str</span><br><span class="hljs-keyword">select</span> lpad(<span class="hljs-string">&#x27;hello&#x27;</span>, <span class="hljs-number">10</span>, <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>aaaaahello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-9-trim"><a href="#2-1-9-trim" class="headerlink" title="2.1.9 trim"></a>2.1.9 trim</h4><p><code>trim([trim_str from] x)</code>：把 x 的两边截去 trim_str 字符（1个），缺省截去空格。</p>
+<p>情况 1：不指定 trim_str。截去 x 两边的所有空格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;   hello   &#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>hello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 2：trim_str 为空字符串，执行的结果也为空。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 3：trim_str 不为空串，但是 x 两边没有 trim_str。如果这时 x 两边有空格，则会两边各去掉一个空格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 含有空格</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;  hello  &#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br> hello <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 不含有空格</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;a&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>hello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 4：trim_str 不为空串，但是 x 只有一边含有 trim_str。如果这时 x 的另外边有空格，则会在这边去掉一个空格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 含有空格</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;hello  &#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>ello <br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 不含有空格</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;elloh&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>ello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 5：trim_str 不为空串，但是不是一个字符。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;hel&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">-- 报错，ORA-30001: 截取集仅能有一个字符。</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 6：正常情况。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">trim</span>(<span class="hljs-string">&#x27;h&#x27;</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;helloh&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>ello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-10-ltrim-和-rtrim"><a href="#2-1-10-ltrim-和-rtrim" class="headerlink" title="2.1.10 ltrim 和 rtrim"></a>2.1.10 ltrim 和 rtrim</h4><p><code>ltrim(x [,trim_str])</code>：把 x 的左边截取 trim_str 字符串，缺省截去空格。</p>
+<p>情况 1：trim_str 的长度比 x 长。执行结果为 null。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;h&#x27;</span> , <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 2：trim_str 为空。执行结果为 null。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;hello&#x27;</span> , <span class="hljs-string">&#x27;&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 3：trim_str 与 x 相同。执行结果为 null。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;hello&#x27;</span> , <span class="hljs-string">&#x27;hello&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br><span class="hljs-keyword">null</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 4：x 和 trim_str 从左边第一个字符开始一一比较，没有相同的部分。执行结果就是 x。但如果 x 的左边含有空格，则会截去一个空格。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 不含有空格</span><br><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;hello&#x27;</span> , <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>hello<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 含有空格</span><br><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;   hello&#x27;</span> , <span class="hljs-string">&#x27;a&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>  hello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>情况 5：正常情况。</p>
+<p>x 和 trim_str 从左边第一个字符开始一一比较，只会截去相同的部分。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> ltrim(<span class="hljs-string">&#x27;hello&#x27;</span> , <span class="hljs-string">&#x27;ha&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">--------</span><br>ello<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-11-instr"><a href="#2-1-11-instr" class="headerlink" title="2.1.11 instr"></a>2.1.11 instr</h4><p><code>instr(x, str [, start] [,n])</code>：从 x 中查找 str。可以指定从 start 开始，也可以指定从 n 开始。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> instr(<span class="hljs-string">&#x27;Hello World&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-operator">/</span><span class="hljs-operator">/</span>运行结果：<br><span class="hljs-keyword">RESULT</span><br><span class="hljs-comment">----------</span><br><span class="hljs-number">5</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> instr(<span class="hljs-string">&#x27;Hello World&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-number">6</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 从前往后查找，从下标为6开始</span><br><span class="hljs-comment">-- 运行结果：</span><br><span class="hljs-keyword">RESULT</span><br><span class="hljs-comment">----------</span><br><span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> instr(<span class="hljs-string">&#x27;Hello World&#x27;</span>,<span class="hljs-string">&#x27;o&#x27;</span>,<span class="hljs-number">-1</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 从后往前查找，从最后一个开始</span><br><span class="hljs-comment">-- 运行结果：</span><br><span class="hljs-keyword">RESULT</span><br><span class="hljs-comment">----------</span><br><span class="hljs-number">8</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-1-12-substr"><a href="#2-1-12-substr" class="headerlink" title="2.1.12 substr"></a>2.1.12 substr</h4><p><code>substr(x, start [,length])</code>：在字符串 x 上截取一个子串。start 是开始位置，length 是截取的长度。缺省 length ，默认到结尾。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> substr(<span class="hljs-string">&#x27;hello&#x27;</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果：</span><br><span class="hljs-keyword">RESULT</span><br><span class="hljs-comment">------</span><br>ell<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-2-数值函数"><a href="#2-2-数值函数" class="headerlink" title="2.2 数值函数"></a>2.2 数值函数</h3><p>专门操作数字的函数，常用的数字函数有：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>abs(x)</code></td>
+<td>x 的绝对值。</td>
+</tr>
+<tr>
+<td><code>cos(x)</code></td>
+<td>x 的反余弦。</td>
+</tr>
+<tr>
+<td><code>acos(x)</code></td>
+<td>x 的余弦。</td>
+</tr>
+<tr>
+<td><code>sin(x)</code></td>
+<td>x 的正弦。</td>
+</tr>
+<tr>
+<td><code>asin(x)</code></td>
+<td>x 的反正弦。</td>
+</tr>
+<tr>
+<td><code>ceil(x)</code></td>
+<td>大于或等于X的最小值(整数)。</td>
+</tr>
+<tr>
+<td><code>floor(x)</code></td>
+<td>小于或等于X的最大值(整数)。</td>
+</tr>
+<tr>
+<td><code>round(x [,y])</code></td>
+<td>x 在第 y 位四舍五入。</td>
+</tr>
+<tr>
+<td><code>trunc(x [,y])</code></td>
+<td>x 在第 y 位截断。</td>
+</tr>
+<tr>
+<td><code>power(x,y)</code></td>
+<td>x 的 y 次幂。</td>
+</tr>
+<tr>
+<td><code>sqrt(x)</code></td>
+<td>x 的平方根。</td>
+</tr>
+<tr>
+<td><code>log(x,y)</code></td>
+<td>x 为底 y 的对数。</td>
+</tr>
+<tr>
+<td><code>mod(x,y)</code></td>
+<td>x 除以 y 的余数。</td>
+</tr>
+</tbody></table>
+<br/>
+
+<h4 id="2-2-1-ceil"><a href="#2-2-1-ceil" class="headerlink" title="2.2.1 ceil"></a>2.2.1 ceil</h4><p><code>ceil(x)</code>：大于或等于 X 的最小值(整数)。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">ceil</span>(<span class="hljs-number">3.14</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">4</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-2-2-floor"><a href="#2-2-2-floor" class="headerlink" title="2.2.2 floor"></a>2.2.2 floor</h4><p><code>floor(x)</code>：小于或等于 X 的最小值(整数)。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">floor</span>(<span class="hljs-number">3.14</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">3</span><br></code></pre></td></tr></table></figure>
+
+
+
+<h4 id="2-2-3-round"><a href="#2-2-3-round" class="headerlink" title="2.2.3 round"></a>2.2.3 round</h4><p><code>round(x [, y])</code>：x 在 y 为四舍五入。</p>
+<ul>
+<li>x 表示要进行四舍五入操作的数字。</li>
+<li>y 表示要保留到哪一位，默认是 0 ，即保留到个位。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 保留到小数点后两位。</span><br><span class="hljs-keyword">select</span> round(<span class="hljs-number">3.1415926</span> , <span class="hljs-number">2</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">3.14</span><br><br><span class="hljs-comment">-- 保留到个位</span><br><span class="hljs-keyword">select</span> round(<span class="hljs-number">3.1415926</span>, <span class="hljs-number">0</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">3</span><br><br><span class="hljs-comment">-- 保留到十位</span><br><span class="hljs-keyword">select</span> round(<span class="hljs-number">31.4</span>, <span class="hljs-number">-1</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">30</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-2-4-trunc"><a href="#2-2-4-trunc" class="headerlink" title="2.2.4 trunc"></a>2.2.4 trunc</h4><p><code>trunc(x [,y])</code>：x 在第 y 位截断。</p>
+<p>trunc 的用法和 round 基本一样，但是 trunc 只会舍去不会进位。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 截取到小数点后面两位</span><br><span class="hljs-keyword">select</span> trunc(<span class="hljs-number">3.141526</span> , <span class="hljs-number">2</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">3.14</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-2-5-mod"><a href="#2-2-5-mod" class="headerlink" title="2.2.5 mod"></a>2.2.5 mod</h4><p><code>mod(x, y)</code>：x 除以 y 的余数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 10 除以 3 的余数</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">mod</span>(<span class="hljs-number">10</span>, <span class="hljs-number">3</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 结果为</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-3-日期函数"><a href="#2-3-日期函数" class="headerlink" title="2.3 日期函数"></a>2.3 日期函数</h3><h4 id="2-3-1-sysdate"><a href="#2-3-1-sysdate" class="headerlink" title="2.3.1 sysdate"></a>2.3.1 sysdate</h4><p>sysdate 是 Oracle 中用来表示当前时间的关键字，并且可以使用它来参与时间运算。 sysdate 参与时间的加减操作的时候，单位是天。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 显示当前时间</span><br><span class="hljs-keyword">select</span> sysdate <span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 显示明天这个时候的时间</span><br><span class="hljs-keyword">select</span> sysdate <span class="hljs-operator">+</span> <span class="hljs-number">1</span> <span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 显示昨天这个时候的时间</span><br><span class="hljs-keyword">select</span> sysdate <span class="hljs-operator">-</span> <span class="hljs-number">1</span> <span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 显示 1 小时之后的时间</span><br><span class="hljs-keyword">select</span> sysdate <span class="hljs-operator">+</span> <span class="hljs-number">1</span><span class="hljs-operator">/</span><span class="hljs-number">24</span> <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-2-常用的日期函数"><a href="#2-3-2-常用的日期函数" class="headerlink" title="2.3.2 常用的日期函数"></a>2.3.2 常用的日期函数</h4><table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>months_between(x, y)</code></td>
+<td>求两个日期之间相差的月数。</td>
+</tr>
+<tr>
+<td><code>add_months(x, y)</code></td>
+<td>返回一个日期数据：表示一个时间点，往后推 x 月的日期。</td>
+</tr>
+<tr>
+<td><code>next_day(x, 星期 y)</code></td>
+<td>返回一个日期数据：表示一个时间点后的下一个星期几在哪一天。</td>
+</tr>
+<tr>
+<td><code>last_day(x)</code></td>
+<td>返回一个日期数据：表示一个日期所在月份的最后一天。</td>
+</tr>
+<tr>
+<td><code>round(x, y)</code></td>
+<td>对日期进四舍五入，返回操作后的日期数据。</td>
+</tr>
+<tr>
+<td><code>trunc(x, y)</code></td>
+<td>对日期进行截取和 round 类似，但是只舍弃不进位。</td>
+</tr>
+</tbody></table>
+<br/>
+
+<h4 id="2-3-3-months-between"><a href="#2-3-3-months-between" class="headerlink" title="2.3.3 months_between"></a>2.3.3 months_between</h4><p><code>months_between(x, y)</code>：求两个日期之间相差的月数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 31 天之后和现在相差了多少个月。</span><br><span class="hljs-keyword">select</span> months_between(sysdate<span class="hljs-operator">+</span><span class="hljs-number">31</span> , sysdate) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">1</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-4-add-months"><a href="#2-3-4-add-months" class="headerlink" title="2.3.4 add_months"></a>2.3.4 add_months</h4><p><code>add_months(x, y)</code>：返回一个日期数据：表示一个时间点，往后推 x 月的日期。 y 也可以是负数，表示之前多少月</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 两个月后的日期</span><br><span class="hljs-keyword">select</span> add_months(sysdate , <span class="hljs-number">2</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span> <br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2021</span><span class="hljs-number">-09</span><span class="hljs-number">-11</span> <span class="hljs-number">10</span>:<span class="hljs-number">18</span>:<span class="hljs-number">18</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-5-next-day"><a href="#2-3-5-next-day" class="headerlink" title="2.3.5 next_day"></a>2.3.5 next_day</h4><p><code>next_day(x, 星期)</code>：返回一个日期数据：表示一个时间点后的下一个星期几在哪一天。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 离当前时间最近的下一个星期5是哪一个天</span><br><span class="hljs-keyword">select</span> next_day(sysdate, <span class="hljs-string">&#x27;星期五&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> nls_language<span class="hljs-operator">=</span>english;<br><span class="hljs-keyword">select</span> next_day(sysdate, <span class="hljs-string">&#x27;FRIDAY&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2021</span><span class="hljs-number">-07</span><span class="hljs-number">-16</span> <span class="hljs-number">10</span>:<span class="hljs-number">22</span>:<span class="hljs-number">12</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-6-last-day"><a href="#2-3-6-last-day" class="headerlink" title="2.3.6 last_day"></a>2.3.6 last_day</h4><p><code>last_day(x)</code>：返回一个日期数据：表示一个日期所在月份的最后一天。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 当前月的最后一天</span><br><span class="hljs-keyword">select</span> last_day(sysdate)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2021</span><span class="hljs-number">-07</span><span class="hljs-number">-31</span> <span class="hljs-number">10</span>:<span class="hljs-number">27</span>:<span class="hljs-number">25</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-7-round"><a href="#2-3-7-round" class="headerlink" title="2.3.7 round"></a>2.3.7 round</h4><p><code>round(x, y)</code>：对日期进四舍五入，返回操作后的日期数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 把当前日期四舍五入到月</span><br><span class="hljs-keyword">select</span> round(sysdate, <span class="hljs-string">&#x27;MONTH&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2021</span><span class="hljs-number">-07</span><span class="hljs-number">-01</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br><br><br><span class="hljs-comment">-- 把当前日期四舍五入到年</span><br><span class="hljs-keyword">select</span> round(sysdate, <span class="hljs-string">&#x27;YEAR&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2022</span><span class="hljs-number">-01</span><span class="hljs-number">-01</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-8-trunc"><a href="#2-3-8-trunc" class="headerlink" title="2.3.8 trunc"></a>2.3.8 trunc</h4><p><code>trunc(x, y)</code>：对日期进行截取和 round 类似，但是只舍弃不进位。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> trunc(sysdate,<span class="hljs-string">&#x27;MONTH&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2021</span><span class="hljs-number">-07</span><span class="hljs-number">-01</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br><br><br><span class="hljs-keyword">select</span> trunc(sysdate,<span class="hljs-string">&#x27;YEAR&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br><span class="hljs-comment">-- 运行结果</span><br><span class="hljs-keyword">result</span><br><span class="hljs-comment">-------</span><br><span class="hljs-number">2022</span><span class="hljs-number">-01</span><span class="hljs-number">-01</span> <span class="hljs-number">00</span>:<span class="hljs-number">00</span>:<span class="hljs-number">00</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="3-转换函数"><a href="#3-转换函数" class="headerlink" title="3. 转换函数"></a>3. 转换函数</h2><p>转换函数可以将一个类型的数据，转换为另一种类型的数据。</p>
+<p>转换函数主要有三种： </p>
+<ul>
+<li>to_char 把一个数字或日期数据转换为字符。</li>
+<li>to_number 把字符转换为数字。</li>
+<li>to_date 把字符转换为日期。</li>
+</ul>
+<br/>
+
+<h3 id="3-1-to-char"><a href="#3-1-to-char" class="headerlink" title="3.1 to_char"></a>3.1 to_char</h3><h4 id="3-1-1-数字转换为字符"><a href="#3-1-1-数字转换为字符" class="headerlink" title="3.1.1 数字转换为字符"></a>3.1.1 数字转换为字符</h4><p>数字转为字符的常用格式：</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>示例</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>9</td>
+<td>999</td>
+<td>指定位置处显示数字。</td>
+</tr>
+<tr>
+<td>.</td>
+<td>9.9</td>
+<td>指定位置显示小数点。</td>
+</tr>
+<tr>
+<td>，</td>
+<td>99,999</td>
+<td>指定位置显示逗号。</td>
+</tr>
+<tr>
+<td>$</td>
+<td>$999</td>
+<td>数字开头显示一个美元符号。</td>
+</tr>
+<tr>
+<td>L</td>
+<td>L999</td>
+<td>数字开头显示一个本地的货币符号。</td>
+</tr>
+<tr>
+<td>PR</td>
+<td>999PR</td>
+<td>如果数字式负数则用尖括号进行表示。</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> to_char(salary,<span class="hljs-string">&#x27;$999,999.00&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> s_emp;<br><br><span class="hljs-keyword">select</span> to_char(salary,<span class="hljs-string">&#x27;L999,999.00&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> s_emp;<br><br><span class="hljs-keyword">select</span> to_char(<span class="hljs-number">-10</span>,<span class="hljs-string">&#x27;999PR&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-1-2-日期转换为字符"><a href="#3-1-2-日期转换为字符" class="headerlink" title="3.1.2 日期转换为字符"></a>3.1.2 日期转换为字符</h4><p>日期转换为字符的常用格式：</p>
+<table>
+<thead>
+<tr>
+<th>格式</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>yyyy</td>
+<td>四位数的年份。</td>
+</tr>
+<tr>
+<td>rrrr</td>
+<td>四位数的年份。</td>
+</tr>
+<tr>
+<td>yy</td>
+<td>两位数的年份。</td>
+</tr>
+<tr>
+<td>rr</td>
+<td>两位数的年份。</td>
+</tr>
+<tr>
+<td>mm</td>
+<td>两位数的月份（数据）。</td>
+</tr>
+<tr>
+<td>D</td>
+<td>一周的星期几。</td>
+</tr>
+<tr>
+<td>DD</td>
+<td>一个月的第几天。</td>
+</tr>
+<tr>
+<td>DDD</td>
+<td>一年的第几天。</td>
+</tr>
+<tr>
+<td>YEAR</td>
+<td>英文的年份。</td>
+</tr>
+<tr>
+<td>MONTH</td>
+<td>英文的全称月份。</td>
+</tr>
+<tr>
+<td>mon</td>
+<td>英文的简称月份。</td>
+</tr>
+<tr>
+<td>ddsp</td>
+<td>英文的第几天（一个月的）。</td>
+</tr>
+<tr>
+<td>ddspth</td>
+<td>英文序列数的第几天（一个月的）。</td>
+</tr>
+<tr>
+<td>DAY</td>
+<td>英文的全称星期（monday, tuesday…）</td>
+</tr>
+<tr>
+<td>DY</td>
+<td>英文的简称星期（mon, tues…）</td>
+</tr>
+<tr>
+<td>hh</td>
+<td>小时</td>
+</tr>
+<tr>
+<td>mi</td>
+<td>分钟</td>
+</tr>
+<tr>
+<td>ss</td>
+<td>秒</td>
+</tr>
+</tbody></table>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;yyyy mm MONTH mon MON D DD DDD DAY DY&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;dd-mm-yy&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;yy-mm-dd&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;yy-mm-dd hh:mi:ss&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;yy-mm-dd hh24:mi:ss&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_char(sysdate,<span class="hljs-string">&#x27;yy-mm-dd hh:mi:ss AM&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-2-to-number"><a href="#3-2-to-number" class="headerlink" title="3.2 to_number"></a>3.2 to_number</h3><p><code>to_number(字符)</code>：把字符转换为数值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> to_number(<span class="hljs-string">&#x27;1000&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br><br><span class="hljs-keyword">select</span> to_number(<span class="hljs-string">&#x27;abc&#x27;</span>)<br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-3-to-date"><a href="#3-3-to-date" class="headerlink" title="3.3 to_date"></a>3.3 to_date</h3><p><code>to_date(字符串, 日期格式)</code>：把字符转换为日期。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;10-12-2022&#x27;</span>,<span class="hljs-string">&#x27;dd-mm-yyyy&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs SQL"><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> nls_language<span class="hljs-operator">=</span><span class="hljs-string">&#x27;simplified chinese&#x27;</span>;<br><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;25-5月-22&#x27;</span>,<span class="hljs-string">&#x27;dd-month-yy&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> nls_language<span class="hljs-operator">=</span><span class="hljs-string">&#x27;simplified chinese&#x27;</span>;<br><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;22/5月/25&#x27;</span>,<span class="hljs-string">&#x27;yy/month/dd&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> nls_language<span class="hljs-operator">=</span>english;<br><span class="hljs-keyword">select</span> to_date(<span class="hljs-string">&#x27;25-MAY-22&#x27;</span>,<span class="hljs-string">&#x27;dd-MONTH-yy&#x27;</span>) <span class="hljs-keyword">as</span> <span class="hljs-keyword">result</span><br><span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-4-千年虫问题"><a href="#3-4-千年虫问题" class="headerlink" title="3.4 千年虫问题"></a>3.4 千年虫问题</h3><p>在早期的计算机的程序中，规定了的年份仅用两位数来表示。 假如是 1971 年，在计算机里就会被表示为 71。 但是到了 2000 年的时候这个情况就出现了问题，计算机读取出之前存的一个日期88，结果就是 2088 年。 这样的话，计算机内部对年份的计算就会出现问题，这个事情当时被称为千年虫。</p>
+<p>为了处理这个问题，后面就有了一种新的日期格式：rr 。<br>如果在存储日期数据的时候，年份采用的格式为 rr，并且只提供了最后 2 位年份，那么年份中的前两位数字就由两部分共同确定，其规则如下：</p>
+<ul>
+<li><p>规则 1：<br>如果指定年在 00 ~ 49 之间，并且当前年份在 00 ~ 49 之间，那么指定年的世纪就与当前年份的世纪相同。因此，指定年的前两位数字就等于当前年份的前两位数字。例如：如果指定年为15，而当前年 份为 2007，那么指定年就是 2015。</p>
+</li>
+<li><p>规则 2：<br>如果指定年在 50 ~ 99 之间，并且当前年份在 00 ~ 49 之间，那么指定年的世纪就等于当前年份的世纪减去1。因此，指定年的前两位数字等于当前年份的前两位数字减去 1。例如：如果指定年为 75，而当 前年份为 2007，那么指定年就是 1975 。</p>
+</li>
+<li><p>规则 3：<br>如果指定年在 00 ~ 49 之间，并且当前年份在 50 ~ 99 之间，那么指定年的世纪就等于当前年份的世纪加 上1。因此，指定年的前两位数字等于当前年份的前两位数字加上 1。例如：如果指定年为 15，而当 前年份为 2075，那么指定年就是 2115。</p>
+</li>
+<li><p>规则 4：<br>如果指定年在 50 ~ 99 之间，并且当前年份在 50~99 之间，那么指定年的世纪就与当前年份的世纪相同。因此，指定年的前两位数字就等于当前年份的前两位数字。例如：如果指定年为 55，而当前年 份为 2075，那么指定年就是 2055。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%8D%95%E8%A1%8C%E5%87%BD%E6%95%B0%E5%92%8C%E8%BD%AC%E6%8D%A2%E5%87%BD%E6%95%B0/">单行函数和转换函数</a>
+                    
+                  </div>
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/6.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile">SQL 基础（四）多表查询</span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/4.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89%20%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">SQL 基础（二）查询</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

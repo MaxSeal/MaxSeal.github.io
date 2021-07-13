@@ -194,19 +194,73 @@
     <article class="col-12 col-md-12 mx-auto index-info">
       <h1 class="index-header">
         
-        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/5.%20%E5%BA%8F%E5%88%97/" target="_self">
-          
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E5%90%8C%E4%B9%89%E8%AF%8D/" target="_self">
+          SQL 基础（十一）同义词
         </a>
       </h1>
 
       <p class="index-excerpt">
-        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/5.%20%E5%BA%8F%E5%88%97/" target="_self">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E5%90%8C%E4%B9%89%E8%AF%8D/" target="_self">
           
           
             
           
-          在 Oracle 中 sequence 就是序号，每次提取完都会自动增加，步幅固定，它与表没有直接关系！
-1. 创建序列1234567CREATE SEQUENCE sequence_name[START WITH num][INCREMENT BY increment][MAXVALUE num|NOMAXVALUE][MINVALUE num|NOMINVALUE][CYCLE|NOCYCLE
+          
+
+1. 概念​        Oracle 数据库中提供了同义词管理的功能。同义词是数据库对象的一个别名，经常用于简化对象访问和提高对象访问的安全性。在使用同义词时，Oracle 数据库将它翻译成对应方案对象的名字。与视图类似，同义词并不占用实际存储空间，只有在数据字典中保存了同义词的定义。在Oracle 数据库中的大部分数据库对象，如表、视图、物化视图、序列、函数、存储过程、包、同义词等等，数
+        </a>
+      </p>
+
+      <div class="index-btm post-metas">
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-date"></i>
+            <time datetime="2021-07-08 22:05" pubdate>
+              2021-07-08
+            </time>
+          </div>
+        
+        
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%90%8C%E4%B9%89%E8%AF%8D/">同义词</a>
+            
+          </div>
+        
+      </div>
+    </article>
+  </div>
+
+  <div class="row mx-auto index-card">
+    
+    
+    <article class="col-12 col-md-12 mx-auto index-info">
+      <h1 class="index-header">
+        
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/14.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E5%BA%8F%E5%88%97/" target="_self">
+          SQL 基础（十二）序列
+        </a>
+      </h1>
+
+      <p class="index-excerpt">
+        <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/14.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E5%BA%8F%E5%88%97/" target="_self">
+          
+          
+            
+          
+          
+
+在 Oracle 中 sequence 就是序号，每次提取完都会自动增加，步幅固定，它与表没有直接关系！
+1. 创建序列1234567CREATE SEQUENCE sequence_name[START WITH num][INCREMENT BY increment][MAXVALUE num|NOMAXVALUE][MINVALUE num|NOMINVALUE][CYCLE|NOCYC
         </a>
       </p>
 
@@ -220,6 +274,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/%E5%BA%8F%E5%88%97/">序列</a>
+            
+          </div>
         
       </div>
     </article>
@@ -232,7 +300,7 @@
       <h1 class="index-header">
         
         <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/2.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%BA%8C%EF%BC%89/" target="_self">
-          
+          Oracle 基础（二）
         </a>
       </h1>
 
@@ -242,8 +310,10 @@
           
             
           
-          1. 方案​        方案就是某用户拥有的所有的数据库对象的逻辑集合，可以看做是 SQL Server 或 MySQL 中的一个数据库。
-​        在 SQL Server 或者 MySQL 中，一般情况下（暂不考虑多租户等特殊情况），一个项目对应DBMS 中的一个数据库，连接字符串中是用 “用户名+密码+数据库名” 来唯一标识数据库，一个用户可以管理多个数据库；而连接 Oracle
+          
+
+1. 方案​        方案就是某用户拥有的所有的数据库对象的逻辑集合，可以看做是 SQL Server 或 MySQL 中的一个数据库。
+​        在 SQL Server 或者 MySQL 中，一般情况下（暂不考虑多租户等特殊情况），一个项目对应DBMS 中的一个数据库，连接字符串中是用 “用户名+密码+数据库名” 来唯一标识数据库，一个用户可以管理多个数据库；而连接 Orac
         </a>
       </p>
 
@@ -257,6 +327,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Oracle-%E5%9F%BA%E7%A1%80/">Oracle 基础</a>
+            
+          </div>
         
       </div>
     </article>
@@ -269,7 +353,7 @@
       <h1 class="index-header">
         
         <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/1.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%B8%80%EF%BC%89/" target="_self">
-          
+          Oracle 基础（一）
         </a>
       </h1>
 
@@ -279,8 +363,10 @@
           
             
           
-          1. Oracle 简介1977年6月，Larry Ellison（拉里，埃里森）与Bob Miner 和 Ed Oates 在硅谷共同创办了一家名为软件开发 实验室（Software Development Laboratories，SDL）的计算机公司，这就是 ORACLE公司的前身。
-如今，ORACLE（甲骨文）公司，已经是全球最大的企业级软件公司，它的软件和硬件产品众多，其中 oracle
+          
+
+1. Oracle 简介1977年6月，Larry Ellison（拉里，埃里森）与Bob Miner 和 Ed Oates 在硅谷共同创办了一家名为软件开发 实验室（Software Development Laboratories，SDL）的计算机公司，这就是 ORACLE公司的前身。
+如今，ORACLE（甲骨文）公司，已经是全球最大的企业级软件公司，它的软件和硬件产品众多，其中 orac
         </a>
       </p>
 
@@ -294,6 +380,20 @@
           </div>
         
         
+          <div class="post-meta mr-3">
+            <i class="iconfont icon-category"></i>
+            
+              <a href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+            
+          </div>
+        
+        
+          <div class="post-meta">
+            <i class="iconfont icon-tags"></i>
+            
+              <a href="/tags/Oracle-%E5%9F%BA%E7%A1%80/">Oracle 基础</a>
+            
+          </div>
         
       </div>
     </article>
@@ -518,64 +618,6 @@ Stream 是对集合功能的增强，它提供了各种非常便利、高效的�
             <i class="iconfont icon-date"></i>
             <time datetime="2021-07-06 14:08" pubdate>
               2021-07-06
-            </time>
-          </div>
-        
-        
-        
-      </div>
-    </article>
-  </div>
-
-  <div class="row mx-auto index-card">
-    
-    
-    <article class="col-12 col-md-12 mx-auto index-info">
-      <h1 class="index-header">
-        
-        <a href="/2021/07/04/CoreJava/2.%20%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
-          
-        </a>
-      </h1>
-
-      <p class="index-excerpt">
-        <a href="/2021/07/04/CoreJava/2.%20%E5%8C%85%E8%A3%85%E7%B1%BB/" target="_self">
-          
-          
-            
-          
-          1. 概念Java 语言是一个面向对象的语言，但是 Java 中的基本数据类型却是不面向对象的。这在实际使用时存在很多的不便，为了解决这个不足，在设计类时为每个基本数据类型设计了一个对应的类进行代表，这样八个和基本数据类型对应的类统称为包装类。
-
-
-
-基本类型
-大小
-包装器类型
-
-
-
-boolean
-/
-Boolean
-
-
-char
-16bit
-Character
-
-
-byte
-8bit
-Byte
-        </a>
-      </p>
-
-      <div class="index-btm post-metas">
-        
-          <div class="post-meta mr-3">
-            <i class="iconfont icon-date"></i>
-            <time datetime="2021-07-04 19:16" pubdate>
-              2021-07-04
             </time>
           </div>
         
