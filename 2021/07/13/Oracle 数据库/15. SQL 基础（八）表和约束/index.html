@@ -1,0 +1,628 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-13 15:00" pubdate>
+        2021年7月13日 下午
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.6k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      31
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-数据库设计"><a href="#1-数据库设计" class="headerlink" title="1. 数据库设计"></a>1. 数据库设计</h2><h3 id="1-1-ER-图转数据库表"><a href="#1-1-ER-图转数据库表" class="headerlink" title="1.1 ER 图转数据库表"></a>1.1 ER 图转数据库表</h3><p>数据建模完成之后，可以把 E-R 图转换成数据库中的表：</p>
+<ul>
+<li>实体的名字转换为表。</li>
+<li>实体的属性转换为表中的列。</li>
+<li>具有唯一特点的属性设置为表中的主键。</li>
+<li>根据实体之间的关系，设置表中某列为外键列（主外键关联）。<ul>
+<li>一对一关系：外键设可以设在任意一方。</li>
+<li>一对多关系：外键设在多的一方。</li>
+<li>多对多关系：需要建一张桥表。</li>
+</ul>
+</li>
+</ul>
+<br/>
+
+<h3 id="1-2-主键（primary-key）"><a href="#1-2-主键（primary-key）" class="headerlink" title="1.2 主键（primary key）"></a>1.2 主键（primary key）</h3><p>表中经常有<strong>一个列或多列的组合</strong>，其值能<strong>唯一地标识表中的每一行</strong>。这样的一列或多列称为表的主键，通过它可强制表的实体完整性。</p>
+<p>关系型数据库要求所有表都应该有主键，不过 Oracle 没有遵循此范例要求。Oracle 中的表可以没有主键（这种情况不多见）。</p>
+<ul>
+<li>作用：用来唯一标识一行数据的。</li>
+<li>特点：<ul>
+<li>非空且唯一，相当于 <code>not null + unique</code>。</li>
+<li>主键所在列必须具有索引（主键的唯一约束通过索引来实现）。如果不存在，将会在索引添加的时候自动创建。</li>
+</ul>
+</li>
+</ul>
+<p>在表中可以使用一个有意义的列做主键。例如：学生表的学号、公民的身份证号。也可以使用没有意义的列做主键，因为主键的作用就是标识一行数据，<strong>大部分情况下都是用没有意义的列去做主键</strong>。此外，还能把多个列组合在一起作为表的主键。</p>
+<br/>
+
+<h3 id="1-3-外键（foreign-key）"><a href="#1-3-外键（foreign-key）" class="headerlink" title="1.3 外键（foreign key）"></a>1.3 外键（foreign key）</h3><p>外键是用于建立和加强两个表数据之间的链接的一列或多列。通过将保存表中主键值的一列或多列添加到另一个表中，可创建两个表之间的链接。这个列就成为第二个表的外键。</p>
+<ul>
+<li>作用：连接两张表，体现两张表之间的对应关系。</li>
+<li>特点：<ul>
+<li>表中的某一个声明为外键的列，一般是与之连接的表的主键（其实只要是<strong>具体唯一约束的列</strong>，就可以被另一种表的外键列所引用）。</li>
+<li><strong>声明为外键的列和被引用的列，名字可以不同，但数据类型必须相同。</strong></li>
+<li>如果外键列没有做主键或联合主键，那么<strong>外键列的值可以为空</strong>。</li>
+<li>实际上，<strong>外键列和被引用的列可以在同一张表中</strong>。最常见的就是表示一棵树。</li>
+<li>如果把 B 表中的联合主键，引用到 A 表中做外键，那么这个外键就是一个联合外键。</li>
+</ul>
+</li>
+</ul>
+<br/>
+
+<h2 id="2-约束"><a href="#2-约束" class="headerlink" title="2. 约束"></a>2. 约束</h2><h3 id="2-1-概念"><a href="#2-1-概念" class="headerlink" title="2.1 概念"></a>2.1 概念</h3><p>列的约束，就是对这个列中的值的要求（限制）。</p>
+<p>数据库中的约束有：</p>
+<ul>
+<li>主键约束 primary key</li>
+<li>外键约束 foreign key</li>
+<li>唯一约束 unique</li>
+<li>非空约束 not null （不能作为表级约束）</li>
+<li>check 约束 check</li>
+</ul>
+<p>按照约束位置的不同又可以分为：列级约束和表级约束。</p>
+<p>如果要声明的约束为<strong>联合主键</strong>、<strong>联合外键</strong>、<strong>联合唯一</strong>的时候，一定要用表级约束。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 声明联合主键</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> customer_tb(<br>		id   number,<br>  	name  varchar2(<span class="hljs-number">30</span>),<br>  	<span class="hljs-keyword">primary</span> key(id, name)<br>);<br><br><span class="hljs-comment">-- 声明联合外键</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> order_tb(<br>		id  number <span class="hljs-keyword">primary</span> key,<br>  	content  varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id number,<br>  	customer_name varchar2(<span class="hljs-number">30</span>),<br>  	<span class="hljs-keyword">foreign</span> key(customer_id, customer_name) <span class="hljs-keyword">references</span> customer_tb(id, name)<br>);<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-2-constraint-关键字"><a href="#2-2-constraint-关键字" class="headerlink" title="2.2 constraint 关键字"></a>2.2 constraint 关键字</h3><p>在创建约束的时候，可以使用 constraint 关键字给约束命名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 列级约束</span><br><span class="hljs-keyword">column</span> [<span class="hljs-keyword">constraint</span> constraint_name] constraint_type<br><br><span class="hljs-comment">-- 表级约束</span><br>[<span class="hljs-keyword">constraint</span> constraint_name] constraint_type (column1, column2...)<br></code></pre></td></tr></table></figure>
+
+<p>例：创建一个课程表和教师表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> teacher_tb(<br>		id number <span class="hljs-keyword">constraint</span> pk_teacher_tb <span class="hljs-keyword">primary</span> key,<br>  	teacher_name varchar2(<span class="hljs-number">20</span>) <span class="hljs-keyword">constraint</span> n_teacher_name <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br>);<br><br><span class="hljs-comment">-- 方式 1：定义列级约束</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> course_tb(<br>		id  number <span class="hljs-keyword">constraint</span> pk_course_tb <span class="hljs-keyword">primary</span> key,<br>  	course_name  varchar2(<span class="hljs-number">20</span>)  <span class="hljs-keyword">constraint</span> u_course_name <span class="hljs-keyword">unique</span>,<br>  	description  varchar2(<span class="hljs-number">100</span>) <span class="hljs-keyword">constraint</span> n_description <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	teacher_id   number <span class="hljs-keyword">constraint</span> fk_course_tb <span class="hljs-keyword">references</span> teacher_tb(id)<br>);<br><br><span class="hljs-comment">-- 方式 2：定义表级约束</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> course_tb(<br>		id  number,<br>  	course_name  varchar2(<span class="hljs-number">20</span>),<br>  	description  varchar2(<span class="hljs-number">100</span>) <span class="hljs-keyword">constraint</span> n_description <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	teacher_id   number,<br>  	<span class="hljs-keyword">constraint</span> pk_course_tb <span class="hljs-keyword">primary</span> key (id),<br>  	<span class="hljs-keyword">constraint</span> u_course_name <span class="hljs-keyword">unique</span> (course_name),<br>  	<span class="hljs-keyword">constraint</span> fk_course_tb <span class="hljs-keyword">foreign</span> key(teacher_id) <span class="hljs-keyword">references</span> teacher_tb(id)<br>);<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-3-操作约束"><a href="#2-3-操作约束" class="headerlink" title="2.3 操作约束"></a>2.3 操作约束</h3><h4 id="2-3-1-增加约束"><a href="#2-3-1-增加约束" class="headerlink" title="2.3.1 增加约束"></a>2.3.1 增加约束</h4><p>如果增加的是除 not null 以外的约束，需要使用 alter table 的 add 子句。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br><span class="hljs-keyword">add</span> [<span class="hljs-keyword">constraint</span> constraint_name] constraint_type (column1, column2...);<br><br><span class="hljs-comment">-- 给 teacher_tb 表的 teacher_name 加上一个 unique 约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> teacher_tb<br><span class="hljs-keyword">add</span> <span class="hljs-keyword">unique</span> (teacher_name);<br></code></pre></td></tr></table></figure>
+
+<p>如果增加 not null 约束，那么必须使用 alter 语句的 modify 子句。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>modify column1 [<span class="hljs-keyword">constraint</span> constraint_name] <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br><br><span class="hljs-comment">-- 给 course_tb 表的 course_name 加上一个 not null 约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> course_tb<br>modify course_name <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-2-修改约束名"><a href="#2-3-2-修改约束名" class="headerlink" title="2.3.2 修改约束名"></a>2.3.2 修改约束名</h4><p>在同一个方案中，约束名必须惟一，并且约束名也不能与其他对象同名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>rename <span class="hljs-keyword">constraint</span> old_constraint_name <span class="hljs-keyword">to</span> new_constraint_name;<br><br><span class="hljs-comment">-- 修改 teacher_tb 表的 teacher_name 的约束的约束名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> teacher_tb<br>rename <span class="hljs-keyword">constraint</span> n_teacher_name <span class="hljs-keyword">to</span> un_teacher_name;<br><br><span class="hljs-comment">-- 修改 course_tb 表的 course_name 的约束的约束名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> course_tb<br>rename <span class="hljs-keyword">constraint</span> u_course_name <span class="hljs-keyword">to</span> un_course_name;<br><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-3-删除约束"><a href="#2-3-3-删除约束" class="headerlink" title="2.3.3 删除约束"></a>2.3.3 删除约束</h4><p>当删除特定表的主键约束时，如果该表具有相关的从表，那么在删除主键约束时必须带有 cascade 选项。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">constraint</span> constraint_name <span class="hljs-operator">|</span> <span class="hljs-keyword">primary</span> key [cascade];<br><br><span class="hljs-comment">-- 删除 teacher_tb 表中 teacher_name 的约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> teacher_tb<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">constraint</span> un_teacher_name;<br><br><span class="hljs-comment">-- 删除 teacher_tb 表的主键约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> teacher_tb<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">primary</span> key cascade;<br><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> TEACHER_TB<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">constraint</span> pk_teacher_tb cascade ;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-4-禁用约束"><a href="#2-3-4-禁用约束" class="headerlink" title="2.3.4 禁用约束"></a>2.3.4 禁用约束</h4><p>禁止约束指使约束临时失效。当禁止了约束之后，约束规则将不再生效。在使用 sql * loader 或 insert 装载数据之前，为了加快数据装载速度，应该首先禁止约束，然后装载数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-comment">-- cascade 用于指定级联禁止从表的外键约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>disable <span class="hljs-keyword">constraint</span> constraint_name [cascade];<br><br><span class="hljs-comment">-- 禁用 course_tb 表的 description 的约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> course_name<br>disable <span class="hljs-keyword">constraint</span> n_description;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="2-3-5-激活约束"><a href="#2-3-5-激活约束" class="headerlink" title="2.3.5 激活约束"></a>2.3.5 激活约束</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>enable <span class="hljs-keyword">constraint</span> constraint_name;<br><br><span class="hljs-comment">-- 激活 course_tb 表的 description 的约束</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> course_name<br>enable <span class="hljs-keyword">constraint</span> n_description;<br><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="2-4-约束的状态"><a href="#2-4-约束的状态" class="headerlink" title="2.4 约束的状态"></a>2.4 约束的状态</h3><h4 id="2-4-1-状态类型"><a href="#2-4-1-状态类型" class="headerlink" title="2.4.1 状态类型"></a>2.4.1 状态类型</h4><p>很多时候由于业务需要，比如我们有大量的历史数据，需要和现有数据合并。当前表存在数据库约束（如非空约束），而这些历史数据又包含违背非空约束的数据行，为了避免导入时由于违反约束而导入失败，我们通过调整约束状态来达到目的。</p>
+<p>数据库约束有两类状态：</p>
+<ul>
+<li><p><strong>启用/禁用（enable/disable）</strong>：是否对新变更的数据启用约束验证。</p>
+</li>
+<li><p><strong>验证/非验证 (validate/novalidate)</strong> ：是否对表中已客观存在的数据进行约束验证。</p>
+</li>
+</ul>
+<br/>
+这两类四种状态从语法角度讲可以随意组合，默认是 enable 和 validate。
+
+<table>
+<thead>
+<tr>
+<th>状态</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>enable validate</td>
+<td>默认的约束组合状态，无法添加违反约束的数据行，数据表中也不能存在违反约束的数据行。</td>
+</tr>
+<tr>
+<td>enable  novalidate</td>
+<td>无法添加违反约束的数据行，但对已存在的违反约束的数据行不做验证。</td>
+</tr>
+<tr>
+<td>disable validate</td>
+<td>可以添加违反约束的数据行，但对已存在的违反约束的数据行会做约束验证。从描述中可以看出来，这本来就是一种相互矛盾的约束组合，只不过是语法上支持这种组合罢了，造成的结果就是会导致 DML 失败。</td>
+</tr>
+<tr>
+<td>disable novalidate</td>
+<td>可以添加违法约束的数据行，对已存在的违反约束的数据行也不做验证。</td>
+</tr>
+</tbody></table>
+<br/>
+
+<h4 id="2-4-2-修改状态"><a href="#2-4-2-修改状态" class="headerlink" title="2.4.2 修改状态"></a>2.4.2 修改状态</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 语法</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>modify <span class="hljs-keyword">constraint</span> constraint_name state1 state2;<br><br><span class="hljs-comment">-- 修改 course_tb 表的 description 的约束的状态为 disable novalidate</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> course_tb<br>modify <span class="hljs-keyword">constraint</span> n_description disable novalidate;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="3-表"><a href="#3-表" class="headerlink" title="3. 表"></a>3. 表</h2><h3 id="2-1-命名规则"><a href="#2-1-命名规则" class="headerlink" title="2.1 命名规则"></a>2.1 命名规则</h3><p>表和列的命名规则：</p>
+<ul>
+<li>名字中只能出现字母、数字、下划线（_）和井号（#）。</li>
+<li>必须是字母开头。</li>
+<li>不能是数据库中的关键字。</li>
+<li>长度必须在 1 ~ 30 个字符之间。</li>
+<li>不能和数据库中已有的对象重名。</li>
+</ul>
+<br/>
+
+<h3 id="2-2-数据类型"><a href="#2-2-数据类型" class="headerlink" title="2.2 数据类型"></a>2.2 数据类型</h3><p>Oracle 数据库中常用的几种数据类型：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>char(size)</code></td>
+<td>定长的字符串。size 用于指定字符串的最大长度，size 的值必须是正整数且不超过 32767。字符串长度没有达到 size 用空格填充。</td>
+</tr>
+<tr>
+<td><code>varchar(size)</code></td>
+<td>变长的字符串。size 用于指定字符串的最大长度，字符串长度没有达到 size 不会填充。可以存空字符串和 null。</td>
+</tr>
+<tr>
+<td><code>varchar2(size)</code></td>
+<td>变长的字符串。varchar2 是 Oracle 数据库特有的类型。用法和 varchar 一样，但是不能存储空字符串。</td>
+</tr>
+<tr>
+<td><code>number(p, s)</code></td>
+<td>数字。p 表示最大位数（整数位 + 小数位）。s 表示保留的小数位（四舍五入），也可以为负数。可以直接使用 number，不加参数。</td>
+</tr>
+<tr>
+<td><code>date</code></td>
+<td>日期类型。</td>
+</tr>
+<tr>
+<td><code>blob</code></td>
+<td>存二进制对象，例如视频，音频，图片等。</td>
+</tr>
+<tr>
+<td><code>clob</code></td>
+<td>存储大文本，例如很多很多文字。</td>
+</tr>
+</tbody></table>
+<h3 id="3-3-创建表的格式"><a href="#3-3-创建表的格式" class="headerlink" title="3.3 创建表的格式"></a>3.3 创建表的格式</h3><p>创建表的格式有两种：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 格式1</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名(<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    ...   ...      ...<br>    字段名 数据类型 [列约束类型]<br>);<br><br><span class="hljs-comment">-- 格式2</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名(<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    ...    ...      ...<br>    字段名 数据类型 [列约束类型],<br>    [表级约束],<br>    ...<br>    [表级约束]<br>);<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 1：创建一个学生表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 格式 1：使用列级约束</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> student_tb(<br>		id        number        <span class="hljs-keyword">primary</span> key,                    <span class="hljs-comment">-- 主键</span><br>  	name      varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,                       <span class="hljs-comment">-- 非空</span><br>  	email     varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">unique</span>,                         <span class="hljs-comment">-- 唯一</span><br>  	gender    <span class="hljs-type">char</span>(<span class="hljs-number">1</span>)       <span class="hljs-keyword">check</span>(gender <span class="hljs-keyword">in</span> (<span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-string">&#x27;b&#x27;</span>)),    <span class="hljs-comment">-- check 约束</span><br>  	age       number,<br>  	birthday  <span class="hljs-type">date</span><br>);<br><br><span class="hljs-comment">-- 格式 2：使用表级约束</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> student_tb(<br>		id      number,<br>		name    varchar2(<span class="hljs-number">30</span>)   <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	age     number  <span class="hljs-keyword">default</span> <span class="hljs-number">20</span>,<br>  	email   varchar2(<span class="hljs-number">30</span>),<br>  	gender  <span class="hljs-type">char</span>,<br>  <br>  	<span class="hljs-keyword">primary</span> key(id),       <span class="hljs-comment">-- 主键</span><br>  	<span class="hljs-keyword">unique</span>(email),				<span class="hljs-comment">-- 唯一 </span><br>  	<span class="hljs-keyword">check</span>(gender <span class="hljs-keyword">in</span> (<span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-string">&#x27;m&#x27;</span>))  <span class="hljs-comment">-- check 约束</span><br>);<br><br><span class="hljs-comment">-- not null 只能是列级约束，不能是表级约束</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 2：顾客表和订单表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> customer_tb(<br>		id    number         <span class="hljs-keyword">primary</span> key,<br>  	name  varchar2(<span class="hljs-number">30</span>)   <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br>);<br><br><span class="hljs-comment">-- 方式 1：使用列级约束声明外键</span><br>creat <span class="hljs-keyword">table</span> order_tb(<br>		id           number          <span class="hljs-keyword">primary</span> key,<br>  	content      varchar2(<span class="hljs-number">30</span>)    <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id  number  <span class="hljs-keyword">references</span> customer_tb(id)<br>);<br><br><span class="hljs-comment">-- 方式 2：使用表级约束声明外键</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> order_tb(<br>		id           number,<br>    content      varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id  number,<br>  	<span class="hljs-keyword">primary</span> key (id),<br>  	<span class="hljs-keyword">foreign</span> key (customer_id) <span class="hljs-keyword">references</span> customer_tb (id)<br>);<br></code></pre></td></tr></table></figure>
+
+<ul>
+<li><p>一个顾客对应多分订单，所以外键在订单表中。订单表中的外键列 customer_id 的值，是引用自顾客表中的主键列 id 的值。</p>
+</li>
+<li><p>不能直接删除顾客表，因为订单表引用了顾客表的主键做外键。应当删除订单表再删除顾客表。</p>
+</li>
+</ul>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%BB%93%E6%9E%9C%E9%9B%86/">
+                        <span class="hidden-mobile">SQL 基础（四）操作结果集</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>

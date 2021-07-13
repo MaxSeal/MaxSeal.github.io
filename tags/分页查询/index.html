@@ -18,25 +18,9 @@
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>maxseal</title>
+  <title>标签 - 分页查询 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
-
-
-  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
-  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
-
-  
-    
-    
-      
-      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
-    
-  
-
-  
-    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
-  
 
 
 
@@ -64,7 +48,7 @@
 
 
 <body>
-  <header style="height: 70vh;">
+  <header style="height: 80vh;">
     <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
   <div class="container">
     <a class="navbar-brand"
@@ -175,50 +159,17 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="标签 - 分页查询">
               
             </span>
 
             
-              <div class="mt-3">
-  
-  
-    <span class="post-meta">
-      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-09 15:14" pubdate>
-        2021年7月9日 下午
-      </time>
-    </span>
-  
-</div>
-
-<div class="mt-1">
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-chart"></i>
-      779 字
-    </span>
-  
-
-  
-    
-    <span class="post-meta mr-2">
-      <i class="iconfont icon-clock-fill"></i>
-      
-      
-      8
-       分钟
-    </span>
-  
-
-  
-  
-</div>
-
-            
           </div>
 
+          
+            <div class="scroll-down-bar">
+              <i class="iconfont icon-arrowdown"></i>
+            </div>
           
         </div>
       </div>
@@ -227,116 +178,40 @@
 
   <main>
     
+      <div class="container nopadding-x-md">
+        <div class="py-5" id="board"
+          >
+          
+          <div class="container">
+            <div class="row">
+              <div class="col-12 col-md-10 m-auto">
+                
+
+<div class="list-group">
+  <p class="h4">共计 1 篇文章</p>
+  <hr>
+  
+  
+    
       
+      <p class="h5">2021</p>
+    
+    <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/14.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2/" class="list-group-item list-group-item-action">
+      <span class="archive-post-title">SQL 基础（七）分页查询</span>
+      <time style="float: right;">07-12</time>
+    </a>
+  
+</div>
 
-<div class="container-fluid nopadding-x">
-  <div class="row nomargin-x">
-    <div class="d-none d-lg-block col-lg-2"></div>
-    <div class="col-lg-8 nopadding-x-md">
-      <div class="container nopadding-x-md" id="board-ctn">
-        <div class="py-5" id="board">
-          <article class="post-content mx-auto">
-            <!-- SEO header -->
-            <h1 style="display: none"></h1>
-            
-            <div class="markdown-body">
-              <h1 id="Oracle-数据库结构"><a href="#Oracle-数据库结构" class="headerlink" title="Oracle 数据库结构"></a>Oracle 数据库结构</h1><p>数据库服务器是信息管理的关键。</p>
-<p>通常，数据库服务器能在多用户的环境下地靠地管理大量数据，以便用户可以并发地访问相同的数据。此外，数据库服务器还可以防止未经授权的访问，并为故障恢复提供有效的解决方案。</p>
-<br/>
 
-<h2 id="1-数据库和实例"><a href="#1-数据库和实例" class="headerlink" title="1. 数据库和实例"></a>1. 数据库和实例</h2><p>Oracle 数据库服务器由一个数据库和至少一个数据库实例组成，通常被简称为实例。</p>
-<p>因为数据库和实例联系紧密，所以 Oracle 数据库这个术语有时同时用指实例和数据库。但从严格的意义上来讲，这些术语是有区别的：</p>
-<ul>
-<li><p>数据库</p>
-<p>数据库是一组位于磁盘上的用于存储数据文件。这些文件能够独立于数据库实例存在。</p>
-</li>
-<li><p>数据库实例</p>
-<p>数据库实例是一组管理数据库文件的内存结构。数据库实例由一个被称为 <a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/Chunk520365104.html#GUID-78C0E867-233A-4857-B9FE-A3852A9B7BDF"><strong>system global area (SGA)</strong></a> 的共享存储区域和一些列的后台进程组成。实例可以独立于数据库文件而存在。</p>
-</li>
-</ul>
-<p>对于到实例的每个用户连接，一个客户端进程运行应用程序。每个客户端进程都与其自己的服务器进程相关联。服务器进程有自己的私有会话内存，称为 <a target="_blank" rel="noopener" href="https://docs.oracle.com/en/database/oracle/oracle-database/19/cncpt/Chunk520365104.html#GUID-76021F69-AC7A-4D8D-A308-A7B8AC072EEF">program global area (PGA)</a>。</p>
-<br/>
 
-<h2 id="2-数据库的存储结构"><a href="#2-数据库的存储结构" class="headerlink" title="2. 数据库的存储结构"></a>2. 数据库的存储结构</h2><p>可以从物理和逻辑的角度来考虑 Oracle 数据库的结构。</p>
-<p>数据库拥有物理结构和逻辑结构。因为物理结构和逻辑结构是分开的，所以修改数据的物理存储结构并不会影响其逻辑存储结构。</p>
-<br/>
 
-<h3 id="2-1-物理存储结构"><a href="#2-1-物理存储结构" class="headerlink" title="2.1 物理存储结构"></a>2.1 物理存储结构</h3><p> <strong>物理结构是由构成数据库的操作系统文件所决定</strong>，Oracle 数据库文件包括：</p>
-<ul>
-<li><p>数据文件（Data Files）：</p>
-<p>每个 Oracle 数据库都有一个或多个物理数据文件，其中包含了所有的数据库数据。数据库逻辑结构（如表和索引）的数据物理地存储在数据文件中。名字的格式通常为<code>*.dbf</code>格式，例如: <code>userCIMS.dbf </code>。</p>
-<br/></li>
-<li><p>日志文件（Redo Log File）：</p>
-<p>日志文件<strong>用于记录数据库所做的全部变更（如增加、删除、修改），以便在系统发生故障时，用它对数据库进行恢复</strong>。名字通常为<code>Log*.dbf</code>格式，如：<code>Log1CIMS.dbf,Log2CIMS.dbf</code> </p>
-<br/></li>
-<li><p>控制文件（Control File）:</p>
-<p>每个 Oracle 数据库都有一个控制文件，它们是较小的二进制文件，<strong>用于记录数据库的物理结构</strong>，如：数据库名、数据库的数据文件和日志文件的名字和位置等信息。用于打开、存取数据库。名字通常为 <code>Ctrl*.ctl</code> 格式，如 <code>Ctrl1CIMS.ctl</code>。　　</p>
-<br/></li>
-<li><p>配置文件：</p>
-<p>配置文件用于<strong>记录 Oracle 数据库运行时的一些重要参数</strong>，如：数据块的大小，内存结构的配置等。名字通常为 <code>init*.ora</code> 格式，如：<code>initCIMS.ora</code> 。　　</p>
-</li>
-</ul>
 
-            </div>
-            <hr>
-            <div>
-              <div class="post-metas mb-3">
-                
-                
               </div>
-              
-                <p class="note note-warning">
-                  
-                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
-                  
-                </p>
-              
-              
-                <div class="post-prevnext">
-                  <article class="post-prev col-6">
-                    
-                    
-                      <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/9.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%9F%A5%E8%AF%A2/">
-                        <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">上一篇</span>
-                      </a>
-                    
-                  </article>
-                  <article class="post-next col-6">
-                    
-                    
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/4.%20%E8%A1%A8/">
-                        <span class="hidden-mobile"></span>
-                        <span class="visible-mobile">下一篇</span>
-                        <i class="iconfont icon-arrowright"></i>
-                      </a>
-                    
-                  </article>
-                </div>
-              
             </div>
-
-            
-          </article>
+          </div>
         </div>
       </div>
-    </div>
-    
-      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
-        <div id="toc">
-  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
-  <div class="toc-body" id="toc-body"></div>
-</div>
-
-      </div>
-    
-  </div>
-</div>
-
-<!-- Custom -->
-
-
     
 
     
@@ -416,15 +291,9 @@
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
 
 
 
-  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
-
-
-
-  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
 
 
 

@@ -18,7 +18,7 @@
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>maxseal</title>
+  <title>SQL 基础（七）分页查询 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="SQL 基础（七）分页查询">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-08 22:05" pubdate>
-        2021年7月8日 晚上
+      <time datetime="2021-07-12 14:45" pubdate>
+        2021年7月12日 下午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.2k 字
+      568 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      6
        分钟
     </span>
   
@@ -237,70 +237,68 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">SQL 基础（七）分页查询</h1>
             
             <div class="markdown-body">
-              <h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>​        Oracle 数据库中提供了同义词管理的功能。<strong>同义词是数据库对象的一个别名</strong>，经常用于简化对象访问和提高对象访问的安全性。在使用同义词时，Oracle 数据库将它翻译成对应方案对象的名字。与视图类似，同义词并不占用实际存储空间，只有在数据字典中保存了同义词的定义。在Oracle 数据库中的大部分数据库对象，如表、视图、物化视图、序列、函数、存储过程、包、同义词等等，数据库管理员都可以根据实际情况为他们定义同义词。</p>
+              <span id="more"></span>
+
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>因为表中数据过多，我们并不能一次全都查询出来交给前端去展示，而是需要每次按照提前设置好的要求，查询一部分数据给用户，当用户点击下一页的时候，再查出下一部分数据给用户。</p>
+<p>实现分页的方式有很多，并且不同数据库，实现分页查询的方式也会不同，那么在 Oracle 中，可以使用伪列 rownum，再结合子查询来进行简单的实现。</p>
 <br/>
 
-<h2 id="2-同义词分类"><a href="#2-同义词分类" class="headerlink" title="2. 同义词分类"></a>2. 同义词分类</h2><p>​        Oracle 同义词有两种类型，分别是公用同义词和私有同义词。普通用户创建的同义词一般都是私有同义词，公有同义词一般由数据库管理员创建，普通用户如果希望创建同义词，则需要 <code>CREATE PUBLIC SYNONYM</code> 这个系统权限。</p>
-<p>公用同义词：由一个特殊的用户组 Public 所拥有。顾名思义，数据库中所有的用户都可以使用公用同义词。公用同义词往往用来标示一些比较普通的数据库对象，这些对象往往大家都需要引用。但是公共的意思并不是所有的用户都可以访问它，必须被授权后才能进行。</p>
-<p>私有同义词：它是跟公用同义词所对应，他是由创建他的用户所有。当然，这个同义词的创建者，可以通过授权控制其他用户是否有权使用属于自己的私有同义词。</p>
-<br/>
-
-<h2 id="3-同义词的作用"><a href="#3-同义词的作用" class="headerlink" title="3. 同义词的作用"></a>3. 同义词的作用</h2><p>​        <strong>为分布式数据库的远程对象提供位置透明性。</strong></p>
-<p>​        <strong>在数据库连接中提供位置透明性。</strong></p>
-<p>​        <strong>简化 SQL 语句。</strong>如果自己建的表的名字很长，可以为这个表创建一个同义词来简化开发。</p>
-<p>​        <strong>多用户协同开发中，可以屏蔽对象的名字及其持有者。</strong>如果没有同义词，当操作其他用户的表时，必须通过<code>用户名.对象名</code>的形式。采用了同义词之后就可以隐蔽掉用户名。当然这里要注意的是：公用同义词只是为数据库对象定义了一个公共的别名，其他用户能否通过这个别名访问这个数据库对象，还要看是否已经为这个用户授权。</p>
-<br/>
-
-<h2 id="4-同义词的操作"><a href="#4-同义词的操作" class="headerlink" title="4. 同义词的操作"></a>4. 同义词的操作</h2><h3 id="4-1-创建同义词"><a href="#4-1-创建同义词" class="headerlink" title="4.1 创建同义词"></a>4.1 创建同义词</h3><p>创建同义词的语法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> [ PUBLIC ] SYNONYM synonym_name <span class="hljs-keyword">FOR</span> [ schema .] object [ <span class="hljs-variable">@db</span>_link ];<br></code></pre></td></tr></table></figure>
-
+<h2 id="2-伪列-rownum"><a href="#2-伪列-rownum" class="headerlink" title="2. 伪列 rownum"></a>2. 伪列 rownum</h2><p>Oracle 中有一个特殊的关键字 rownum，被称为伪列。rownum 就像表中的列一样，但是在表中并不存在。伪列并不能像表中真实的列一样随便操作，伪列只能用于查询。</p>
+<p>伪列可以根据查询结果的条数，自动生成，并且一定是从 1 开始连续不断的数字。伪列 rownum的本质就是给查询的每一行的结果标上行号。</p>
 <p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建公有同义词：</span><br><span class="hljs-keyword">create</span> public synonym table_a <span class="hljs-keyword">for</span> test.table_a;<br><br><span class="hljs-comment">-- 创建私有同义词：</span><br><span class="hljs-keyword">create</span> synonym table_b <span class="hljs-keyword">for</span> test.table_b;<br></code></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> rownum, last_name<br><span class="hljs-keyword">from</span> s_emp;<br><br><span class="hljs-comment">-- 查询结果：</span><br>ROWNUM     LAST_NAME<br><span class="hljs-comment">---------  ---------------</span><br>        <span class="hljs-number">1</span>  Velasquez<br>        <span class="hljs-number">2</span>  Ngao<br>        <span class="hljs-number">3</span>  Nagayama<br>        <span class="hljs-number">4</span>  Ropeburn<br></code></pre></td></tr></table></figure>
 
 <br/>
 
-<h3 id="4-2-使用同义词"><a href="#4-2-使用同义词" class="headerlink" title="4.2 使用同义词"></a>4.2 使用同义词</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 使用同义词</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> table_a;<br><br><span class="hljs-comment">-- 相当于</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test.table_a<br></code></pre></td></tr></table></figure>
-
+<p>如果伪列用在 where 条件中，那么它只能有以下操作：</p>
 <ul>
-<li>使用同义词可以保证当数据库的位置或对象名称发生改变时，应用程序的代码保持稳定不变，仅需要改变同义词。</li>
-<li>当使用一个没有指定 schema 的同义词是，首先在用户自己的 schema 中寻找，然后再公共同义词中寻找。</li>
+<li><p>rownum 如果是 ‘ = ’ 的条件，那么伪列只能等于 1。</p>
+<p>如果等于其他值，那么就查询不出任何结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> last_name<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">where</span> rownum <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+<br/></li>
+<li><p>rownum 如果是 ‘ &gt; ’ 的条件，那么伪列只能大于0。</p>
+<p>如果大于其他值，那么就查询不出任何结果。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> last_name<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">where</span> rownum <span class="hljs-operator">&gt;</span> <span class="hljs-number">0</span>;<br></code></pre></td></tr></table></figure>
+
+<br/></li>
+<li><p>rownum 可以小于任何数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> last_name<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">where</span> rownum <span class="hljs-operator">&lt;</span> <span class="hljs-number">7</span>;<br></code></pre></td></tr></table></figure></li>
 </ul>
+<p>将来在实际的使用中，伪列 rownum 最核心的作用就是完成分页查询。</p>
 <br/>
 
-<h3 id="4-3-编译同义词"><a href="#4-3-编译同义词" class="headerlink" title="4.3 编译同义词"></a>4.3 编译同义词</h3><p>​        当同义词的原对象被重新建立时，同义词需要重新编译。对原对象进行 DDL 操作后，同义词的状态会变成 INVALID；当再次引用这个同义词时，同义词会自动编译，状态会变成VALID，无需人工干预，当然前提是不改变原对象的名称。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span>  SYNONYM T COMPILE;<br></code></pre></td></tr></table></figure>
+<h2 id="3-使用例"><a href="#3-使用例" class="headerlink" title="3. 使用例"></a>3. 使用例</h2><p>在这 SQL 中，给 rownum 起一个别名 rn，然后把这个 SQL  语句作为第二条 SQL  语句的子查询，并且把它当做一张虚拟的表。那么这时候，这个虚拟表中的 rn 就可以当做普通的字段进行操作了。</p>
+<p>例 1：查询出来 s_emp 表中的第 6~10 条数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> t.id, t.last_name, t.dept_id<br><span class="hljs-keyword">from</span> (<br>      <span class="hljs-keyword">select</span> rownum rn, id, last_name, dept_id<br>      <span class="hljs-keyword">from</span> s_emp<br>      <span class="hljs-keyword">where</span> rownum<span class="hljs-operator">&lt;=</span><span class="hljs-number">10</span><br>) t<br><span class="hljs-keyword">where</span> t.rn <span class="hljs-operator">&gt;=</span> <span class="hljs-number">6</span><br></code></pre></td></tr></table></figure>
 
-
-
-<h3 id="4-4-删除同义词"><a href="#4-4-删除同义词" class="headerlink" title="4.4 删除同义词"></a>4.4 删除同义词</h3><p>删除同义词的语法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> [ PUBLIC ] SYNONYM [ schema. ] synonym_name [ FORCE ];<br></code></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> public synonym table_a;<br><span class="hljs-keyword">drop</span> synonym table_b;<br></code></pre></td></tr></table></figure>
-
-<p><strong>当同义词的原对象被删除是，同义词并不会被删除。</strong></p>
 <br/>
 
-<h2 id="5-同义词的权限管理"><a href="#5-同义词的权限管理" class="headerlink" title="5. 同义词的权限管理"></a>5. 同义词的权限管理</h2><p>与同义词相关的权限有 <code>CREATE SYNONYM</code>、<code>CREATE ANY SYNONYM</code>、<code>CREATE PUBLIC SYNONYM</code>。</p>
-<p>（1）用户在自己的模式下创建私有同义词，这个用户必须拥有<code>CREATE SYNONYM</code>权限，否则不能创建私有同义词。</p>
-<p>（2）如果需要在其它模式下创建同义词，则必须具有<code>CREATE ANY SYNONYM</code>的权限。</p>
-<p>（3）创建公有同义词则需要 CREATE PUBLIC SYNONYM 系统权限。</p>
-<br/>
+<p>例 2：查询 s_emp 表中，第 3~7 条数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> t.id, t.last_name, t.dept_id<br><span class="hljs-keyword">from</span> (<br>      <span class="hljs-keyword">select</span> rownum rn, id,last_name, dept_id<br>      <span class="hljs-keyword">from</span> s_emp<br>      <span class="hljs-keyword">where</span> rownum <span class="hljs-operator">&lt;=</span> <span class="hljs-number">7</span><br>) t<br><span class="hljs-keyword">where</span> t.rn <span class="hljs-operator">&gt;=</span> <span class="hljs-number">3</span>;<br></code></pre></td></tr></table></figure>
 
-<h2 id="6-相关的一些问题"><a href="#6-相关的一些问题" class="headerlink" title="6. 相关的一些问题"></a>6. 相关的一些问题</h2><p>（1）公用同义词与私有同义词能否同名呢？如果可以，访问同义词时，是共有同义词还是私有同义词优先？<br>答：可以，如果存在公用同义词和私有同义词同名的情况，在访问同义词是，访问的是私有同义词的指向的对象。</p>
-<br/>
-
-<p>（2）为什么 OE 用户创建的公用同义词，HR 用户不能访问呢？</p>
-<p>答：因为HR没有访问OE模式下对象的权限，如果OE模式给HR用户赋予了SELECT对象等权限，那么HR用户即可访问。</p>
 
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%88%86%E9%A1%B5%E6%9F%A5%E8%AF%A2/">分页查询</a>
+                    
+                  </div>
                 
               </div>
               
@@ -315,9 +313,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/3.%20%E7%94%A8%E6%88%B7/">
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E6%93%8D%E4%BD%9C%E7%BB%93%E6%9E%9C%E9%9B%86/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile"></span>
+                        <span class="hidden-mobile">SQL 基础（四）操作结果集</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -325,7 +323,7 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/5.%20%E5%BA%8F%E5%88%97/">
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%85%AD%EF%BC%89%E5%AD%90%E6%9F%A5%E8%AF%A2/">
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>

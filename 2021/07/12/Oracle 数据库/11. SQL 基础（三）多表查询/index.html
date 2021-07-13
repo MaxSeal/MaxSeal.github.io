@@ -18,7 +18,7 @@
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>maxseal</title>
+  <title>SQL 基础（三）多表查询 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="">
+            <span class="h2" id="subtitle" title="SQL 基础（三）多表查询">
               
             </span>
 
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      0 字
+      1.2k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      1
+      16
        分钟
     </span>
   
@@ -237,15 +237,100 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none"></h1>
+            <h1 style="display: none">SQL 基础（三）多表查询</h1>
             
             <div class="markdown-body">
-              
+              <span id="more"></span>
+
+<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>多表查询，又称表联合查询，即一条 SQL 语句涉及到的表有多张，表中的数据通过特定的连接，进行联合显示。</p>
+<br/>
+
+<h2 id="2-笛卡尔积"><a href="#2-笛卡尔积" class="headerlink" title="2. 笛卡尔积"></a>2. 笛卡尔积</h2><p>在数学中，两个集合 X 和 Y 的笛卡尓积表示为 X × Y。</p>
+<p>在数据库中如果直接查询两张表，那么其查询结果就会产生笛卡尔积。例如：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- s_emp表中25条数据，s_dept表中12条数据，查询两张表，数据两两组合，会得到300条数据。</span><br><span class="hljs-keyword">select</span> <span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-keyword">from</span> s_emp,s_dept;<br></code></pre></td></tr></table></figure>
+
+<p>其实 s_emp 表中的每一条数据和 s_dept 表中的每一条数据进行两两组合，这里面大多数的数据是没有意义的。为了这种避免笛卡尔积的产生，在多表查询的时候，可以使用连接查询来解决这个问题。</p>
+<br/>
+
+<h2 id="3-连接查询"><a href="#3-连接查询" class="headerlink" title="3. 连接查询"></a>3. 连接查询</h2><h3 id="3-1-等值连接"><a href="#3-1-等值连接" class="headerlink" title="3.1 等值连接"></a>3.1 等值连接</h3><p>利用一张表中某列的值和另一张表中某列的值相等的关系，把两张表连接起来，满足条件的数据才会组合。</p>
+<p>例如：查询员工的名字、部门编号、部门名字。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> se.last_name, se.dept_id, sd.id, sd.name<br><span class="hljs-keyword">from</span> s_emp se, s_dept sd<br><span class="hljs-keyword">where</span> se.dept_id <span class="hljs-operator">=</span> sd.id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-2-不等值连接"><a href="#3-2-不等值连接" class="headerlink" title="3.2 不等值连接"></a>3.2 不等值连接</h3><p>假设数据库中还有一张工资等级表 salgrade。</p>
+<p>工资等级表 salgrade ：</p>
+<ul>
+<li>gradeName 列表示等级名称。</li>
+<li>losal 列表示这个级别的最低工资数。 </li>
+<li>hisal 列表示这个级别的最高工资数。</li>
+</ul>
+<p>假设，表中的数据类似于下面内容：</p>
+<figure class="highlight apache"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs apache"><span class="hljs-attribute">id</span> salgrade losal hisal<br><span class="hljs-attribute">1</span> 初级程序员 <span class="hljs-number">2000</span> <span class="hljs-number">4000</span><br><span class="hljs-attribute">2</span> 中级程序员 <span class="hljs-number">4000</span> <span class="hljs-number">6000</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例如：查询出员工的名字、职位、工资、工资等级名称。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> e.last_name, e.title, e.salray, s.gradeName<br><span class="hljs-keyword">from</span> s_emp e, salgrade s<br><span class="hljs-keyword">where</span> e.salray betweeb s.losal <span class="hljs-keyword">and</span> s.hisal<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-3-外连接"><a href="#3-3-外连接" class="headerlink" title="3.3 外连接"></a>3.3 外连接</h3><p>创建两张表用于测试：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_A (<br>    id number,<br>    name VARCHAR2(<span class="hljs-number">10</span>)<br>);<br><br><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> t_B (<br>    id  number,<br>    name VARCHAR2(<span class="hljs-number">10</span>)<br>);<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_A <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;A&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_A <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;B&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_A <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">3</span>,<span class="hljs-string">&#x27;C&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_A <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">4</span>,<span class="hljs-string">&#x27;D&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_A <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">5</span>,<span class="hljs-string">&#x27;E&#x27;</span>);<br><br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_B <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;AA&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_B <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;BB&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_B <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">2</span>,<span class="hljs-string">&#x27;CC&#x27;</span>);<br><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> t_B <span class="hljs-keyword">VALUES</span>(<span class="hljs-number">1</span>,<span class="hljs-string">&#x27;DD&#x27;</span>);<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-3-1-左外连接"><a href="#3-3-1-左外连接" class="headerlink" title="3.3.1 左外连接"></a>3.3.1 左外连接</h4><p>左外连接是以左表的记录为基础的，该表的内容会全部显示，然后加上左表和右表匹配的内容。</p>
+<p>示例中 t_A 可以看成左表，t_B 可以看成右表。结果集是 t_A 表中的全部数据，再加上 t_A 表和t_B 表匹配后的数据。换句话说，左表 (t_A) 的记录将会全部表示出来，而右表 (t_B) 只会显示符合搜索条件的记录。t_B 表记录不足的地方均为 NULL。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">from</span> t_A a <span class="hljs-keyword">left</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> t_B b <br><span class="hljs-keyword">on</span> a.id <span class="hljs-operator">=</span> b.id;<br><br><span class="hljs-comment">-- 结果为</span><br>ID    NAME   ID    NAME<br><span class="hljs-comment">----  ----   ----  ----</span><br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    AA<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    BB<br> <span class="hljs-number">2</span>     B       <span class="hljs-number">2</span>    CC<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    DD<br> <span class="hljs-number">4</span>     D       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">5</span>     E       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">3</span>     C       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br></code></pre></td></tr></table></figure>
+
+<BR/>
+
+<p>也可以用 + 来实现。这个 + 号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。如果加号写在右表，左表就是全部显示，所以是左连接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Select</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">from</span> t_A a, t_B b <br><span class="hljs-keyword">where</span> a.id <span class="hljs-operator">=</span> b.id(<span class="hljs-operator">+</span>);<br><br><span class="hljs-comment">-- 结果为</span><br>ID    NAME   ID    NAME<br><span class="hljs-comment">----  ----   ----  ----</span><br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    AA<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    BB<br> <span class="hljs-number">2</span>     B       <span class="hljs-number">2</span>    CC<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    DD<br> <span class="hljs-number">4</span>     D       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">5</span>     E       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">3</span>     C       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-3-2-右外连接"><a href="#3-3-2-右外连接" class="headerlink" title="3.3.2 右外连接"></a>3.3.2 右外连接</h4><p>与左外连接相反，右外连接是以右表的记录为基础的，该表的内容会全部显示，然后加上右表和左表匹配的内容。</p>
+<p>示例中 t_A 可以看成左表，t_B 可以看成右表。结果集是 t_B 表中的全部数据，再加上 t_A 表和t_B 表匹配后的数据。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">from</span> t_A a <span class="hljs-keyword">right</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> t_B b <br><span class="hljs-keyword">on</span> a.id <span class="hljs-operator">=</span> b.id;<br><br><span class="hljs-comment">-- 结果为</span><br>ID    NAME   ID    NAME<br><span class="hljs-comment">----  ----   ----  ----</span><br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    AA<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    BB<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    DD<br> <span class="hljs-number">2</span>     B       <span class="hljs-number">2</span>    CC<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>用（+）来实现。这个 + 号可以这样来理解： + 表示补充，即哪个表有加号，这个表就是匹配表。如果加号写在左表，右表就是全部显示，所以是右连接。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Select</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">from</span> t_A a, t_B b <br><span class="hljs-keyword">where</span> a.id(<span class="hljs-operator">+</span>) <span class="hljs-operator">=</span> b.id;<br><br><span class="hljs-comment">-- 结果为</span><br>ID    NAME   ID    NAME<br><span class="hljs-comment">----  ----   ----  ----</span><br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    AA<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    BB<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    DD<br> <span class="hljs-number">2</span>     B       <span class="hljs-number">2</span>    CC<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-3-3-全连接"><a href="#3-3-3-全连接" class="headerlink" title="3.3.3 全连接"></a>3.3.3 全连接</h4><p>左表和右表都不做限制，所有的记录都显示，两表不足的地方均为 NULL。 全外连接不支持（+）写法。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <br><span class="hljs-keyword">from</span> t_A a <span class="hljs-keyword">full</span> <span class="hljs-keyword">outer</span> <span class="hljs-keyword">join</span> t_B b <br><span class="hljs-keyword">on</span> a.id <span class="hljs-operator">=</span> b.id; <br><br><span class="hljs-comment">-- 结果为</span><br>ID    NAME   ID    NAME<br><span class="hljs-comment">----  ----   ----  ----</span><br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    AA<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    BB<br> <span class="hljs-number">2</span>     B       <span class="hljs-number">2</span>    CC<br> <span class="hljs-number">1</span>     A       <span class="hljs-number">1</span>    DD<br> <span class="hljs-number">4</span>     D       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">5</span>     E       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br> <span class="hljs-number">3</span>     C       <span class="hljs-keyword">NULL</span> <span class="hljs-keyword">NULL</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-4-自连接"><a href="#3-4-自连接" class="headerlink" title="3.4 自连接"></a>3.4 自连接</h3><p>自连接就是一张表，自己和自己连接后进行查询。</p>
+<p>例如：查询每个员工的名字以及员工对应的管理者的名字。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> s1.last_name, s2.last_name manager_name<br><span class="hljs-keyword">from</span> s_emp s1, s_emp s2<br><span class="hljs-keyword">where</span> s1.manager_id <span class="hljs-operator">=</span> s2.id;<br></code></pre></td></tr></table></figure>
+
+<h2 id=""><a href="#" class="headerlink" title=""></a></h2>
             </div>
             <hr>
             <div>
               <div class="post-metas mb-3">
                 
+                  <div class="post-meta mr-3">
+                    <i class="iconfont icon-category"></i>
+                    
+                      <a class="hover-with-bg" href="/categories/SQL-%E5%9F%BA%E7%A1%80/">SQL 基础</a>
+                    
+                  </div>
+                
+                
+                  <div class="post-meta">
+                    <i class="iconfont icon-tags"></i>
+                    
+                      <a class="hover-with-bg" href="/tags/%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">多表查询</a>
+                    
+                  </div>
                 
               </div>
               
@@ -260,7 +345,7 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%94%EF%BC%89%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">
                         <i class="iconfont icon-arrowleft"></i>
                         <span class="hidden-mobile"></span>
                         <span class="visible-mobile">上一篇</span>
@@ -270,8 +355,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/09/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/9.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89%20%E6%9F%A5%E8%AF%A2/">
-                        <span class="hidden-mobile"></span>
+                      <a href="/2021/07/10/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/10.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89%E5%8D%95%E8%A1%8C%E5%87%BD%E6%95%B0/">
+                        <span class="hidden-mobile">SQL 基础（二）单行函数</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>
