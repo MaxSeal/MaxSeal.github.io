@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="序列的基本概念与使用方法。">
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      824 字
+      836 字
     </span>
   
 
@@ -240,7 +240,8 @@
             <h1 style="display: none">SQL 基础（十二）序列</h1>
             
             <div class="markdown-body">
-              <span id="more"></span>
+              <p>序列的基本概念与使用方法。</p>
+<span id="more"></span>
 
 <p>在 Oracle 中 sequence 就是序号，每次提取完都会自动增加，步幅固定，它与表没有直接关系！</p>
 <h2 id="1-创建序列"><a href="#1-创建序列" class="headerlink" title="1. 创建序列"></a>1. 创建序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> SEQUENCE sequence_name<br>[<span class="hljs-keyword">START</span> <span class="hljs-keyword">WITH</span> num]<br>[INCREMENT <span class="hljs-keyword">BY</span> increment]<br>[MAXVALUE num<span class="hljs-operator">|</span>NOMAXVALUE]<br>[MINVALUE num<span class="hljs-operator">|</span>NOMINVALUE]<br>[<span class="hljs-keyword">CYCLE</span><span class="hljs-operator">|</span>NOCYCLE]<br>[CACHE num<span class="hljs-operator">|</span>NOCACHE]<br></code></pre></td></tr></table></figure>

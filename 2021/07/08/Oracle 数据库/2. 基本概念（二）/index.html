@@ -14,7 +14,7 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="">
+  <meta name="description" content="方案、模式、用户、表空间、表之间的关系。">
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.4k 字
+      1.5k 字
     </span>
   
 
@@ -240,7 +240,8 @@
             <h1 style="display: none">Oracle 基础（二）</h1>
             
             <div class="markdown-body">
-              <span id="more"></span>
+              <p>方案、模式、用户、表空间、表之间的关系。</p>
+<span id="more"></span>
 
 <h2 id="1-方案"><a href="#1-方案" class="headerlink" title="1. 方案"></a>1. 方案</h2><p>​        <strong>方案就是某用户拥有的所有的数据库对象的逻辑集合</strong>，可以看做是 SQL Server 或 MySQL 中的一个数据库。</p>
 <p>​        在 SQL Server 或者 MySQL 中，一般情况下（暂不考虑多租户等特殊情况），一个项目对应DBMS 中的一个数据库，连接字符串中是用 “用户名+密码+数据库名” 来唯一标识数据库，一个用户可以管理多个数据库；而连接 Oracle 中的字符串主要是用 “户名+密码” 来标识数据库，即一个用户管理一个方案。</p>
