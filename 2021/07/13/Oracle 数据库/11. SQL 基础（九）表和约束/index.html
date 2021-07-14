@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      3.7k 字
+      4.7k 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      45
+      58
        分钟
     </span>
   
@@ -375,7 +375,7 @@
 
 <br/>
 
-<h2 id="3-表"><a href="#3-表" class="headerlink" title="3. 表"></a>3. 表</h2><h3 id="2-1-命名规则"><a href="#2-1-命名规则" class="headerlink" title="2.1 命名规则"></a>2.1 命名规则</h3><p>表和列的命名规则：</p>
+<h2 id="3-表"><a href="#3-表" class="headerlink" title="3. 表"></a>3. 表</h2><h3 id="3-1-命名规则"><a href="#3-1-命名规则" class="headerlink" title="3.1 命名规则"></a>3.1 命名规则</h3><p>表和列的命名规则：</p>
 <ul>
 <li>名字中只能出现字母、数字、下划线（_）和井号（#）。</li>
 <li>必须是字母开头。</li>
@@ -385,7 +385,7 @@
 </ul>
 <br/>
 
-<h3 id="2-2-数据类型"><a href="#2-2-数据类型" class="headerlink" title="2.2 数据类型"></a>2.2 数据类型</h3><p>Oracle 数据库中常用的几种数据类型：</p>
+<h3 id="3-2-数据类型"><a href="#3-2-数据类型" class="headerlink" title="3.2 数据类型"></a>3.2 数据类型</h3><p>Oracle 数据库中常用的几种数据类型：</p>
 <table>
 <thead>
 <tr>
@@ -422,6 +422,8 @@
 <td>存储大文本，例如很多很多文字。</td>
 </tr>
 </tbody></table>
+<br/>
+
 <h3 id="3-3-创建表"><a href="#3-3-创建表" class="headerlink" title="3.3 创建表"></a>3.3 创建表</h3><p>创建表的格式有两种：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 格式1</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名(<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    ...   ...      ...<br>    字段名 数据类型 [列约束类型]<br>);<br><br><span class="hljs-comment">-- 格式2</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> 表名(<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    字段名 数据类型 [列约束类型],<br>    ...    ...      ...<br>    字段名 数据类型 [列约束类型],<br>    [表级约束],<br>    ...<br>    [表级约束]<br>);<br></code></pre></td></tr></table></figure>
 
@@ -441,16 +443,69 @@
 </ul>
 <br/>
 
-<h3 id="3-4-修改表"><a href="#3-4-修改表" class="headerlink" title="3.4 修改表"></a>3.4 修改表</h3><h3 id="3-5-删除表"><a href="#3-5-删除表" class="headerlink" title="3.5 删除表"></a>3.5 删除表</h3><h3 id="3-4-操作表"><a href="#3-4-操作表" class="headerlink" title="3.4 操作表"></a>3.4 操作表</h3><h4 id="3-4-1-DML-语句"><a href="#3-4-1-DML-语句" class="headerlink" title="3.4.1 DML 语句"></a>3.4.1 DML 语句</h4><p>DML (Date Manipulation Language) 数据操作语言。</p>
-<p>DML 用于改变数据库中的数据，主要包括：insert，update，delete。</p>
+<h3 id="3-4-修改表"><a href="#3-4-修改表" class="headerlink" title="3.4 修改表"></a>3.4 修改表</h3><h4 id="3-4-1-添加列"><a href="#3-4-1-添加列" class="headerlink" title="3.4.1 添加列"></a>3.4.1 添加列</h4><p>可以使用 alter 向已经建好的表中增加一个新的列。语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name <br><span class="hljs-keyword">add</span> column_name date_type [<span class="hljs-keyword">constraint</span> constraint_name][constraint_type];  <br></code></pre></td></tr></table></figure>
+
+<p>例：向订单表中加入一个 price 列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br><span class="hljs-keyword">add</span> price number;<br></code></pre></td></tr></table></figure>
+
 <br/>
 
-<h4 id="3-4-2-insert-插入数据"><a href="#3-4-2-insert-插入数据" class="headerlink" title="3.4.2 insert 插入数据"></a>3.4.2 insert 插入数据</h4><p>向表中插入数据，语法为：</p>
+<p><strong>只有向空表中添加列时，才能给这个列加上 not null 约束。</strong>因为向已经有数据的表中添加新的列，这列的数据全部都是 null，不能满足 not null 约束。</p>
+<p>例：向已经有数据的订单表中新增一个有 not null 约束的列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br><span class="hljs-keyword">add</span> test number <span class="hljs-keyword">constraint</span> n_test <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>;<br><br><span class="hljs-comment">-- ORA-01758: 要添加必需的 (NOT NULL) 列, 则表必须为空。</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-4-2-删除列"><a href="#3-4-2-删除列" class="headerlink" title="3.4.2 删除列"></a>3.4.2 删除列</h4><p>可以使用 alter 删除表中的列。语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">column</span> column_name;<br></code></pre></td></tr></table></figure>
+
+<p>例：删除订单表中的 price 列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">column</span> price;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p><strong>如果表中的某个列被另外一张表引用，那么不能删除这个列。</strong></p>
+<p>例：删除客户表的 id 列。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> customer_tb<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">column</span> id;<br><br><span class="hljs-comment">-- ORA-12992: 无法删除父项关键字列。</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-4-3-修改列的数据列型"><a href="#3-4-3-修改列的数据列型" class="headerlink" title="3.4.3 修改列的数据列型"></a>3.4.3 修改列的数据列型</h4><p>可以使用 alter 修改列的数据类型，并且修改后的数据类型要和修改前的一样。语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>modify (column_name new_data_tpye);<br></code></pre></td></tr></table></figure>
+
+<p>例：修改订单表的 content 列的数据类型。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br>modify (content  varchar2(<span class="hljs-number">100</span>));<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-4-4-修改列名-表名"><a href="#3-4-4-修改列名-表名" class="headerlink" title="3.4.4 修改列名/表名"></a>3.4.4 修改列名/表名</h4><p>可以使用 alter 修改列名。语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 修改列名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> table_name<br>rename <span class="hljs-keyword">column</span> old_name <span class="hljs-keyword">to</span> new_name;<br><br><span class="hljs-comment">-- 修改表名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> old_name rename <span class="hljs-keyword">to</span> new_name;<br></code></pre></td></tr></table></figure>
+
+<p>例：修改订单表的表名和列名。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 修改表名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb rename <span class="hljs-keyword">to</span> order_table;<br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_table rename <span class="hljs-keyword">to</span> order_tb;<br><br><span class="hljs-comment">-- 修改列名</span><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br>rename colunm id <span class="hljs-keyword">to</span> order_id;<br><br><span class="hljs-keyword">alter</span> <span class="hljs-keyword">table</span> order_tb<br>rename <span class="hljs-keyword">column</span> order_id <span class="hljs-keyword">to</span> id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-5-删除表"><a href="#3-5-删除表" class="headerlink" title="3.5 删除表"></a>3.5 删除表</h3><p>删除表的语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> table_name;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>删除两个用外键连接的两个表示，应该先删除父表，再删除子表。<br>例如：应该先删除订单表，再删除客户表。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> order_tb;<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> customer_tb;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>如果非要先删除子表，则需要加上<code>cascade constraints</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> customer_tb cascade constraints;<br><span class="hljs-keyword">drop</span> <span class="hljs-keyword">table</span> order_tb;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="3-6-操作表"><a href="#3-6-操作表" class="headerlink" title="3.6 操作表"></a>3.6 操作表</h3><h4 id="3-6-1-insert-插入数据"><a href="#3-6-1-insert-插入数据" class="headerlink" title="3.6.1 insert 插入数据"></a>3.6.1 insert 插入数据</h4><p>向表中插入数据，语法为：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> table_name [(column1, column2...)] <span class="hljs-keyword">values</span> (val1, val2, ...);<br></code></pre></td></tr></table></figure>
 
 <p><strong>插入的值的顺序和列声明的顺序一致，数据类型必须和列声明的数据类型一致，并且不能违背列的约束。</strong></p>
-<br/>
-
 <p>例 1：向学生表里插入数据（全部列）。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 全部插入</span><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> student_tb <br><span class="hljs-keyword">values</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;张三&#x27;</span>, <span class="hljs-string">&#x27;121@163.com&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-number">22</span>, to_date(<span class="hljs-string">&#x27;2021-07-14&#x27;</span>, <span class="hljs-string">&#x27;yyyy-mm-dd&#x27;</span>));<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> student_tb <br><span class="hljs-keyword">values</span> (<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;李四&#x27;</span>, <span class="hljs-string">&#x27;123@163.com&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-number">21</span>, to_date(<span class="hljs-string">&#x27;2021-03-14&#x27;</span>, <span class="hljs-string">&#x27;yyyy-mm-dd&#x27;</span>));<br><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> student_tb <br><span class="hljs-keyword">values</span> (<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;王五&#x27;</span>, <span class="hljs-string">&#x27;124@163.com&#x27;</span>, <span class="hljs-string">&#x27;f&#x27;</span>, <span class="hljs-number">23</span>, to_date(<span class="hljs-string">&#x27;2021-04-14&#x27;</span>, <span class="hljs-string">&#x27;yyyy-mm-dd&#x27;</span>));<br></code></pre></td></tr></table></figure>
 
@@ -467,10 +522,10 @@
 
 <br/>
 
-<h4 id="3-4-3-update-更新数据"><a href="#3-4-3-update-更新数据" class="headerlink" title="3.4.3 update 更新数据"></a>3.4.3 update 更新数据</h4><p>修改表中的数据，语法为：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql">update table_name <br><span class="hljs-keyword">set</span> column1 <span class="hljs-operator">=</span> value1, column2 <span class="hljs-operator">=</span> value2 ... <br><span class="hljs-keyword">where</span> ...;<br></code></pre></td></tr></table></figure>
+<h4 id="3-6-2-update-更新数据"><a href="#3-6-2-update-更新数据" class="headerlink" title="3.6.2 update 更新数据"></a>3.6.2 update 更新数据</h4><p>修改表中的数据，语法为：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql">update table_name <br><span class="hljs-keyword">set</span> column1 <span class="hljs-operator">=</span> value1, column2 <span class="hljs-operator">=</span> value2 ...  [<span class="hljs-keyword">where</span> ...];<br></code></pre></td></tr></table></figure>
 
-<p>使用 update 修改数据也不能违背列的约束。</p>
+<p>使用 update 修改数据也不能违背列的约束。如果不加条件，就表示把表中所有数据修改。加了条件就修改符合条件的所有数据。</p>
 <br/>
 
 <p>例：修改学生表中的数据。</p>
@@ -478,7 +533,7 @@
 
 <br/>
 
-<h4 id="3-4-5-delete-删除数据"><a href="#3-4-5-delete-删除数据" class="headerlink" title="3.4.5 delete 删除数据"></a>3.4.5 delete 删除数据</h4><p>删除表中的数据，语法为：</p>
+<h4 id="3-6-3-delete-删除数据"><a href="#3-6-3-delete-删除数据" class="headerlink" title="3.6.3 delete 删除数据"></a>3.6.3 delete 删除数据</h4><p>删除表中的数据，语法为：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> table_name [where...];<br></code></pre></td></tr></table></figure>
 
 <p>如果不加条件，就表示把表中所有数据删除。加了条件就删除符合条件的所有数据。</p>
@@ -489,12 +544,12 @@
 
 <br/>
 
-<h3 id="3-5-有外键的表的-DML"><a href="#3-5-有外键的表的-DML" class="headerlink" title="3.5 有外键的表的 DML"></a>3.5 有外键的表的 DML</h3><p>创建两个表用于测试：</p>
+<h3 id="3-7-有外键的表的-DML"><a href="#3-7-有外键的表的-DML" class="headerlink" title="3.7 有外键的表的 DML"></a>3.7 有外键的表的 DML</h3><p>创建两个表用于测试：</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建客户表</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> customer_tb(<br>		id    number         <span class="hljs-keyword">primary</span> key,<br>  	name  varchar2(<span class="hljs-number">30</span>)   <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span><br>);<br><br><span class="hljs-comment">-- 创建订单表</span><br><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> order_tb(<br>		id           number          <span class="hljs-keyword">primary</span> key,<br>  	content      varchar2(<span class="hljs-number">30</span>)    <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id  number  <span class="hljs-keyword">references</span> customer_tb(id)<br>);<br></code></pre></td></tr></table></figure>
 
 <br/>
 
-<h4 id="3-5-1-insert-插入数据"><a href="#3-5-1-insert-插入数据" class="headerlink" title="3.5.1 insert 插入数据"></a>3.5.1 insert 插入数据</h4><p>向父表（外键所在的表）插入数据，外键列的值必须是子表（被引用的表）的被引用的列中有的数据，或者为 null （如果允许的话）。</p>
+<h4 id="3-7-1-insert-插入数据"><a href="#3-7-1-insert-插入数据" class="headerlink" title="3.7.1 insert 插入数据"></a>3.7.1 insert 插入数据</h4><p>向父表（外键所在的表）插入数据，外键列的值必须是子表（被引用的表）的被引用的列中有的数据，或者为 null （如果允许的话）。</p>
 <p>例：向客户表中插入数据。<br>向客户表中插入数据不会对订单表有影响。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 向客户表中插入一些数据</span><br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> customer_tb <span class="hljs-keyword">values</span> (<span class="hljs-number">1</span>, <span class="hljs-string">&#x27;张三&#x27;</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> customer_tb <span class="hljs-keyword">values</span> (<span class="hljs-number">2</span>, <span class="hljs-string">&#x27;李四&#x27;</span>);<br><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> customer_tb <span class="hljs-keyword">values</span> (<span class="hljs-number">3</span>, <span class="hljs-string">&#x27;王五&#x27;</span>);<br></code></pre></td></tr></table></figure>
 
@@ -505,7 +560,7 @@
 
 <br/>
 
-<h4 id="3-5-2-update-更新数据"><a href="#3-5-2-update-更新数据" class="headerlink" title="3.5.2 update 更新数据"></a>3.5.2 update 更新数据</h4><p>和插入数据一样，更新数据也必须保证：父表的外键列的值必须是子表的被引用的列中有的数据，或者为 null （如果允许的话）。</p>
+<h4 id="3-7-2-update-更新数据"><a href="#3-7-2-update-更新数据" class="headerlink" title="3.7.2 update 更新数据"></a>3.7.2 update 更新数据</h4><p>和插入数据一样，更新数据也必须保证：父表的外键列的值必须是子表的被引用的列中有的数据，或者为 null （如果允许的话）。</p>
 <p>例：修改订单表中的数据。<br>要保证订单表中 customer_id 的数据是客户表中 id 列中存在的。</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql">update order_tb <span class="hljs-keyword">set</span> customer_id <span class="hljs-operator">=</span> <span class="hljs-number">4</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- 报错，因为客户表中没有 id = 4 的客户</span><br><br>update order_tb <span class="hljs-keyword">set</span> customer_id <span class="hljs-operator">=</span> <span class="hljs-number">3</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- 成功，因为客户表中有 id = 3 的客户</span><br><br>update order_tb <span class="hljs-keyword">set</span> customer_id <span class="hljs-operator">=</span> <span class="hljs-keyword">null</span> <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- 成功，customer_id 列可以为 null</span><br></code></pre></td></tr></table></figure>
 
@@ -516,7 +571,34 @@
 
 <br/>
 
-<h4 id="3-5-3-delete-删除数据"><a href="#3-5-3-delete-删除数据" class="headerlink" title="3.5.3 delete 删除数据"></a>3.5.3 delete 删除数据</h4>
+<h4 id="3-7-3-delete-删除数据"><a href="#3-7-3-delete-删除数据" class="headerlink" title="3.7.3 delete 删除数据"></a>3.7.3 delete 删除数据</h4><p>和插入数据一样，删除数据也必须保证：父表的外键列的值必须是子表的被引用的列中有的数据，或者为 null （如果允许的话）。</p>
+<p>例 1：删除订单表中的数据。<br>删除订单表里的数据不会对客户表产生任何影响。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> order_tb <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 2：删除客户表中的数据<br>如果删除了客户表中的数据，导致订单表里 customer_id 列的某个数据不在客户表中，会报违反完整性约束的错误。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> customer_tb <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br><span class="hljs-comment">-- ORA-02292: 违反完整约束条件 (SEAL.SYS_C007501)</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="3-7-4-on-delete-xxx-关键字"><a href="#3-7-4-on-delete-xxx-关键字" class="headerlink" title="3.7.4 on delete xxx 关键字"></a>3.7.4 on delete xxx 关键字</h4><p><code>on delete xxx </code>语句是在声明外键约束的时候使用的。用户在删除 A 表中的一条数据，而这条数据被 B 表中的外键列所引用了，这个时候 <code>on delete xxx</code> 语句的设置可以告诉 Oracle 这个时候该如何处理。</p>
+<ul>
+<li><p>on delete no action ：</p>
+<p>如果在建外键的时候，不加 <code>on delete xxx</code> 语句，默认就是 <code>on delete no action</code>。删除时不做操作。</p>
+<br/></li>
+<li><p>on delete cascade：</p>
+<p>如果在建外键的时候使用 <code>on delete cascade</code> ，当子表中删除数据时会级联删除父表中引用了这条数据的所有数据。</p>
+<p>例：给订单表的外键加上 <code>on delete cascade</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> order_tb(<br>		id  number  <span class="hljs-keyword">primary</span> key,<br>  	content  varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id  number  <span class="hljs-keyword">references</span> customer_tb(id) <span class="hljs-keyword">on</span> <span class="hljs-keyword">delete</span> cascade<br>);<br><br><span class="hljs-comment">-- 删除客户表中 id=1 的客户，订单表中所有 customer_id=1 的数据都会被级联删除。</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> customer_tb <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure>
+
+<br/></li>
+<li><p>on delete set null：</p>
+<p>如果在建外键的时候使用 <code>on delete cascade</code> ，当子表中删除数据时会将父表中引用了这条数据的外键的值设置为 null。但如果外键列上有 not null 约束，这个删除操作就会报错。</p>
+<p>例：给订单表加上 <code>on delete set null</code>。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> <span class="hljs-keyword">table</span> order_tb(<br>		id  number  <span class="hljs-keyword">primary</span> key,<br>  	content  varchar2(<span class="hljs-number">30</span>)  <span class="hljs-keyword">not</span> <span class="hljs-keyword">null</span>,<br>  	customer_id  number  <span class="hljs-keyword">references</span> customer_tb(id) <span class="hljs-keyword">on</span> <span class="hljs-keyword">delete</span> <span class="hljs-keyword">set</span> <span class="hljs-keyword">null</span><br>);<br><br><span class="hljs-comment">-- 删除客户表中 id=1 的客户，订单表中所有 customer_id=1 的值将被设置成 null。</span><br><span class="hljs-keyword">delete</span> <span class="hljs-keyword">from</span> customer_tb <span class="hljs-keyword">where</span> id <span class="hljs-operator">=</span> <span class="hljs-number">1</span>;<br></code></pre></td></tr></table></figure></li>
+</ul>
+
             </div>
             <hr>
             <div>
