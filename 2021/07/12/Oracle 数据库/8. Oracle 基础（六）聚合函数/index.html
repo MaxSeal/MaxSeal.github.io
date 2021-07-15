@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="序列的基本概念与使用方法。">
+  <meta name="description" content="聚合函数的用法以及 select 各个子句的执行顺序。">
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>SQL 基础（十二）序列 - maxseal</title>
+  <title>SQL 基础（六）聚合函数 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SQL 基础（十二）序列">
+            <span class="h2" id="subtitle" title="SQL 基础（六）聚合函数">
               
             </span>
 
@@ -185,8 +185,8 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-08 19:46" pubdate>
-        2021年7月8日 晚上
+      <time datetime="2021-07-12 10:05" pubdate>
+        2021年7月12日 上午
       </time>
     </span>
   
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      836 字
+      897 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      9
+      10
        分钟
     </span>
   
@@ -237,57 +237,133 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL 基础（十二）序列</h1>
+            <h1 style="display: none">SQL 基础（六）聚合函数</h1>
             
             <div class="markdown-body">
-              <p>序列的基本概念与使用方法。</p>
+              <p>聚合函数的用法以及 select 各个子句的执行顺序。</p>
 <span id="more"></span>
 
-<p>在 Oracle 中 sequence 就是序号，每次提取完都会自动增加，步幅固定，它与表没有直接关系！</p>
-<h2 id="1-创建序列"><a href="#1-创建序列" class="headerlink" title="1. 创建序列"></a>1. 创建序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> SEQUENCE sequence_name<br>[<span class="hljs-keyword">START</span> <span class="hljs-keyword">WITH</span> num]<br>[INCREMENT <span class="hljs-keyword">BY</span> increment]<br>[MAXVALUE num<span class="hljs-operator">|</span>NOMAXVALUE]<br>[MINVALUE num<span class="hljs-operator">|</span>NOMINVALUE]<br>[<span class="hljs-keyword">CYCLE</span><span class="hljs-operator">|</span>NOCYCLE]<br>[CACHE num<span class="hljs-operator">|</span>NOCACHE]<br></code></pre></td></tr></table></figure>
+<h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>聚合函数一般会操作多组数据，并对每一组中的某个列，执行计算并返回单一的值。<br>聚合函数经常与 select 语句的 group by 子句一同使用，所以也把其它称之为分组函数。</p>
+<p>常用的聚合函数有：</p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>作用</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>avg(列名)</code></td>
+<td>求平均值。</td>
+</tr>
+<tr>
+<td><code>count(列名)</code></td>
+<td>计算有多少条数据。</td>
+</tr>
+<tr>
+<td><code>max(列名)</code></td>
+<td>求最大值。</td>
+</tr>
+<tr>
+<td><code>min(列名)</code></td>
+<td>求最小值。</td>
+</tr>
+<tr>
+<td><code>sum(列名)</code></td>
+<td>求和。</td>
+</tr>
+</tbody></table>
+<br/>
+
+<h2 id="2-执行顺序"><a href="#2-执行顺序" class="headerlink" title="2. 执行顺序"></a>2. 执行顺序</h2><p>一个完整的 select 语句：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> 字段<span class="hljs-number">1</span>,字段<span class="hljs-number">2.</span>..<br><span class="hljs-keyword">from</span> 表<br><span class="hljs-keyword">where</span> 条件<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> 分组条件<br><span class="hljs-keyword">having</span> 分组筛选条件<br><span class="hljs-keyword">order</span> <span class="hljs-keyword">by</span> 排序条件<br></code></pre></td></tr></table></figure>
 
 <br/>
 
-<p>START WITH：从某一个整数开始，升序默认值是 1，降序默认值是 -1。</p>
-<p>INCREMENT BY：增长数。如果是正数则升序生成，如果是负数则降序生成。升序默认值是 1，降序默认值是 -1。</p>
-<p>MAXVALUE：指最大值。</p>
-<p>NOMAXVALUE：这是最大值的默认选项，升序的最大值是 1027，降序默认值是 -1。</p>
-<p>MINVALUE：指最小值。</p>
-<p>NOMINVALUE：这是默认值选项，升序默认值是1，降序默认值是-1026。</p>
-<p>CYCLE：表示如果升序达到最大值后，从最小值重新开始；如果是降序序列，达到最小值后，从最大值重新开始。</p>
-<p>NOCYCLE：表示不重新开始，序列升序达到最大值、降序达到最小值后就报错。默认不重新开始。</p>
-<p>CACHE：使用 CACHE 选项时，该序列会根据序列规则预生成一组序列号。保留在内存中，当使用下一个序列号时，可以更快的响应。当内存中的序列号用完时，系统再生成一组新的序列号，并保存在缓存中，这样可以提高生成序列号的效率。Oracle 默认会生产 20 个序列号。使用 CACHE 或许会跳号， 比如数据库突然不正常关掉，内存中的序列号就会丢失。</p>
-<p>NOCACHE：不预先在内存中生成序列号。</p>
-<br/>
-
-<p>此外，序列中还有个 ORDER 概念，参数分别是：</p>
+<p>select 语句的执行顺序：</p>
 <ul>
-<li>ORDER ：保证序列号按请求顺序产生。如果想以序列号作为时间戳类型的话，可以采用该选项。对于将序列用于生成主键来说，约定顺序通常并不重要。</li>
-<li>NOORDER ：此选项跟 ORDER 相对应，并不按照请求的顺序进行生成。</li>
+<li>from 子句</li>
+<li>where 子句</li>
+<li>group by 子句</li>
+<li>聚合函数</li>
+<li>having 子句</li>
+<li>select 子句</li>
+<li>order by 子句</li>
+</ul>
+<p>​       基本的工作原理：from 子句先被执行，通过 from 子句获得一个虚拟表，然后通过 where 子句从虚拟表中获取满足条件的记录，生成新的虚拟表。将新虚拟表中的记录通过 group by 子句分组后得到更新的虚拟表，而后 having 子句在最新的虚拟表中筛选出满足条件的记录组成另外一个虚拟表中，select 子句会将指定的列提取出来组成更新的虚拟表，最后 order by 子句对其进行排序得出最终的虚拟表。通常这个最终的虚拟表被称为查询结果集。</p>
+<br/>
+
+<h2 id="3-聚合函数的位置"><a href="#3-聚合函数的位置" class="headerlink" title="3. 聚合函数的位置"></a>3. 聚合函数的位置</h2><p>聚合函数能够出现的位置： </p>
+<ul>
+<li>select 后面 </li>
+<li>having 后面 </li>
+<li>order by后面</li>
+</ul>
+<p>如果 select、having 语句后面出现了聚合函数，那么 select、having 后面没有被组函数修饰的 列，就必须出现在 group by 后面。</p>
+<br/>
+
+<h2 id="4-各个子句的关系"><a href="#4-各个子句的关系" class="headerlink" title="4. 各个子句的关系"></a>4. 各个子句的关系</h2><h3 id="4-1-where-和-having"><a href="#4-1-where-和-having" class="headerlink" title="4.1 where 和 having"></a>4.1 where 和 having</h3><ul>
+<li>where 和 having 都是做条件筛选的。 </li>
+<li>where 执行的时间比 having 要早。</li>
+<li>where 后面不能出现组函数。</li>
+<li>having 后面可以出现组函数。</li>
+<li>where 语句要紧跟 from 后面。</li>
+<li>having 语句要紧跟 group by 后面。</li>
 </ul>
 <br/>
 
-<h2 id="2-修改序列"><a href="#2-修改序列" class="headerlink" title="2. 修改序列"></a>2. 修改序列</h2><p>​        使用 Alter 可以修改序列的步幅、最大/最小值、是否循环、缓存个数等参数。 但不能修改序列的初始值，且修改的最小值不能大于当前值，最大值不能小于当前值。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Alter</span> Sequence seq_name  <br>Increment  <span class="hljs-keyword">By</span>  <span class="hljs-number">2</span> <br>Maxvalue <span class="hljs-number">9999</span><br><span class="hljs-keyword">Cycle</span><br>Cache <span class="hljs-number">5</span>;<br></code></pre></td></tr></table></figure>
-
-<br/>
-
-<h2 id="3-使用序列"><a href="#3-使用序列" class="headerlink" title="3. 使用序列"></a>3. 使用序列</h2><p>序列创建完成后，就可以使用其两个参数 currval、nextval；</p>
-<ul>
-<li>currval：返回序列的当前值。</li>
-<li>nextval：增加序列的值，然后返回序列的值。</li>
+<h3 id="4-2-group-by-和-having"><a href="#4-2-group-by-和-having" class="headerlink" title="4.2 group by 和 having"></a>4.2 group by 和 having</h3><ul>
+<li>group by 可以单独存在，后面可以不出现 having 语句。</li>
+<li>having不能单独存在，如果需要出现，那么就必须出现在 group by 后面。</li>
 </ul>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> seq_name.currval <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> seq_name.nextval <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
-
-<p>currval 是取当前值，所以一个新的计数器必须先使用 nextval 后才可以使用 currval 否则会报错；</p>
-<p>nextval 是取下一个值，但第一次使用时取的是初始值，之后正常取下一个，且如果一个语句(不同的子句)里面有多个 nextval，它们的取值可能是不同的；</p>
 <br/>
 
-<h2 id="4-删除序列"><a href="#4-删除序列" class="headerlink" title="4. 删除序列"></a>4. 删除序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> sequence seq_name;<br></code></pre></td></tr></table></figure>
+<h3 id="4-3-order-by"><a href="#4-3-order-by" class="headerlink" title="4.3 order by"></a>4.3 order by</h3><ul>
+<li>如果 SQL 语句中需要排序，那么就一定要写在 SQL 语句的最后面。</li>
+<li>order by 后也可以出现组函数。</li>
+</ul>
+<br/>
+
+<h2 id="5-实例"><a href="#5-实例" class="headerlink" title="5. 实例"></a>5. 实例</h2><h3 id="5-1-group-by"><a href="#5-1-group-by" class="headerlink" title="5.1 group by"></a>5.1 group by</h3><p>在使用聚合函数的时候： </p>
+<ul>
+<li>如果还使用了 group by 分组，那么就表示先分组，然后对每一个小组使用聚合函数。</li>
+<li>如果没有使用 group by 分组，那么就表示全部数据是一个默认小组，然后对这个全部数据使用聚合函数。</li>
+</ul>
+<br/>
+
+<p>例 1：查询 s_emp 表中所有员工的平均工资。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> <span class="hljs-built_in">avg</span>(salary)<br><span class="hljs-keyword">from</span> s_emp;<br></code></pre></td></tr></table></figure>
 
 <br/>
 
-<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><p>​        序列(SEQUENCE)其实是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。其主要的用途是生成表的主键值，可以在插入语句中引用，也可以通过查询检查当前值，或使序列增至下一个值。</p>
+<p>例 2：查询 s_emp 表中每个部门的平均工资。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">avg</span>(salary)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 3：查询 s_emp 表中每个部门员工的最高工资。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">max</span>(salary)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 4：查询 s_emp 表中每个部门员工的工资总和。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">sum</span>(salary)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 5：查询 s_emp 表中每个部门员工的人数。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">count</span>(<span class="hljs-operator">*</span>)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="5-2-having"><a href="#5-2-having" class="headerlink" title="5.2 having"></a>5.2 having</h3><p>例 1：查询 s_emp 表中部门的平均工资大于等于 1400 的部门。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">avg</span>(salary)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id<br><span class="hljs-keyword">having</span> <span class="hljs-built_in">avg</span>(salary)<span class="hljs-operator">&gt;=</span><span class="hljs-number">1400</span>;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<p>例 2：查询 s_emp 表中部门的总工资大于等于 4000 的部门。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> dept_id,<span class="hljs-built_in">sum</span>(salary)<br><span class="hljs-keyword">from</span> s_emp<br><span class="hljs-keyword">group</span> <span class="hljs-keyword">by</span> dept_id<br><span class="hljs-keyword">having</span> <span class="hljs-built_in">sum</span>(salary)<span class="hljs-operator">&gt;=</span><span class="hljs-number">4000</span>;<br></code></pre></td></tr></table></figure>
+
 
             </div>
             <hr>
@@ -305,7 +381,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97/">序列</a>
+                      <a class="hover-with-bg" href="/tags/%E8%81%9A%E5%90%88%E5%87%BD%E6%95%B0/">聚合函数</a>
                     
                   </div>
                 
@@ -322,9 +398,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E5%90%8C%E4%B9%89%E8%AF%8D/">
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/9.%20Oracle%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%83%EF%BC%89%E5%AD%90%E6%9F%A5%E8%AF%A2/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 基础（十一）同义词</span>
+                        <span class="hidden-mobile">SQL 基础（七）子查询</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -332,8 +408,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/2.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%BA%8C%EF%BC%89/">
-                        <span class="hidden-mobile">Oracle 基础（二）</span>
+                      <a href="/2021/07/12/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/6.%20Oracle%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%9B%9B%EF%BC%89%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/">
+                        <span class="hidden-mobile">SQL 基础（四）多表查询</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

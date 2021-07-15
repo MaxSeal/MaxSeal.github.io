@@ -14,11 +14,11 @@
   <meta http-equiv="x-ua-compatible" content="ie=edge">
   
   <meta name="theme-color" content="#2f4154">
-  <meta name="description" content="同义词的概念与基本使用方式。">
+  <meta name="description" content="序列的基本概念与使用方法。">
   <meta name="author" content="maxseal">
   <meta name="keywords" content="">
   
-  <title>SQL 基础（十一）同义词 - maxseal</title>
+  <title>SQL 基础（十二）序列 - maxseal</title>
 
   <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
 
@@ -175,7 +175,7 @@
       <div class="full-bg-img">
         <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
           <div class="page-header text-center fade-in-up">
-            <span class="h2" id="subtitle" title="SQL 基础（十一）同义词">
+            <span class="h2" id="subtitle" title="SQL 基础（十二）序列">
               
             </span>
 
@@ -185,7 +185,7 @@
   
     <span class="post-meta">
       <i class="iconfont icon-date-fill" aria-hidden="true"></i>
-      <time datetime="2021-07-08 22:05" pubdate>
+      <time datetime="2021-07-08 19:46" pubdate>
         2021年7月8日 晚上
       </time>
     </span>
@@ -197,7 +197,7 @@
     
     <span class="post-meta mr-2">
       <i class="iconfont icon-chart"></i>
-      1.3k 字
+      838 字
     </span>
   
 
@@ -207,7 +207,7 @@
       <i class="iconfont icon-clock-fill"></i>
       
       
-      13
+      9
        分钟
     </span>
   
@@ -237,67 +237,59 @@
         <div class="py-5" id="board">
           <article class="post-content mx-auto">
             <!-- SEO header -->
-            <h1 style="display: none">SQL 基础（十一）同义词</h1>
+            <h1 style="display: none">SQL 基础（十二）序列</h1>
             
             <div class="markdown-body">
-              <p>同义词的概念与基本使用方式。</p>
+              <p>序列的基本概念与使用方法。</p>
 <span id="more"></span>
 
-<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>​        Oracle 数据库中提供了同义词管理的功能。<strong>同义词是数据库对象的一个别名</strong>，经常用于简化对象访问和提高对象访问的安全性。在使用同义词时，Oracle 数据库将它翻译成对应方案对象的名字。与视图类似，同义词并不占用实际存储空间，只有在数据字典中保存了同义词的定义。在Oracle 数据库中的大部分数据库对象，如表、视图、物化视图、序列、函数、存储过程、包、同义词等等，数据库管理员都可以根据实际情况为他们定义同义词。</p>
+<h2 id="1-概念"><a href="#1-概念" class="headerlink" title="1. 概念"></a>1. 概念</h2><p>序列是 Oracle 数据库所特有的对象，其他数据库中是没有的。序列的主要作用是来帮助表去创建自动增长的主键。</p>
 <br/>
 
-<h2 id="2-同义词分类"><a href="#2-同义词分类" class="headerlink" title="2. 同义词分类"></a>2. 同义词分类</h2><p>​        Oracle 同义词有两种类型，分别是公用同义词和私有同义词。普通用户创建的同义词一般都是私有同义词，公有同义词一般由数据库管理员创建，普通用户如果希望创建同义词，则需要 <code>CREATE PUBLIC SYNONYM</code> 这个系统权限。</p>
-<p>公用同义词：由一个特殊的用户组 Public 所拥有。顾名思义，数据库中所有的用户都可以使用公用同义词。公用同义词往往用来标示一些比较普通的数据库对象，这些对象往往大家都需要引用。但是公共的意思并不是所有的用户都可以访问它，必须被授权后才能进行。</p>
-<p>私有同义词：它是跟公用同义词所对应，他是由创建他的用户所有。当然，这个同义词的创建者，可以通过授权控制其他用户是否有权使用属于自己的私有同义词。</p>
-<br/>
-
-<h2 id="3-同义词的作用"><a href="#3-同义词的作用" class="headerlink" title="3. 同义词的作用"></a>3. 同义词的作用</h2><p>​        <strong>为分布式数据库的远程对象提供位置透明性。</strong></p>
-<p>​        <strong>在数据库连接中提供位置透明性。</strong></p>
-<p>​        <strong>简化 SQL 语句。</strong>如果自己建的表的名字很长，可以为这个表创建一个同义词来简化开发。</p>
-<p>​        <strong>多用户协同开发中，可以屏蔽对象的名字及其持有者。</strong>如果没有同义词，当操作其他用户的表时，必须通过<code>用户名.对象名</code>的形式。采用了同义词之后就可以隐蔽掉用户名。当然这里要注意的是：公用同义词只是为数据库对象定义了一个公共的别名，其他用户能否通过这个别名访问这个数据库对象，还要看是否已经为这个用户授权。</p>
-<br/>
-
-<h2 id="4-同义词的操作"><a href="#4-同义词的操作" class="headerlink" title="4. 同义词的操作"></a>4. 同义词的操作</h2><h3 id="4-1-创建同义词"><a href="#4-1-创建同义词" class="headerlink" title="4.1 创建同义词"></a>4.1 创建同义词</h3><p>创建同义词的语法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">CREATE</span> [ PUBLIC ] SYNONYM synonym_name <span class="hljs-keyword">FOR</span> [ schema .] object [ <span class="hljs-variable">@db</span>_link ];<br></code></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 创建公有同义词：</span><br><span class="hljs-keyword">create</span> public synonym table_a <span class="hljs-keyword">for</span> test.table_a;<br><br><span class="hljs-comment">-- 创建私有同义词：</span><br><span class="hljs-keyword">create</span> synonym table_b <span class="hljs-keyword">for</span> test.table_b;<br></code></pre></td></tr></table></figure>
+<h2 id="2-创建序列"><a href="#2-创建序列" class="headerlink" title="2. 创建序列"></a>2. 创建序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">create</span> sequence sequence_name<br>[<span class="hljs-keyword">start</span> <span class="hljs-keyword">with</span> num]<br>[increment <span class="hljs-keyword">by</span> num]<br>[maxvalue num <span class="hljs-operator">|</span> nomaxvalue]<br>[minvalue num <span class="hljs-operator">|</span> nominvalue]<br>[<span class="hljs-keyword">cycle</span> <span class="hljs-operator">|</span> nocycle]<br>[cache num <span class="hljs-operator">|</span> nocache]<br></code></pre></td></tr></table></figure>
 
 <br/>
 
-<h3 id="4-2-使用同义词"><a href="#4-2-使用同义词" class="headerlink" title="4.2 使用同义词"></a>4.2 使用同义词</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-comment">-- 使用同义词</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> table_a;<br><br><span class="hljs-comment">-- 相当于</span><br><span class="hljs-keyword">select</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">from</span> test.table_a<br></code></pre></td></tr></table></figure>
+<p>start with：从某一个整数开始，升序默认值是 1，降序默认值是 -1。</p>
+<p>increment by：增长数。如果是正数则升序生成，如果是负数则降序生成。升序默认值是 1，降序默认值是 -1。</p>
+<p>maxvalue：指最大值。</p>
+<p>nomaxvalue：这是最大值的默认选项，表示没有最大值。</p>
+<p>minvalue：指最小值。</p>
+<p>nominvalue：这是默认值选项，表设计没有最小值。</p>
+<p>cycle：表示如果升序达到最大值后，从最小值重新开始；如果是降序序列，达到最小值后，从最大值重新开始。</p>
+<p>nocycle：表示不重新开始，序列升序达到最大值、降序达到最小值后就报错。默认不重新开始。</p>
+<p>cache：使用 cache 选项时，该序列会根据序列规则预生成一组序列号。保留在内存中，当使用下一个序列号时，可以更快的响应。当内存中的序列号用完时，系统再生成一组新的序列号，并保存在缓存中，这样可以提高生成序列号的效率。Oracle 默认会生产 20 个序列号。使用 cache 或许会跳号， 比如数据库突然不正常关掉，内存中的序列号就会丢失。</p>
+<p>nocache：不预先在内存中生成序列号。</p>
+<br/>
 
+<p>此外，序列中还有个 order 概念，参数分别是：</p>
 <ul>
-<li>使用同义词可以保证当数据库的位置或对象名称发生改变时，应用程序的代码保持稳定不变，仅需要改变同义词。</li>
-<li>当使用一个没有指定 schema 的同义词是，首先在用户自己的 schema 中寻找，然后再公共同义词中寻找。</li>
+<li>order：保证序列号按请求顺序产生。如果想以序列号作为时间戳类型的话，可以采用该选项。对于将序列用于生成主键来说，约定顺序通常并不重要。</li>
+<li>noorder：此选项跟 order 相对应，并不按照请求的顺序进行生成。</li>
 </ul>
 <br/>
 
-<h3 id="4-3-编译同义词"><a href="#4-3-编译同义词" class="headerlink" title="4.3 编译同义词"></a>4.3 编译同义词</h3><p>​        当同义词的原对象被重新建立时，同义词需要重新编译。对原对象进行 DDL 操作后，同义词的状态会变成 INVALID；当再次引用这个同义词时，同义词会自动编译，状态会变成VALID，无需人工干预，当然前提是不改变原对象的名称。</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">ALTER</span>  SYNONYM T COMPILE;<br></code></pre></td></tr></table></figure>
+<h2 id="2-修改序列"><a href="#2-修改序列" class="headerlink" title="2. 修改序列"></a>2. 修改序列</h2><p>使用 Alter 可以修改序列的步幅、最大/最小值、是否循环、缓存个数等参数。 但不能修改序列的初始值，且修改的最小值不能大于当前值，最大值不能小于当前值。</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">Alter</span> Sequence seq_name  <br>Increment  <span class="hljs-keyword">By</span>  <span class="hljs-number">2</span> <br>Maxvalue <span class="hljs-number">9999</span><br><span class="hljs-keyword">Cycle</span><br>Cache <span class="hljs-number">5</span>;<br></code></pre></td></tr></table></figure>
 
-
-
-<h3 id="4-4-删除同义词"><a href="#4-4-删除同义词" class="headerlink" title="4.4 删除同义词"></a>4.4 删除同义词</h3><p>删除同义词的语法：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">DROP</span> [ PUBLIC ] SYNONYM [ schema. ] synonym_name [ FORCE ];<br></code></pre></td></tr></table></figure>
-
-<p>例如：</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> public synonym table_a;<br><span class="hljs-keyword">drop</span> synonym table_b;<br></code></pre></td></tr></table></figure>
-
-<p><strong>当同义词的原对象被删除是，同义词并不会被删除。</strong></p>
 <br/>
 
-<h2 id="5-同义词的权限管理"><a href="#5-同义词的权限管理" class="headerlink" title="5. 同义词的权限管理"></a>5. 同义词的权限管理</h2><p>与同义词相关的权限有 <code>CREATE SYNONYM</code>、<code>CREATE ANY SYNONYM</code>、<code>CREATE PUBLIC SYNONYM</code>。</p>
-<p>（1）用户在自己的模式下创建私有同义词，这个用户必须拥有<code>CREATE SYNONYM</code>权限，否则不能创建私有同义词。</p>
-<p>（2）如果需要在其它模式下创建同义词，则必须具有<code>CREATE ANY SYNONYM</code>的权限。</p>
-<p>（3）创建公有同义词则需要 CREATE PUBLIC SYNONYM 系统权限。</p>
+<h2 id="3-使用序列"><a href="#3-使用序列" class="headerlink" title="3. 使用序列"></a>3. 使用序列</h2><p>序列创建完成后，就可以使用其两个参数 currval、nextval；</p>
+<ul>
+<li>currval：返回序列的当前值。</li>
+<li>nextval：增加序列的值，然后返回序列的值。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">select</span> seq_name.currval <span class="hljs-keyword">from</span> dual;<br><span class="hljs-keyword">select</span> seq_name.nextval <span class="hljs-keyword">from</span> dual;<br></code></pre></td></tr></table></figure>
+
+<p>currval 是取当前值，所以一个新的计数器必须先使用 nextval 后才可以使用 currval 否则会报错；</p>
+<p>nextval 是取下一个值，但第一次使用时取的是初始值，之后正常取下一个，且如果一个语句(不同的子句)里面有多个 nextval，它们的取值可能是不同的；</p>
 <br/>
 
-<h2 id="6-相关的一些问题"><a href="#6-相关的一些问题" class="headerlink" title="6. 相关的一些问题"></a>6. 相关的一些问题</h2><p>（1）公用同义词与私有同义词能否同名呢？如果可以，访问同义词时，是共有同义词还是私有同义词优先？<br>答：可以，如果存在公用同义词和私有同义词同名的情况，在访问同义词是，访问的是私有同义词的指向的对象。</p>
+<h2 id="4-删除序列"><a href="#4-删除序列" class="headerlink" title="4. 删除序列"></a>4. 删除序列</h2><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">drop</span> sequence seq_name;<br></code></pre></td></tr></table></figure>
+
 <br/>
 
-<p>（2）为什么 OE 用户创建的公用同义词，HR 用户不能访问呢？</p>
-<p>答：因为HR没有访问OE模式下对象的权限，如果OE模式给HR用户赋予了SELECT对象等权限，那么HR用户即可访问。</p>
+<h2 id="5-应用场景"><a href="#5-应用场景" class="headerlink" title="5. 应用场景"></a>5. 应用场景</h2><p>​        序列(SEQUENCE)其实是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。其主要的用途是生成表的主键值，可以在插入语句中引用，也可以通过查询检查当前值，或使序列增至下一个值。</p>
 
             </div>
             <hr>
@@ -315,7 +307,7 @@
                   <div class="post-meta">
                     <i class="iconfont icon-tags"></i>
                     
-                      <a class="hover-with-bg" href="/tags/%E5%90%8C%E4%B9%89%E8%AF%8D/">同义词</a>
+                      <a class="hover-with-bg" href="/tags/%E5%BA%8F%E5%88%97/">序列</a>
                     
                   </div>
                 
@@ -332,9 +324,9 @@
                   <article class="post-prev col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/12.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%EF%BC%89%E6%9D%83%E9%99%90%E5%92%8C%E7%94%A8%E6%88%B7/">
+                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/13.%20Oracle%20%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%B8%80%EF%BC%89%E5%90%8C%E4%B9%89%E8%AF%8D/">
                         <i class="iconfont icon-arrowleft"></i>
-                        <span class="hidden-mobile">SQL 基础（十）权限和用户</span>
+                        <span class="hidden-mobile">SQL 基础（十一）同义词</span>
                         <span class="visible-mobile">上一篇</span>
                       </a>
                     
@@ -342,8 +334,8 @@
                   <article class="post-next col-6">
                     
                     
-                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/14.%20SQL%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E4%BA%8C%EF%BC%89%E5%BA%8F%E5%88%97/">
-                        <span class="hidden-mobile">SQL 基础（十二）序列</span>
+                      <a href="/2021/07/08/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/2.%20%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%EF%BC%88%E4%BA%8C%EF%BC%89/">
+                        <span class="hidden-mobile">Oracle 基础（二）</span>
                         <span class="visible-mobile">下一篇</span>
                         <i class="iconfont icon-arrowright"></i>
                       </a>

@@ -1,0 +1,570 @@
+
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-default-color-scheme=&#34;dark&#34;>
+
+
+
+<head>
+  <meta charset="UTF-8">
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/chess-king-solid.svg">
+  <link rel="icon" href="/img/chess-king-solid.svg">
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="description" content="">
+  <meta name="author" content="maxseal">
+  <meta name="keywords" content="">
+  
+  <title>maxseal</title>
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" />
+
+
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/github-markdown-css@4.0.0/github-markdown.min.css" />
+  <link  rel="stylesheet" href="/lib/hint/hint.min.css" />
+
+  
+    
+    
+      
+      <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@10.7.2/styles/github-gist.min.css" />
+    
+  
+
+  
+    <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+  
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1749284_ba1fz6golrf.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/font_1736178_kmeydafke9r.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+<!-- 自定义样式保持在最底部 -->
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    var CONFIG = {"hostname":"maxseal.github.io","root":"/","version":"1.8.11","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"right","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"copy_btn":true,"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":false,"baidu":null,"google":null,"gtag":null,"tencent":{"sid":null,"cid":null},"woyaola":null,"cnzz":null,"leancloud":{"app_id":null,"app_key":null,"server_url":null}},"search_path":"/local-search.xml"};
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+  <header style="height: 70vh;">
+    <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand"
+       href="/">&nbsp;<strong>MaxSeal</strong>&nbsp;</a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/">
+                <i class="iconfont icon-home-fill"></i>
+                首页
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/">
+                <i class="iconfont icon-archive-fill"></i>
+                归档
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/">
+                <i class="iconfont icon-category-fill"></i>
+                分类
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/">
+                <i class="iconfont icon-tags-fill"></i>
+                标签
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/">
+                <i class="iconfont icon-user-fill"></i>
+                关于
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/links/">
+                <i class="iconfont icon-link-fill"></i>
+                友链
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" data-toggle="modal" data-target="#modalSearch">&nbsp;<i
+                class="iconfont icon-search"></i>&nbsp;</a>
+          </li>
+        
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self">&nbsp;<i
+                class="iconfont icon-dark" id="color-toggle-icon"></i>&nbsp;</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+    <div class="banner" id="banner" parallax=true
+         style="background: url('https://images.unsplash.com/photo-1509023464722-18d996393ca8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1650&q=80') no-repeat center center;
+           background-size: cover;">
+      <div class="full-bg-img">
+        <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+          <div class="page-header text-center fade-in-up">
+            <span class="h2" id="subtitle" title="">
+              
+            </span>
+
+            
+              <div class="mt-3">
+  
+  
+    <span class="post-meta">
+      <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+      <time datetime="2021-07-14 18:21" pubdate>
+        2021年7月14日 晚上
+      </time>
+    </span>
+  
+</div>
+
+<div class="mt-1">
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-chart"></i>
+      2.2k 字
+    </span>
+  
+
+  
+    
+    <span class="post-meta mr-2">
+      <i class="iconfont icon-clock-fill"></i>
+      
+      
+      23
+       分钟
+    </span>
+  
+
+  
+  
+</div>
+
+            
+          </div>
+
+          
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="d-none d-lg-block col-lg-2"></div>
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div class="py-5" id="board">
+          <article class="post-content mx-auto">
+            <!-- SEO header -->
+            <h1 style="display: none"></h1>
+            
+            <div class="markdown-body">
+              <h2 id="1-概述"><a href="#1-概述" class="headerlink" title="1. 概述"></a>1. 概述</h2><p>事务（transaction）是由<strong>一系列</strong>对数据库表中数据进行访问与更新的<strong>操作所组成的一个执行逻辑单元</strong>。只有 DML 语句才会产生事务，其他语句不会产生事务。通过事务机能确保 DML 语句所作的操作要么都成功执行，完成整个工作单元操作，要么一个也不执行。</p>
+<br/>
+
+<h2 id="2-ACID-特性"><a href="#2-ACID-特性" class="headerlink" title="2. ACID 特性"></a>2. ACID 特性</h2><p>事务的 ACID 特性：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>原子性 Atomicity</td>
+<td>事务必须是原子工作单元。一个事务中的所有 DML 操作要么全部成功，要么全部失败。</td>
+</tr>
+<tr>
+<td>一致性 Consistency</td>
+<td>事务执行的结果必须是使数据库从一个一致性状态变到另一个一致性状态。</td>
+</tr>
+<tr>
+<td>隔离性 Isolation</td>
+<td>两个事务的执行是相互独立的，一个事务不可能看到其他事务运行时、运行中间某一时刻的数据。</td>
+</tr>
+<tr>
+<td>持久性 Durability</td>
+<td>事务结束后，它对数据库中的影响是永久的，即便系统遇到故障的情况下，数据也不会丢失。</td>
+</tr>
+</tbody></table>
+<p>一组 SQL 语句操作要成为事务，数据库管理系统必须保证这组操作的原子性、一致性、隔离性、和持久性。</p>
+<br/>
+
+<h2 id="3-数据异常"><a href="#3-数据异常" class="headerlink" title="3. 数据异常"></a>3. 数据异常</h2><p>因为 Oracle 数据库中支持多个事务并发执行，所以会出现下面的数据异常。</p>
+<h3 id="3-1-脏读"><a href="#3-1-脏读" class="headerlink" title="3.1 脏读"></a>3.1 脏读</h3><p>主要由 update 操作引起。事务 A 修改数据时，事务 B 读取了这个数据，但是事务 A 因为某些原因没有提交修改操作，导致了事务 B 读取的数据与数据库中实际存储的数据不一致。这就是脏读。事务 B 读取到的数据就是脏数据。</p>
+<br/>
+
+<h3 id="3-2-不可重复读"><a href="#3-2-不可重复读" class="headerlink" title="3.2 不可重复读"></a>3.2 不可重复读</h3><p>主要由 update 操作引起。事务 A 从数据库中读取数据后，事务 B 修改并提交了这个数据，事务 A 再次读取这个数据，这时就会出现事务 A 两次读取同一个数据，但两次读到的结果不一样的情况。这就是不可重复度。</p>
+<br/>
+
+<h3 id="3-3-幻读"><a href="#3-3-幻读" class="headerlink" title="3.3 幻读"></a>3.3 幻读</h3><p>主要由 insert 和 delete 操作引起。事务 A 基于某条件读取数据后，事务 B 对同一张表中的数据进行了 insert 或 delete 操作。当事务 A 按照相同的条件再次从表中读取数据时，读出的数据和第一次不一样。这就是幻读。</p>
+<br/>
+
+<h2 id="4-隔离级别"><a href="#4-隔离级别" class="headerlink" title="4. 隔离级别"></a>4. 隔离级别</h2><h3 id="4-1-概念"><a href="#4-1-概念" class="headerlink" title="4.1 概念"></a>4.1 概念</h3><p>事务执行过程中遇到的这些数据异常和数据库的隔离级别有关。事务的隔离级别越高，异常情况出现的就越少，但并发效果就越低。</p>
+<ul>
+<li>read uncommitted (读未提交数据)：允许事务读取未被其他事务提交的更变。</li>
+<li>read committed (读已提交数据)：只允许事务读取已经被其他事务提交的变更。</li>
+<li>repeateable read (可重复读)：确保事务可以多次从一个字段中读取相同的值，在这个事务持续期间，禁止其他事务对这个字段进行更新。</li>
+<li>serializable (串行读)：确保事务可以从一个表中读取相同的行，在这个事务持续期间，禁止其他事务对该表执行 DML 操作，所有并发问题都可以避免，但性能十分低。</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>隔离级别</th>
+<th>脏读</th>
+<th>不可重复度</th>
+<th>幻读</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>read uncommitted (读未提交数据)</td>
+<td>有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>read committed (读已提交)</td>
+<td>没有</td>
+<td>有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>repeatable read (可重复读)</td>
+<td>没有</td>
+<td>没有</td>
+<td>有</td>
+</tr>
+<tr>
+<td>serializable (串行读)</td>
+<td>没有</td>
+<td>没有</td>
+<td>没有</td>
+</tr>
+</tbody></table>
+<p>Oracle 数据库只支持上述 4 中隔离级别中的两种：read committed 和 serializable，且默认的隔离级别是 read committed。</p>
+<p>除此之外，Oralce 数据库中还定义 read only 和 read write 隔离级别。</p>
+<ul>
+<li>read only：事务中不能有任何修改数据库中数据的操作语句，是 serializable 的一个子集。</li>
+<li>read write：默认设置。该选项表示在事务中可以有访问语句、修改语句，但不经常使用。</li>
+</ul>
+<br/>
+
+<h3 id="4-2-设置隔离级别"><a href="#4-2-设置隔离级别" class="headerlink" title="4.2 设置隔离级别"></a>4.2 设置隔离级别</h3><h4 id="4-2-1-设置单个事务的隔离级别"><a href="#4-2-1-设置单个事务的隔离级别" class="headerlink" title="4.2.1 设置单个事务的隔离级别"></a>4.2.1 设置单个事务的隔离级别</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">set</span> transaction isolation level read committed;  <span class="hljs-comment">-- 设置为 read committed</span><br><span class="hljs-keyword">set</span> transaction isolation level serializable;  <span class="hljs-comment">-- 设置为 serializable</span><br><br><span class="hljs-keyword">set</span> transaction read <span class="hljs-keyword">only</span>;   <span class="hljs-comment">-- 设置为 read only</span><br><span class="hljs-keyword">set</span> transaction read write;  <span class="hljs-comment">-- 设置为 read write</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h4 id="4-2-2-设置会话的隔离级别"><a href="#4-2-2-设置会话的隔离级别" class="headerlink" title="4.2.2 设置会话的隔离级别"></a>4.2.2 设置会话的隔离级别</h4><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> transaction isolation level read committed;<br><span class="hljs-keyword">alter</span> session <span class="hljs-keyword">set</span> transaction isolation level serializable;<br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h2 id="5-事务控制"><a href="#5-事务控制" class="headerlink" title="5. 事务控制"></a>5. 事务控制</h2><h3 id="5-1-commit-提交事务"><a href="#5-1-commit-提交事务" class="headerlink" title="5.1 commit 提交事务"></a>5.1 commit 提交事务</h3><p>使用 commit 语句可以提交事务。</p>
+<ul>
+<li>使用 commit 语句提交事务之后，会确认事务的变化，结束事务，删除保存点，释放锁。</li>
+<li>使用 commit 语句提交事务之后，就不能再使用 rollback 语句进行回滚。</li>
+<li>使用 commit 语句提交事务之后，其他会话将可以查看到事务变化后的新数据。</li>
+</ul>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">commit</span> [work] [<span class="hljs-keyword">commit</span> text];<br><span class="hljs-comment">-- work是一个可选的关键字，主要用于改善代码的可读性；</span><br><span class="hljs-comment">-- text是一个长度不操作50个字符的注释，要用引号包围。</span><br></code></pre></td></tr></table></figure>
+
+<br/>
+
+<h3 id="5-2-rollback-回滚"><a href="#5-2-rollback-回滚" class="headerlink" title="5.2 rollback 回滚"></a>5.2 rollback 回滚</h3><p>撤销从上一个 commit 或者 rollback 以来发生的所有变化，并且释放锁资源。语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">rollback</span> [work] [<span class="hljs-keyword">to</span> [<span class="hljs-keyword">savepoint</span>] savepoint_name]<br></code></pre></td></tr></table></figure>
+
+<p>savepoint_name 是一个保存点的名字，回滚到某个特定的保存点后，在该保存点之后的所有保存点就都清除了。在执行 insert、update、merge、delete 之前，PL/SQL都会隐含的生成一个保存点，如果这个DML语句失败，会自动发生一个回滚动作。</p>
+<br/>
+
+<h3 id="5-3-savepoint-保存点"><a href="#5-3-savepoint-保存点" class="headerlink" title="5.3 savepoint 保存点"></a>5.3 savepoint 保存点</h3><p>设置保存点的语法：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><code class="hljs sql"><span class="hljs-keyword">savepoint</span> savepoint_name;<br></code></pre></td></tr></table></figure>
+
+<p>如果在当前事务中重用了一个保存点名字，这个保存点就会从原先的位置移到当前事务所在的位置，不管这个 savepoint 语句是在过程、函数或者匿名块中执行的。</p>
+<br/>
+
+<h3 id="5-4-set-transaction-命令"><a href="#5-4-set-transaction-命令" class="headerlink" title="5.4 set transaction 命令"></a>5.4 set transaction 命令</h3><p>启动一个只读的或者可读可写的会话，或者设置隔离级别，或者给当前会话分配一个专门的回滚段。这个语句<strong>必须是事务处理的第一个SQL语句，并且只能用一次</strong>。</p>
+<ul>
+<li><code>set transaction read only</code>：这个语句把当前事务定义成只读的。在这个只读事务中，后续的查询能看到的只是在事务开始之前已经提交的变化。当执行一个运行时间很长的，多个查询组成的报表时，希望确保报表中的数据是一致的，这个语句就非常有用。</li>
+<li><code>set transaction read write</code>：把当前的事务定义为可读写的，并且这也是缺省设置。</li>
+<li><code>set transaction isolation leve serializable| read committed</code>：设置事务的隔离级别。</li>
+<li><code>set transaction use rollback segment rollback_segname</code>：为当前语句指定一个专门的回滚段，并把事务设置成可读写。这个语句不能和<code>set transaction read write</code>一起使用。</li>
+</ul>
+<br/>
+
+<h2 id="6-数据库事务实现机制"><a href="#6-数据库事务实现机制" class="headerlink" title="6. 数据库事务实现机制"></a>6. 数据库事务实现机制</h2><p>几乎所有的数据库管理系统中，事务管理的机制都是通过使用日志文件来实现的，我们来简单介绍一下日志的工作方式。</p>
+<p>当用户执行一条修改数据库的 DML 语句时，DBMS 自动在日志文件中写一条记录，显示被这条语句影响的每一条记录的两个副本。一个副本显示变化前的记录，另一个副本显示变化后的记录。当日志写完之后，DBMS 才实际对磁盘中的记录进行修改。</p>
+<p>如果用户随后执行 COMMIT 语句，事务结束也被记录在事务日志中。如果用户执行 ROLLBACK语句，DBMS 检查日志，找出自事务开始以来被修改的记录 “以前” 的样子，然后使用这些信息恢复它们以前的状态，有效地撤销事务期间对数据库所做的修改。</p>
+<p>如果系统出错，系统操作员通常通过运行 DBMS 提供的特殊恢复程序来复原数据库。恢复程序检查到事务日志末尾，查找故障之前没有被提交的事务。恢复程序回滚没有完全完成的事务，以便仅有被提交的事务反映到数据库中，而故障中正处理的事务被回滚。</p>
+<p>事务日志的使用明显增加了更新数据库的开销。在实际中，主流商用 DBMS 产品使用的日志技术比上述描述的方案更复杂，用以减小这种开销。此外，事务日志通常被存储在高速磁盘驱动器中，不同于存储数据库的磁盘，以减小磁盘访问竞争。某些个人计算机 DBMS 产品允许关闭事务日志性能，以提高 DBMS 的性能。</p>
+
+            </div>
+            <hr>
+            <div>
+              <div class="post-metas mb-3">
+                
+                
+              </div>
+              
+                <p class="note note-warning">
+                  
+                    本博客所有文章除特别声明外，均采用 <a target="_blank" href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh" rel="nofollow noopener noopener">CC BY-SA 4.0 协议</a> ，转载请注明出处！
+                  
+                </p>
+              
+              
+                <div class="post-prevnext">
+                  <article class="post-prev col-6">
+                    
+                    
+                      <a href="/2021/07/15/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/16.%20Oracle%20%E5%9F%BA%E7%A1%80%EF%BC%88%E5%8D%81%E5%9B%9B%EF%BC%89%E7%B4%A2%E5%BC%95/">
+                        <i class="iconfont icon-arrowleft"></i>
+                        <span class="hidden-mobile"></span>
+                        <span class="visible-mobile">上一篇</span>
+                      </a>
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2021/07/13/Oracle%20%E6%95%B0%E6%8D%AE%E5%BA%93/3.%20Oracle%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89SQL%20%E6%A6%82%E5%BF%B5/">
+                        <span class="hidden-mobile">SQL 基础（一）SQL 的概念</span>
+                        <span class="visible-mobile">下一篇</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+          </article>
+        </div>
+      </div>
+    </div>
+    
+      <div class="d-none d-lg-block col-lg-2 toc-container" id="toc-ctn">
+        <div id="toc">
+  <p class="toc-header"><i class="iconfont icon-list"></i>&nbsp;目录</p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+      </div>
+    
+  </div>
+</div>
+
+<!-- Custom -->
+
+
+    
+
+    
+      <a id="scroll-top-button" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">搜索</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v"
+                 for="local-search-input">关键词</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+
+    
+  </main>
+
+  <footer class="text-center mt-5 py-3">
+  <div class="footer-content">
+     <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+  </div>
+  
+
+  
+
+  
+</footer>
+
+
+  <!-- SCRIPTS -->
+  
+  <script  src="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://cdn.jsdelivr.net/npm/nprogress@0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.min.js" ></script>
+<script  src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+<!-- Plugins -->
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+  
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/tocbot@4.12.3/dist/tocbot.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js" ></script>
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/anchor-js@4.3.1/anchor.min.js" ></script>
+
+
+
+  <script defer src="https://cdn.jsdelivr.net/npm/clipboard@2.0.8/dist/clipboard.min.js" ></script>
+
+
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+
+
+  <script  src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12/lib/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var title = document.getElementById('subtitle').title;
+      
+      typing(title)
+      
+    })(window, document);
+  </script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 主题的启动项 保持在最底部 -->
+<script  src="/js/boot.js" ></script>
+
+
+</body>
+</html>
